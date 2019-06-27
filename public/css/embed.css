@@ -1,0 +1,22 @@
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+#embedded_messenger {
+  position: fixed;
+  z-index: 1000;
+  bottom: -400px;
+  right: 2rem;
+  height: 444px;
+  transition: 1.0s ease-in-out bottom; }
+  #embedded_messenger.active {
+    bottom: 0; }
+  #embedded_messenger iframe {
+    height: 400px;
+    width: 100%;
+    border: 0; }
+  #embedded_messenger #message_header {
+    background: #000;
+    padding: 0.5rem 1rem;
+    font-style: italic;
+    background: linear-gradient(to right, #3a6073, #3a6073);
+    color: #FFF; }
+
+/*# sourceMappingURL=embed.css.map */
