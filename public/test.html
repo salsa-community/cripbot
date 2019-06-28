@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>Test the Bot</title>
+        <link rel="stylesheet" href="http://localhost:8080/css/embed.css" />
+        <script src="http://localhost:8080/embed.js"></script>
+    </head>
+    <body >
+      <div id="embedded_messenger">
+        <header id="message_header" onclick="Botkit.toggle()">Chat</header>
+        <iframe  id="botkit_client" src="http://localhost:8080/index.html"></iframe>
+    </div>
+    <script>
+    var options = {};
+    Botkit.boot(options);
+    Botkit.deactivate();
+    setTimeout(
+      function() {
+        Botkit.activate();
+    }, 600);
+    </script>
+    </body>
+</html>
