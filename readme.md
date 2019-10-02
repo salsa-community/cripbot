@@ -4,6 +4,15 @@
 
 [a folder full of modules](https://botkit.ai/docs/v4/core.html#organize-your-bot-code). 
 
+
+### Clone the project
+
+```bash
+git clone git@github.com:danimaniarqsoft/socrates.git
+
+cd socrates
+```
+
 #### Download Dependencies
 
 ```bash
