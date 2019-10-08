@@ -102,8 +102,8 @@ a.button {
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 #message_window {
   background: #FFFFFF;
-  border-left: 1px solid #CCC;
-  border-right: 1px solid #CCC;
+  border-left: 1px solid #FFFFFF;
+  border-right: 1px solid #FFFFFF;
   /*height: 500px;
   width: 320px;*/
   height: 100%;
@@ -151,7 +151,7 @@ a.button {
     flex-direction: column-reverse;
     display: flex;
     overflow-y: auto;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url("../chat-background.jpg"); }
+    background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)) }
     #message_window section div div {
       margin: 0.25rem;
       clear: both; }
@@ -162,18 +162,14 @@ a.button {
       flex-grow: 1;
       font-size: 0.9rem;
       outline: none;
+      height: 3rem !important;
       border: none; }
     #message_window footer input::placeholder {
       font-style: italic; }
     #message_window footer button {
-      background-color: #4CAF50;
       border: 0;
       cursor: pointer;
-      color: white;
-      font-weight: bold;
-      border-radius: 50%;
-      width: 10%;
-      height: 34px; }
+     }
   #message_window form {
     display: flex;
     margin: 0;
@@ -217,7 +213,7 @@ a.button {
     margin-bottom: 0; }
   #message_window .message.outgoing {
     float: right;
-    background: #4CAF50;
+    background: #26a69a;
     color: white; }
   #message_window #message_replies {
     text-align: center;
