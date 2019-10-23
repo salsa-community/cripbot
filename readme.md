@@ -38,7 +38,7 @@ sass --update sass/:public/css/
 ## Create de docker image
 
 ```bash
-docker build -t <your username>/socrates .
+docker build -t i2cmx/socrates .
 ```
 
 ## Verify the docker images
@@ -63,3 +63,7 @@ docker run -p 49160:8080 -d <your username>/socrates
 #### References
 
 https://nodejs.org/de/docs/guides/nodejs-docker-webapp/
+
+
+
+docker login --username=i2cmx --email=daniel.cortes@i2c.mx
