@@ -1,11 +1,11 @@
 version: '3.3'
 services:
   bot-app:
-    image: i2cmx/socrates:${TAG}
+    image: i2cmx/atebot:${TAG}
     environment:
       - MONGO_URI=mongodb://bot-mongodb:27017
     ports:
-      - 8080:8080
+      - 8085:8080
     depends_on:
     - bot-mongodb
   bot-mongodb:
