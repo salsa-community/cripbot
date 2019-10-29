@@ -67,3 +67,4 @@ https://nodejs.org/de/docs/guides/nodejs-docker-webapp/
 
 
 docker login --username=i2cmx --email=daniel.cortes@i2c.mx
+docker tag 3bb870e7a6d4 i2cmx/atebot:0.0.1
