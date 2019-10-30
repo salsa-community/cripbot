@@ -13,8 +13,6 @@ module.exports = function (controller) {
     controller.webserver.get('/info', (req, res) => {
         res.send('{"version": "1.0.0"}');
     });
-
-
     function getRandomInt(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
@@ -25,7 +23,6 @@ module.exports = function (controller) {
     controller.on('welcome_back', firstTime);
 
     function firstTime(bot, message) {
-
         var personal = ['Lucía', 'Paula', 'María', 'Isabella', 'Jimena', 'Sara', 'Laura'];
         bot.say({
             text: 'Hola! ¿Cómo estás?'
@@ -43,8 +40,8 @@ module.exports = function (controller) {
             text: '¿Te gustaría ver información sobre nosotros?!',
             quick_replies: [
                 {
-                    title: 'Información',
-                    payload: 'información'
+                    title: 'solicitar Información',
+                    payload: 'rfc'
                 },
             ]
         }, function () { });

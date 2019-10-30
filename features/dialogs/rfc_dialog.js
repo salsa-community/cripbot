@@ -15,9 +15,9 @@ module.exports = function (controller) {
     convo.say('¿Cómo puedo ayudarte?');
     controller.addDialog(convo);
     controller.afterDialog(DIALOG_LOGIN_ID, async (bot, results) => {
-        await bot.beginDialog('dialog_ticket_id');
+        //await bot.beginDialog('dialog_ticket_id');
     });
-    controller.hears('data', 'message', async (bot, message) => {
+    controller.hears('rfc', 'message', async (bot, message) => {
         await bot.beginDialog(DIALOG_LOGIN_ID);
     });
 }
