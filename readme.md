@@ -18,7 +18,11 @@ cd socrates
 ```bash
 npm install
 ```
+#### Build docker images
 
+```bash
+TAG=0.0.3 npm run docker-build
+```
 
 #### Start the bot
 
@@ -32,39 +36,21 @@ npm start
 sass --update sass/:public/css/
 ```
 
-
-# Docker images
-
-## Create de docker image
-
-```bash
-docker build -t i2cmx/socrates .
-```
-
-## Verify the docker images
-
-```bash
-$ docker images
-
-# Example
-REPOSITORY                      TAG        ID              CREATED
-node                            10         1934b0b038d1    5 days ago
-<your username>/socrates    latest     d64d3505b0d2    1 minute ago
-```
-
 ## Run the images
 
 ```bash
-docker run -p 49160:8080 -d <your username>/socrates
+docker run -p 8080:3000 -d i2cmx/atebot:$TAG
 ```
-
-
 
 #### References
 
 https://nodejs.org/de/docs/guides/nodejs-docker-webapp/
 
 
+#### Push Image to Docker Hub
 
-docker login --username=i2cmx --email=daniel.cortes@i2c.mx
+```bash
+docker login --username=i2cmx
 docker tag 3bb870e7a6d4 i2cmx/atebot:0.0.1
+docker push i2cmx/atebot:0.0.1
+```
