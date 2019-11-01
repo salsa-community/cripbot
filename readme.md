@@ -54,3 +54,9 @@ docker login --username=i2cmx
 docker tag 3bb870e7a6d4 i2cmx/atebot:0.0.1
 docker push i2cmx/atebot:0.0.1
 ```
+
+#### Versioning
+
+```bash
+npm version [major|minor|patch]
+```
