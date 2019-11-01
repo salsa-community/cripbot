@@ -60,3 +60,10 @@ docker push i2cmx/atebot:0.0.1
 ```bash
 npm version [major|minor|patch]
 ```
+
+
+#### Add context into the deployment
+
+```bash
+CONTEXT=api npm start
+```

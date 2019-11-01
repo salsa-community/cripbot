@@ -4,6 +4,7 @@ services:
     image: i2cmx/atebot:${TAG}
     environment:
       - MONGO_URI=mongodb://bot-mongodb:27017
+      - CONTEXT=docker
     ports:
       - 8085:3000
     depends_on:
