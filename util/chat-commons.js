@@ -6,7 +6,7 @@ const personal = ['Lucía', 'Paula', 'María', 'Isabella', 'Jimena', 'Sara', 'La
  */
 exports.hello = function (bot, message) {
     bot.say({ text: 'Bienvenido a ATEB' });
-    bot.say({ text: 'Mi nombre es ' + personal[getRandomInt(0, 6)] });
+    bot.say({ text: 'Mi nombre es ' + personal[getRandomInt(0, personal.length-1)] });
     bot.reply(message, {
         text: '¿Te gustaría ver información sobre nosotros?!',
         quick_replies: [
