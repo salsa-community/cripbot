@@ -1,10 +1,36 @@
 {
-	"Botkig hear": {
+	"Bot hear": {
+		"scope": "javascript",
+		"prefix": "bothears",
+		"body": [
+			"controller.hears('${1:pattern}', 'message', async (bot, message) => { ",
+			"    await bot.reply(message, '${2:message}');",
+			"});"
+		],
+		"description": "bot hears"
+	},
+	"Bot say": {
 		"scope": "javascript",
 		"prefix": "botsay",
 		"body": [
-			"bot.say({ text: '' });"
+			"bot.say({ text: '${1:text}' });"
 		],
-		"description": "Show PHP Errors"
+		"description": "bot say"
+	},
+	"Bot quick replay": {
+		"scope": "javascript",
+		"prefix": "botquick",
+		"body": [
+			"await bot.reply(message, {",
+			"    text: '${1:text}',",
+			"    quick_replies: [",
+			"        {",
+			"            title: '${2:title}',",
+			"            payload: '${3:payload}'",
+			"        }",
+			"    ]",
+			"});"
+		],
+		"description": "bot say quick replay"
 	}
 }
