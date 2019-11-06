@@ -1,0 +1,10 @@
+{
+	"Botkig hear": {
+		"scope": "javascript",
+		"prefix": "botsay",
+		"body": [
+			"bot.say({ text: '' });"
+		],
+		"description": "Show PHP Errors"
+	}
+}
