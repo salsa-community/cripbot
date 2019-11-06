@@ -21,7 +21,7 @@ npm install
 #### Build docker images
 
 ```bash
-TAG=0.0.3 npm run docker-build
+npm run docker-build
 ```
 
 #### Start the bot
