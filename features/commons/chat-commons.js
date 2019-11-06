@@ -9,7 +9,7 @@ exports.hello = function (bot, message) {
     bot.say({ text: 'Bienvenido a ATEB' });
     bot.say({ text: 'Mi nombre es ' + personal[getRandomInt(0, personal.length - 1)] });
     bot.reply(message, {
-        text: '¿Te gustaría ver información sobre nosotros?!',
+        text: '¿En que servicio te puedo ayudar?',
         quick_replies: infoQuickReplies
     }, function () { });
 }
@@ -21,12 +21,7 @@ exports.welcomeBack = function (bot, message) {
     bot.say({ text: 'Bienvenido de nuevo a ATEB' });
     bot.say({ text: 'Mi nombre es ' + personal[getRandomInt(0, personal.length - 1)] });
     bot.reply(message, {
-        text: '¿Te gustaría ver información sobre nosotros?',
-        quick_replies: [
-            {
-                title: 'solicitar Información',
-                payload: 'rfc'
-            },
-        ]
+        text: '¿En que servicio te puedo ayudar?',
+        quick_replies: infoQuickReplies
     }, function () { });
 }

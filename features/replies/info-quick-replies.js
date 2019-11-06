@@ -1,6 +1,6 @@
 exports.infoQuickReplies = [
     {
-        title: 'solicitar Información',
-        payload: 'rfc'
+        title: 'Red Cofidi',
+        payload: 'red-cofidi'
     },
 ]

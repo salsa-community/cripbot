@@ -3,9 +3,14 @@
  * 
  * @author danimaniARQSOFT
  */
+const { infoQuickReplies } = require('../replies/info-quick-replies');
+
 module.exports = function (controller) {
-    controller.interrupts('iniciar', 'message', async (bot, message) => {
-        await bot.reply(message, 'Muy bien, en que te puedo ayudar');
+    controller.interrupts('cancelar', 'message', async (bot, message) => {
+        await bot.reply(message, {
+            text: 'Muy bien, posiblemente te pueda ayduar con alguno de los siguientes temas:',
+            quick_replies: infoQuickReplies
+        });
         await bot.cancelAllDialogs();
     });
 }
