@@ -8,20 +8,20 @@ let RED_COFIDI_SAY = 'RedCofidi es un servicio de ATEB para apoyar a sus cliente
 let RFC_ASK = 'Por favor, ingrese el RFC de su empresa o la empresa receptora del CFDI.';
 module.exports = function (controller) {
     controller.hears(['.*servicios*.'], 'message', async (bot, message) => {
-        bot.reply(message, {
+        await bot.reply(message, {
             text: 'Tenemos las siguientes opciones:',
             quick_replies: [
                 {
-                    title: 'Cuenta con un Codigo CFDI',
-                    payload: 'codigoCFDI'
+                    title: 'Cuenta con un código CFDI',
+                    payload: 'codigo-cfdi'
                 }, {
                     title: 'Seguimiento a un ticket',
-                    payload: 'segTicket'
+                    payload: 'ticket'
                 }, {
                     title: 'Crear un ticket',
-                    payload: 'crearTicket'
+                    payload: 'crear-ticket'
                 }
             ]
-        }, function () { });
+        });
     });
 }
