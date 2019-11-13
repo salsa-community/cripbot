@@ -9,10 +9,11 @@
     "docker-build": "docker build -t i2cmx/atebot:$npm_package_version ."
   },
   "dependencies": {
+    "botbuilder-adapter-web": "^1.0.3",
+    "botbuilder-storage-mongodb": "^0.9.5",
     "botkit": "^4.0.1",
     "botkit-plugin-cms": "^1.0.0",
-    "botbuilder-storage-mongodb": "^0.9.5",
-    "botbuilder-adapter-web": "^1.0.3",
-    "dotenv": "^7.0.0"
+    "dotenv": "^7.0.0",
+    "mongoose": "^5.7.10"
   }
 }

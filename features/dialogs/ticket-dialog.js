@@ -3,7 +3,6 @@
  * Licensed under the MIT License.
  * https://www.terlici.com/2015/04/03/mongodb-node-express.html
  */
-var MongoClient = require('mongodb').MongoClient
 const { TICKET_DIALOG_ID } = require('./util/constants');
 
 const { Botkit, BotkitConversation } = require('botkit');

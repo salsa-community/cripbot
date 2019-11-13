@@ -5,6 +5,7 @@
 
 const { RFC_DIALOG_ID } = require('./util/constants');
 const { TICKET_DIALOG_ID } = require('./util/constants');
+var User = require('../../models/User.model');
 
 const { BotkitConversation } = require('botkit');
 
@@ -16,7 +17,14 @@ module.exports = function (controller) {
     convo.say(RED_COFIDI_SAY);
     convo.addAction('rfc-thread');
     convo.addQuestion(RFC_ASK, async (res, convo, bot) => {
-        if (res === 'SAMI760605RH6') {
+        var name = null;
+        await User.findOne({ name: res}, function (err, user) {
+            if (err) return next(err);
+            if(user){
+                name = user.name;
+            }
+        });
+        if (name === 'SAMI760605RH6') {
             bot.say({ text: 'Bienvenida Itzia María del Carmen Sánchez Méndez al soporte de RedCofidi' });
             await convo.gotoThread('ticket-thread');
         } else {

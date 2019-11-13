@@ -67,3 +67,8 @@ npm version [major|minor|patch]
 ```bash
 CONTEXT=api npm start
 ```
+
+
+#### notes
+
+for mongodb reference: https://github.com/Eslamunto/ProductsApp/blob/master/controllers/product.js
