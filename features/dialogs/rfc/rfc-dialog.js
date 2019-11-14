@@ -3,9 +3,8 @@
  * Licensed under the MIT License.
  */
 
-const { RFC_DIALOG_ID } = require('./util/constants');
-const { TICKET_DIALOG_ID } = require('./util/constants');
-var User = require('../../models/User.model');
+const { RFC_DIALOG_ID } = require('../util/constants');
+var Usuario = require('../../../models/Usuario.model');
 
 const { BotkitConversation } = require('botkit');
 
@@ -17,15 +16,10 @@ module.exports = function (controller) {
     convo.say(RED_COFIDI_SAY);
     convo.addAction('rfc-thread');
     convo.addQuestion(RFC_ASK, async (res, convo, bot) => {
-        var name = null;
-        await User.findOne({ name: res}, function (err, user) {
-            if (err) return next(err);
-            if(user){
-                name = user.name;
-            }
-        });
-        if (name === 'SAMI760605RH6') {
-            bot.say({ text: 'Bienvenida Itzia María del Carmen Sánchez Méndez al soporte de RedCofidi' });
+        var usuario = await Usuario.findOne({ rfc: res });
+        //SAMI760605RH6
+        if (usuario && usuario.rfc) {
+            bot.say({ text: 'Bienvenido(a) ' + usuario.nombre + ' ' + usuario.primerApellido + ' ' + usuario.segundoApellido + ' ' });
             await convo.gotoThread('ticket-thread');
         } else {
             bot.say({ text: 'el RFC que me proporcionó no se encuentra en nuestra lista de clientes' });

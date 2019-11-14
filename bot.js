@@ -20,7 +20,7 @@ require('dotenv').config();
 let storage = null;
 if (process.env.MONGO_URI) {
     storage = mongoStorage = new MongoDbStorage({
-        url : process.env.MONGO_URI,
+        url: process.env.MONGO_URI,
     });
 }
 
@@ -59,6 +59,7 @@ controller.ready(() => {
     controller.loadModules(__dirname + '/features');
     controller.loadModules(__dirname + '/features/dialogs');
     controller.loadModules(__dirname + '/features/interrupts');
+    controller.loadModules(__dirname + '/features/dialogs/rfc');
 
     /* catch-all that uses the CMS to trigger dialogs */
     if (controller.plugins.cms) {
