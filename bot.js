@@ -27,7 +27,7 @@ if (process.env.MONGO_URI) {
 // Set up mongoose connection
 var mongoose = require('mongoose');
 var dev_db_url = 'mongodb://localhost:27017/chatbot';
-var mongoDB = process.env.MONGO_URI || dev_db_url;
+var mongoDB = process.env.MONGO_KB_URI || dev_db_url;
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
