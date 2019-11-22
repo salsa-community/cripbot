@@ -16,7 +16,6 @@ let RFC_ASK = 'Por favor, ingrese el RFC de su empresa o la empresa receptora de
 module.exports = function (controller) {
     let convo = new BotkitConversation(RFC_DIALOG_ID, controller);
     convo.say({text: 'al menos funciona'});
-    convo.addMessage({type: 'typing'}, 'typing');
     convo.addAction('rfc-thread');
     convo.addQuestion(RFC_ASK, async (res, convo, bot) => {
         var usuario = await Usuario.findOne({ rfc: res });
