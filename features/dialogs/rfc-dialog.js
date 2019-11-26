@@ -15,32 +15,35 @@ let RFC_ASK = 'Por favor, ingrese el RFC de su empresa o la empresa receptora de
 
 module.exports = function (controller) {
     let convo = new BotkitConversation(RFC_DIALOG_ID, controller);
-    convo.addAction('rfc-thread');
+    convo.addAction('get-rfc-thread');
     convo.addQuestion(RFC_ASK, async (res, convo, bot) => {
         var usuario = await Usuario.findOne({ rfc: res });
         //SAMI760605RH6
         if (usuario && usuario.rfc) {
             bot.say({ text: 'Bienvenido(a) ' + usuario.nombre + ' ' + usuario.primerApellido + ' ' + usuario.segundoApellido + ' ' });
-            await convo.gotoThread('ticket-thread');
+            await convo.gotoThread('codigo-error-thread');
         } else {
             bot.say({ text: 'el RFC que me proporcionó no se encuentra en nuestra lista de clientes' });
-            await convo.gotoThread('rfc-thread');
+            await convo.gotoThread('get-rfc-thread');
         }
-    }, 'rfc', 'rfc-thread');
+    }, 'rfc', 'get-rfc-thread');
 
-    convo.addAction('ticket-thread');
-    convo.addQuestion('Por favor, ingrese el número de ticket', async (res, convo, bot) => {
+    convo.addAction('codigo-error-thread');
+    convo.addQuestion('Por favor, ingrese el código de error', async (res, convo, bot) => {
         var error = await Error.findOne({ clave: res });
         if (error) {
+            convo.setVar('error', error);
             for (let instruccion of error.instrucciones) {
                 bot.say({ text: instruccion.desc });
             }
         } else {
-            bot.say({ text: 'el ticket ingresado no se encuentra en nuestra base de conocimiento' });
-            await convo.gotoThread('ticket-thread');
+            bot.say({ text: 'el código de error ingresado no se encuentra en nuestra base de conocimiento' });
+            await convo.gotoThread('codigo-error-thread');
         }
-    }, 'ticket', 'ticket-thread');
+    }, 'codigo-error', 'codigo-error-thread');
 
+    convo.addAction('show-steps-thread');
+    convo.addQuestion('');
 
     controller.addDialog(convo);
     controller.hears('red-cofidi', 'message', async (bot, message) => {
