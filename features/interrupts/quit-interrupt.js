@@ -3,7 +3,7 @@
  * 
  * @author danimaniARQSOFT
  */
-const { infoQuickReplies } = require('../replies/info-quick-replies');
+const { infoQuickReplies } = require('../dialogs/util/info-quick-replies');
 
 module.exports = function (controller) {
     controller.interrupts('cancelar', 'message', async (bot, message) => {

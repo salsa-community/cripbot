@@ -58,8 +58,9 @@ controller.ready(() => {
     // load traditional developer-created local custom feature modules
     controller.loadModules(__dirname + '/features');
     controller.loadModules(__dirname + '/features/dialogs');
+    controller.loadModules(__dirname + '/features/events');
+    controller.loadModules(__dirname + '/features/hears');
     controller.loadModules(__dirname + '/features/interrupts');
-    controller.loadModules(__dirname + '/features/dialogs/rfc');
 
     /* catch-all that uses the CMS to trigger dialogs */
     if (controller.plugins.cms) {

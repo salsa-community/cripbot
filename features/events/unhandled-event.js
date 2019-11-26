@@ -1,4 +1,4 @@
-const { infoQuickReplies } = require('../replies/info-quick-replies');
+const { infoQuickReplies } = require('../dialogs/util/info-quick-replies');
 
 module.exports = function (controller) {
   controller.on('message', function (bot, message) {

@@ -1,6 +1,6 @@
-const { getRandomInt } = require('../../util/commons');
+const { getRandomInt } = require('../../../util/commons');
 const personal = ['Lucía', 'Paula', 'María', 'Isabella', 'Jimena', 'Sara', 'Laura'];
-const { infoQuickReplies } = require('../replies/info-quick-replies');
+const { infoQuickReplies } = require('./info-quick-replies');
 
 /**
  * This is the hello event

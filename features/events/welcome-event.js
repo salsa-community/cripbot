@@ -5,7 +5,7 @@
  * 
  * @author danimaniARQSOFT
  */
-const { hello, welcomeBack } = require('./commons/chat-commons');
+const { hello, welcomeBack } = require('../dialogs/util/chat-commons');
 
 module.exports = function (controller) {
     controller.on('hello', hello);
