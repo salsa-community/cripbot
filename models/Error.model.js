@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 let ErrorSchema = new Schema({
     clave: { type: String, required: true, max: 100 },
     desc: { type: String, required: true, max: 100 },
-    instrucciones: [{ paso: Number, desc: String }],
+    instrucciones: { desc: { type: String, required: true, max: 100 }, pasos: [{ paso: Number, desc: String }] },
     links: [{ url: String }]
 });
 
