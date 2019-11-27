@@ -6,11 +6,7 @@
 const { RFC_DIALOG_ID } = require('./util/constants');
 var Usuario = require('../../models/Usuario.model');
 var Error = require('../../models/Error.model');
-
-
 const { BotkitConversation } = require('botkit');
-
-let RED_COFIDI_SAY = 'RedCofidi es un servicio de ATEB para apoyar a sus clientes y proveedores en la verificación de sus facturas.';
 let RFC_ASK = 'Por favor, ingrese el RFC de su empresa o la empresa receptora del CFDI.';
 
 module.exports = function (controller) {
@@ -44,16 +40,18 @@ module.exports = function (controller) {
     }, 'codigo-error', 'codigo-error-thread');
 
     convo.addAction('show-steps-thread');
-    convo.addQuestion('Paso {{vars.currentStep.paso}} : {{vars.currentStep.desc}}', async (res, convo, bot) => {
+    convo.addQuestion({
+        text: 'Paso {{vars.currentStep.paso}} : {{vars.currentStep.desc}}',
+        quick_replies: [{ title: 'Entendido', payload: 'Entendido' }]
+    }, async (res, convo, bot) => {
         if (convo.vars.currentStepIdx < convo.vars.maxStepIdx - 1) {
             convo.vars.currentStep = convo.vars.error.instrucciones[++convo.vars.currentStepIdx];
             await convo.gotoThread('show-steps-thread');
-        }else{
+        } else {
             bot.say({ text: 'Te puedo ayudar en otros' });
             await convo.gotoThread('codigo-error-thread');
         }
-    }, 'ok', 'show-steps-thread');
-
+    }, 'step-answer', 'show-steps-thread');
     controller.addDialog(convo);
     controller.hears('red-cofidi', 'message', async (bot, message) => {
         await bot.beginDialog(RFC_DIALOG_ID);
