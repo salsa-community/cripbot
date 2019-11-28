@@ -8,8 +8,9 @@ const { infoQuickReplies } = require('./info-quick-replies');
 exports.hello = function (bot, message) {
     bot.say({ text: 'Bienvenido a ATEB' });
     bot.say({ text: 'Mi nombre es ' + personal[getRandomInt(0, personal.length - 1)] });
+    bot.say({ text: 'RedCofidi es un servicio de ATEB para apoyar a sus clientes y proveedores en la verificación de sus facturas' });
     bot.reply(message, {
-        text: '¿En que servicio te puedo ayudar?',
+        text: '¿Requiere ayuda con el servicio de RedCofidi?',
         quick_replies: infoQuickReplies
     }, function () { });
 }
@@ -19,9 +20,10 @@ exports.hello = function (bot, message) {
  */
 exports.welcomeBack = function (bot, message) {
     bot.say({ text: 'Bienvenido de nuevo a ATEB' });
+    bot.say({ text: 'RedCofidi es un servicio de ATEB para apoyar a sus clientes y proveedores en la verificación de sus facturas' });
     bot.say({ text: 'Mi nombre es ' + personal[getRandomInt(0, personal.length - 1)] });
     bot.reply(message, {
-        text: '¿En que servicio te puedo ayudar?',
+        text: '¿Requiere ayuda con el servicio de RedCofidi?',
         quick_replies: infoQuickReplies
     }, function () { });
 }

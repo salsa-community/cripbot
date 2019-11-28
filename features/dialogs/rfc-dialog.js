@@ -7,7 +7,7 @@ const { RFC_DIALOG_ID } = require('./util/constants');
 var Usuario = require('../../models/Usuario.model');
 var Error = require('../../models/Error.model');
 const { BotkitConversation } = require('botkit');
-let RFC_ASK = 'Por favor, ingrese el RFC de su empresa o la empresa receptora del CFDI.';
+let RFC_ASK = 'Por favor, ingrese el RFC del receptor de la factura';
 
 module.exports = function (controller) {
     let convo = new BotkitConversation(RFC_DIALOG_ID, controller);
@@ -30,7 +30,7 @@ module.exports = function (controller) {
      * CODIGO ERROR THREAD
      */
     convo.addAction('codigo-error-thread');
-    convo.addQuestion('Por favor, ingrese el código de error', async (res, convo, bot) => {
+    convo.addQuestion('Ingrese el código de error que se está presentando', async (res, convo, bot) => {
         var error = await Error.findOne({ clave: res });
         if (error) {
             bot.say({ text: error.desc });
@@ -52,16 +52,39 @@ module.exports = function (controller) {
     convo.addAction('show-steps-thread');
     convo.addQuestion({
         text: 'Paso {{vars.currentStep.paso}} : {{vars.currentStep.desc}}',
-        quick_replies: [{ title: 'Entendido', payload: 'Entendido' }]
+        quick_replies: [{ title: 'Realizado', payload: 'Realizado' }]
     }, async (res, convo, bot) => {
         if (convo.vars.currentStepIdx < convo.vars.maxStepIdx - 1) {
             convo.vars.currentStep = convo.vars.error.instrucciones.pasos[++convo.vars.currentStepIdx];
             await convo.gotoThread('show-steps-thread');
         } else {
-            bot.say({ text: 'Te puedo ayudar en otros' });
-            await convo.gotoThread('codigo-error-thread');
+            await convo.gotoThread('more-info-thread');
         }
     }, 'step-answer', 'show-steps-thread');
+
+    /**
+     * ASK for more information
+     */
+
+    convo.addAction('more-info-thread');
+    convo.addQuestion({
+        text: '¿Te gustaría ingresar otro código de error?',
+        quick_replies: [{ title: 'No', payload: 'no' }, { title: 'Si', payload: 'si' }]
+    }, [{
+        pattern: 'no',
+        handler: async (response, convo, bot) => {
+            await convo.gotoThread('exit-thread');
+        }
+    },
+    {
+        default: true,
+        handler: async (response, convo, bot) => {
+            await convo.gotoThread('codigo-error-thread');
+        }
+    }], 'more-info-answer', 'more-info-thread');
+
+    convo.addAction('exit-thread');
+    convo.addMessage('Fue un placer ayudarle, estaré aquí si me requiere','exit-thread');
     controller.addDialog(convo);
     controller.hears('red-cofidi', 'message', async (bot, message) => {
         await bot.beginDialog(RFC_DIALOG_ID);
