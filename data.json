@@ -1,4 +1,653 @@
-{"clave":"CFDI33110","desc":"No fue posible enviar el CFDI. El tipo de comprobante no es “I”, “E” o “N” y un concepto incluye el campo descuento. (Cuando el tipo de comprobante sea “I”, “E”, o “N” y algún concepto incluya el atributo Descuento, debe existir el documento el descuento del “CFDI” Almacenado en la Base de datos de Aranda","instrucciones":{"desc":"Si el atributo Descuento es integrado dentro del elemento Conceptos a nivel detalle, debe integrarse también a nivel encabezado en el elemento Comprobante. Para este caso no se debe de integrar en el elemento Comprobante.","pasos":[{"paso":1,"desc":"Ingresar a su archivo xml"},{"paso":2,"desc":"Buscar la opción del nodo “Conceptos” / CFDI CONCEPTO"},{"paso":3,"desc":"Posterior buscar el nodo “Descuento” y modificar de acuerdo al comprobante."},{"paso":4,"desc":"Envíe esta validación a su proveedor de facturación para que hagan las modificaciones correspondientes y vuelva a subir su comprobante a la red cofidi"}]},"links":[{"url":"Verifica manuales RED COFIDI"},{"url":"URL ANEXO 20 / Guía de llenado"}]}
-{ "type": "home", "number": "212-555-1234" }
-{ "type": "cell", "number": "646-555-4567" }
-{ "type": "office", "number": "202-555-0182"}
+[
+    {
+      "clave": "CFDI33110",
+      "desc": "No fue posible enviar el CFDI. El tipo de comprobante no es “I”, “E” o “N” y un concepto incluye el campo descuento. (Cuando el tipo de comprobante sea “I”, “E”, o “N” y algún concepto incluya el atributo Descuento, debe existir el documento el descuento del “CFDI” Almacenado en la Base de datos de Aranda",
+      "instrucciones": {
+        "desc": "Si el atributo Descuento es integrado dentro del elemento Conceptos a nivel detalle, debe integrarse también a nivel encabezado en el elemento Comprobante. Para este caso no se debe de integrar en el elemento Comprobante.",
+        "pasos": [
+          {
+            "paso": 1,
+            "desc": "Ingresar a su archivo xml"
+          },
+          {
+            "paso": 2,
+            "desc": "Buscar la opción del nodo “Conceptos” / CFDI CONCEPTO"
+          },
+          {
+            "paso": 3,
+            "desc": "Posterior buscar el nodo “Descuento” y modificar de acuerdo al comprobante."
+          },
+          {
+            "paso": 4,
+            "desc": "Envíe esta validación a su proveedor de facturación para que hagan las modificaciones correspondientes y vuelva a subir su comprobante a la red cofidi"
+          }
+        ]
+      },
+      "links": [
+        {
+          "url": "Verifica manuales RED COFIDI"
+        },
+        {
+          "url": "URL ANEXO 20 / Guía de llenado"
+        }
+      ]
+    },
+    {
+      "clave": "CFDI 33113",
+      "desc": "No fue posible enviar el CFD “33113”.- El campo TipoDeCambiono tiene valor “1” y la moneda indicada es MXN Almacenado en la Base de datos de Aranda",
+      "instrucciones": {
+        "desc": "Para la moneda,en esté caso el error es porque usted en su XML no esta colocando de manera correcta el tipo de moneda, tipo de cambio. No se está declarando el tipo de cambio correcto para la moneda. En este caso se trata de moneda MXN",
+        "pasos": [
+          {
+            "paso": 1,
+            "desc": "Ingresar a su XML"
+          },
+          {
+            "paso": 2,
+            "desc": "Buscar la opción del nodo “Comprobante” / CFDI COMPROBANTE"
+          },
+          {
+            "paso": 3,
+            "desc": "Posterior buscar el nodo “Moneda” y modificarlo a “MXN”"
+          },
+          {
+            "paso": 4,
+            "desc": "Envíe esta validación a su proveedor de facturación para que hagan las modificaciones correspondientes y vuelva a subir su comprobante a la red cofidi"
+          }
+        ]
+      },
+      "links": [
+        {
+          "url": "Verifica manuales RED COFIDI"
+        },
+        {
+          "url": "URL ANEXO 20 / Guía de llenado "
+        },
+        {
+          "url": "Página o tema"
+        }
+      ]
+    },
+    {
+      "clave": " CFDI 33113",
+      "desc": "No fue posible enviar el CFD “33113”.- El campo TipoDeCambiono tiene valor “1” y la moneda indicada es MXN Almacenado en la Base de datos de Aranda",
+      "instrucciones": {
+        "desc": "Esté error es porque usted en su XML no esta colocando de manera correcta el tipo de moneda, tipo de cambio. No se está declarando el tipo de cambio correcto para la moneda. En este caso se trata del “TipoCambio”",
+        "pasos": [
+          {
+            "paso": 1,
+            "desc": "Ingresar a su XML"
+          },
+          {
+            "paso": 2,
+            "desc": "Buscar la opción del nodo “Comprobante” / CFDI COMPROBANTE"
+          },
+          {
+            "paso": 3,
+            "desc": "Posterior buscar el nodo”TipoCambio” y modificarlo a “1” (Esté debe de ser “1” cerrado, no “1.0”."
+          },
+          {
+            "paso": 4,
+            "desc": "Envíe esta validación a su proveedor de facturación para que hagan las modificaciones correspondientes y vuelva a subir su comprobante a la red cofidi."
+          }
+        ]
+      },
+      "links": [
+        {
+          "url": "Verifica manuales RED COFIDI"
+        },
+        {
+          "url": "URL ANEXO 20 / Guía de llenado"
+        }
+      ]
+    },
+    {
+      "clave": "CFDI 33116",
+      "desc": "CFDI 33116. El campo TipoCambio no cumple con el patrón requerido Almacenado en la Base de datos de Aranda",
+      "instrucciones": {
+        "desc": "El campo TipoCambio enviado en el XML contiene siete decimales lo cual es erróneo, según el indice del Anexo 20. Este TipoCambio debe de contener solo seis.",
+        "pasos": [
+          {
+            "paso": 1,
+            "desc": "Ingresar a su XML"
+          },
+          {
+            "paso": 2,
+            "desc": "Buscar la opción del nodo “ComprobanteLugardeExpedición” / CFDI COMPROBANTE"
+          },
+          {
+            "paso": 3,
+            "desc": "Posterior buscar el nodo”TipoCambio” y revisar que no tenga más de seis decimales. En dado caso que se sobrepase, favor de solo considerar los seis decimales después del campo. "
+          },
+          {
+            "paso": 4,
+            "desc": "Envíe esta validación a su proveedor de facturación para que hagan las modificaciones correspondientes y vuelva a subir su comprobante a la red cofidi"
+          }
+        ]
+      },
+      "links": [
+        {
+          "url": "Verifica manuales RED COFIDI"
+        },
+        {
+          "url": "URL ANEXO 20 / Guía de llenado "
+        },
+        {
+          "url": "Página o tema"
+        }
+      ]
+    },
+    {
+      "clave": "CFDI 33159",
+      "desc": "No fue posible enviar el CFDI “33159”- El valor del campo TasaOCuota que corresponde a traslado no contiene el valor catálogo c_TasaOCuota o se encuentra fuera de rango. Almacenado en la Base de datos de Aranda ",
+      "instrucciones": {
+        "desc": "El valor de la tasa de cuota no cumple con los decimales permitidos, se encuentra fuera del rango de aceptación",
+        "pasos": [
+          {
+            "paso": 1,
+            "desc": "Ingresar a su XML"
+          },
+          {
+            "paso": 2,
+            "desc": "Buscar la opción del nodo “Traslado” / CFDI TRASLADO"
+          },
+          {
+            "paso": 3,
+            "desc": "Posterior buscar el nodo”TasaOCuota” y revisar que tenga los decimales correspondientes según el catalogo de impuestos del SAT."
+          },
+          {
+            "paso": 4,
+            "desc": "Envíe esta validación a su proveedor de facturación para que hagan las modificaciones correspondientes y vuelva a subir su comprobante a la red cofidi."
+          }
+        ]
+      },
+      "links": [
+        {
+          "url": "Verifica manuales RED COFIDI"
+        },
+        {
+          "url": "URL ANEXO 20 / Guía de llenado"
+        },
+        {
+          "url": "Página o tema"
+        }
+      ]
+    },
+    {
+      "clave": " CFDI 33170",
+      "desc": "No se pudo enviar el CFDI “33170” El número de pedimento es inválido. (El valor de los últimos seis dígitos del NúmeroPedimento en “Concepto”debe estar entre el valor mínimo 1 y el valor máximo de números consecutivos de la columna cantidad del catalogo. Almacenado en la Base de datos de Aranda",
+      "instrucciones": {
+        "desc": "Para este caso se debe corroborar que el número de pedimento concuerde con la cantidad de aduana.",
+        "pasos": [
+          {
+            "paso": 1,
+            "desc": "Ingresar a su XML"
+          },
+          {
+            "paso": 2,
+            "desc": "Buscar la opción del nodo “Traslado” / CFDI TRASLADO"
+          },
+          {
+            "paso": 3,
+            "desc": "Posterior buscar el nodo”InformacionAduanera” “NumeroPedimento” y revisar que tenga los números de pedimento correspondientes que indica el Catalogo de Pedimento del SAT."
+          },
+          {
+            "paso": 4,
+            "desc": "Envíe esta validación a su proveedor de facturación para que hagan las modificaciones correspondientes y vuelva a subir su comprobante a la red cofidi."
+          }
+        ]
+      },
+      "links": [
+        {
+          "url": "Verifica manuales RED COFIDI"
+        },
+        {
+          "url": "URL Catalogo Pedimento Aduana /SAT"
+        },
+        {
+          "url": "Página o tema"
+        }
+      ]
+    },
+    {
+      "clave": "CFDI 33161",
+      "desc": "No fue posible enviar el CFDI 33161- El valor campo importe que corresponde a traslado no se encuentra entre el límite inferior y superior permitido. Almacenado en la Base de datos de Aranda",
+      "instrucciones": {
+        "desc": "El error es porque para el atributo Importe dentro de elemento Impuestos/Traslados/Traslado, se excede de los límites asignados, de acuerdo a las reglas de cálculo de limites de validación para este elemento",
+        "pasos": [
+          {
+            "paso": 1,
+            "desc": "Ingresar a su XML"
+          },
+          {
+            "paso": 2,
+            "desc": "Buscar la opción del nodo “Traslado” / CFDI TRASLADOs"
+          },
+          {
+            "paso": 3,
+            "desc": "Posterior buscar el nodo”TasaOCuota” y “Base” revisar que la operación entre Base del traslado por la tasaOCuota den como resultado el ajuste de moneda. (Realizar la operación de la “Base x Cuota”"
+          },
+          {
+            "paso": 4,
+            "desc": "Envíe esta validación a su proveedor de facturación para que hagan las modificaciones correspondientes y vuelva a subir su comprobante a la red cofidi."
+          }
+        ]
+      },
+      "links": [
+        {
+          "url": "Verifica manuales RED COFIDI"
+        },
+        {
+          "url": "URL ANEXO 20 / Guía de llenado"
+        },
+        {
+          "url": "Página o tema"
+        }
+      ]
+    },
+    {
+      "clave": "CFDI 33183",
+      "desc": "No fue posible enviar el CFDI 33183. El campo importe correspondiente a Traslado no es igual a la suma de los importes de los impuestos trasladados registrados en los conceptos donde el impuesto del concepto sea igual al campo TasaOCuota de este elemento Almacenado en la Base de datos de Aranda ",
+      "instrucciones": {
+        "desc": "El error es porque la cantidad de decimales en el atributo TotalImpuestosTrasladados del elemento Impuestos, no coincide con el atributo Importe del elemento Impuestos/Traslados/Traslado, de acuerdo al tipo de moneda.",
+        "pasos": [
+          {
+            "paso": 1,
+            "desc": "Ingresar a su XML"
+          },
+          {
+            "paso": 2,
+            "desc": "Buscar la opción del nodo “Traslado” / CFDI TRASLADOs"
+          },
+          {
+            "paso": 3,
+            "desc": "Posterior buscar el nodo “Importe” revisar que los impuestos traslados coincidan de acuerdo al tipo de moneda que tenga."
+          },
+          {
+            "paso": 4,
+            "desc": "Envíe esta validación a su proveedor de facturación para que hagan las modificaciones correspondientes y vuelva a subir su comprobante a la red cofidi."
+          }
+        ]
+      },
+      "links": [
+        {
+          "url": "Verifica manuales RED COFIDI"
+        },
+        {
+          "url": "URL ANEXO 20 / Guía de llenado"
+        },
+        {
+          "url": "Página o tema"
+        }
+      ]
+    },
+    {
+      "clave": "CFDI 33189",
+      "desc": "-Error al obtener respuesta validada. Error al validar CFDI 33189. El campo importe correspondiente a retención no es igual a la suma de los importes de los impuestos retenidos registrados en los conceptos donde el impuesto sea igual al campo impuesto de este elemento. Almacenado en la Base de datos de Aranda",
+      "instrucciones": {
+        "desc": "La cantidad de decimales en el atributo TotalImpuestosRetenidos del elemento Impuestos, no coincide con el atributo Importe del elemento Impuestos/Retenciones/Retencion, de acuerdo al tipo de moneda.",
+        "pasos": [
+          {
+            "paso": 1,
+            "desc": "Ingresar a su XML"
+          },
+          {
+            "paso": 2,
+            "desc": "Buscar la opción del nodo “Impuestos”"
+          },
+          {
+            "paso": 3,
+            "desc": "Posterior buscar el nodo “Total de impuestos Trasladados / Total de impuestos retenidos” El valor atributo debe de tener hasta la cantidad de decimales que soporte la moneda."
+          },
+          {
+            "paso": 4,
+            "desc": "Envíe esta validación a su proveedor de facturación para que hagan las modificaciones correspondientes y vuelva a subir su comprobante a la red cofidi."
+          }
+        ]
+      },
+      "links": [
+        {
+          "url": "Verifica manuales RED COFIDI"
+        },
+        {
+          "url": "URL ANEXO 20 / Guía de llenado"
+        },
+        {
+          "url": "Página o tema"
+        }
+      ]
+    },
+    {
+      "clave": "CFDI 301",
+      "desc": "No fue posible enviar el CFD 301 Namespace o SchemaLocation mal definido para el complemento tfd. Almacenado en la Base de datos de Aranda ",
+      "instrucciones": {
+        "desc": "La definición del schemalocation del CFDI dentro del complemento para el Timbre Fiscal Digital es incorrecta, no contiene versión del esquema.",
+        "pasos": [
+          {
+            "paso": 1,
+            "desc": "Ingresar a su XML"
+          },
+          {
+            "paso": 2,
+            "desc": "Buscar la opción del nodo “TimbreFiscalDigital”"
+          },
+          {
+            "paso": 3,
+            "desc": "Posterior buscar el nodo “xsi:schemalocation” Estas ligas deben de coincidir y corresponder a la definición del schema según el Anexo 20, página 11."
+          },
+          {
+            "paso": 4,
+            "desc": "Envíe esta validación a su proveedor de facturación para que hagan las modificaciones correspondientes y vuelva a subir su comprobante a la red cofidi."
+          }
+        ]
+      },
+      "links": [
+        {
+          "url": "Verifica manuales RED COFIDI"
+        },
+        {
+          "url": "URL ANEXO 20 / Guía de llenado"
+        },
+        {
+          "url": "Página o tema"
+        }
+      ]
+    },
+    {
+      "clave": "CFDI 301",
+      "desc": "",
+      "instrucciones": {
+        "desc": "",
+        "pasos": [
+          {
+            "paso": 1,
+            "desc": ""
+          },
+          {
+            "paso": 2,
+            "desc": ""
+          },
+          {
+            "paso": 3,
+            "desc": ""
+          },
+          {
+            "paso": 4,
+            "desc": ""
+          }
+        ]
+      },
+      "links": [
+        {
+          "url": ""
+        },
+        {
+          "url": ""
+        }
+      ]
+    },
+    {
+      "clave": "CFDI 301",
+      "desc": "",
+      "instrucciones": {
+        "desc": "",
+        "pasos": [
+          {
+            "paso": 1,
+            "desc": ""
+          },
+          {
+            "paso": 2,
+            "desc": ""
+          },
+          {
+            "paso": 3,
+            "desc": ""
+          },
+          {
+            "paso": 4,
+            "desc": ""
+          }
+        ]
+      },
+      "links": [
+        {
+          "url": ""
+        },
+        {
+          "url": ""
+        }
+      ]
+    },
+    {
+      "clave": "CFDI 601",
+      "desc": "",
+      "instrucciones": {
+        "desc": "",
+        "pasos": [
+          {
+            "paso": 1,
+            "desc": ""
+          },
+          {
+            "paso": 2,
+            "desc": ""
+          },
+          {
+            "paso": 3,
+            "desc": ""
+          },
+          {
+            "paso": 4,
+            "desc": ""
+          }
+        ]
+      },
+      "links": [
+        {
+          "url": ""
+        },
+        {
+          "url": ""
+        }
+      ]
+    },
+    {
+      "clave": "CFDI 602",
+      "desc": "",
+      "instrucciones": {
+        "desc": "",
+        "pasos": [
+          {
+            "paso": 1,
+            "desc": ""
+          },
+          {
+            "paso": 2,
+            "desc": ""
+          },
+          {
+            "paso": 3,
+            "desc": ""
+          },
+          {
+            "paso": 4,
+            "desc": ""
+          }
+        ]
+      },
+      "links": [
+        {
+          "url": ""
+        },
+        {
+          "url": ""
+        }
+      ]
+    },
+    {
+      "clave": "CFDI 119",
+      "desc": "",
+      "instrucciones": {
+        "desc": "",
+        "pasos": [
+          {
+            "paso": 1,
+            "desc": ""
+          },
+          {
+            "paso": 2,
+            "desc": ""
+          },
+          {
+            "paso": 3,
+            "desc": ""
+          },
+          {
+            "paso": 4,
+            "desc": ""
+          }
+        ]
+      },
+      "links": [
+        {
+          "url": ""
+        },
+        {
+          "url": ""
+        }
+      ]
+    },
+    {
+      "clave": "CFDI 219",
+      "desc": "",
+      "instrucciones": {
+        "desc": "",
+        "pasos": [
+          {
+            "paso": 1,
+            "desc": ""
+          },
+          {
+            "paso": 2,
+            "desc": ""
+          },
+          {
+            "paso": 3,
+            "desc": ""
+          },
+          {
+            "paso": 4,
+            "desc": ""
+          }
+        ]
+      },
+      "links": [
+        {
+          "url": ""
+        },
+        {
+          "url": ""
+        }
+      ]
+    },
+    {
+      "clave": "CFDI 235",
+      "desc": "",
+      "instrucciones": {
+        "desc": "",
+        "pasos": [
+          {
+            "paso": 1,
+            "desc": ""
+          },
+          {
+            "paso": 2,
+            "desc": ""
+          },
+          {
+            "paso": 3,
+            "desc": ""
+          },
+          {
+            "paso": 4,
+            "desc": ""
+          }
+        ]
+      },
+      "links": [
+        {
+          "url": ""
+        },
+        {
+          "url": ""
+        }
+      ]
+    },
+    {
+      "clave": "CFDI 239",
+      "desc": "",
+      "instrucciones": {
+        "desc": "",
+        "pasos": [
+          {
+            "paso": 1,
+            "desc": ""
+          },
+          {
+            "paso": 2,
+            "desc": ""
+          },
+          {
+            "paso": 3,
+            "desc": ""
+          },
+          {
+            "paso": 4,
+            "desc": ""
+          }
+        ]
+      },
+      "links": [
+        {
+          "url": ""
+        },
+        {
+          "url": ""
+        }
+      ]
+    },
+    {
+      "clave": "CFDI 120",
+      "desc": "",
+      "instrucciones": {
+        "desc": "",
+        "pasos": [
+          {
+            "paso": 1,
+            "desc": ""
+          },
+          {
+            "paso": 2,
+            "desc": ""
+          },
+          {
+            "paso": 3,
+            "desc": ""
+          },
+          {
+            "paso": 4,
+            "desc": ""
+          }
+        ]
+      },
+      "links": [
+        {
+          "url": ""
+        },
+        {
+          "url": ""
+        }
+      ]
+    }
+  ]
