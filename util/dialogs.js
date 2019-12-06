@@ -1,7 +1,7 @@
 /**
  * Get a greeting base on the current hour
  */
-exports.resolveSaludo = function (min, max) {
+exports.resolveSaludo = function () {
     var today = new Date();
     var curHr = today.getHours();
     if (curHr < 12) {
