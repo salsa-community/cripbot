@@ -16,7 +16,7 @@ module.exports = function (controller) {
      */
     convo.addAction('get-rfc-thread');
     convo.addQuestion(RFC_ASK, async (res, convo, bot) => {
-        var usuario = await Usuario.findOne({ rfc: res });//SAMI760605RH6
+        var usuario = await Usuario.findOne({ rfc: res.trim() });//SAMI760605RH6
         if (usuario) {
             bot.say({ text: 'Bienvenido(a) ' + usuario.nombre + ' ' + usuario.primerApellido + ' ' + usuario.segundoApellido + ' ' });
             await convo.gotoThread('codigo-error-thread');
