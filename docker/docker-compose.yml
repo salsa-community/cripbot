@@ -4,9 +4,22 @@ services:
     image: i2cmx/atebot:${TAG}
     environment:
       - MONGO_URI=mongodb://bot-mongodb:27017
-      - CONTEXT=docker
+      - MONGO_KB_URI=mongodb://bot-mongodb:27017/chatbot
     ports:
       - 8085:3000
+    depends_on:
+    - bot-mongodb
+  kbase-app:
+    image: i2cmx/kbase:latest
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,swagger
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - SPRING_DATA_MONGODB_URI=mongodb://bot-mongodb:27017
+      - SPRING_DATA_MONGODB_DATABASE=chatbot
+      - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
+    ports:
+      - 8086:8080
     depends_on:
     - bot-mongodb
   bot-mongodb:
@@ -17,5 +30,5 @@ services:
     volumes:
       - ./data/db:/data/db
     ports:
-      - "27017:27017"
+      - 27017:27017
     command: mongod --smallfiles --logpath=/dev/null # --quiet
