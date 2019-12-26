@@ -21,8 +21,6 @@ module.exports = function (controller) {
             bot.say({ text: 'Bienvenido(a) ' + usuario.nombre + ' ' + usuario.primerApellido + ' ' + usuario.segundoApellido + ' ' });
             await convo.gotoThread('codigo-error-thread');
         } else {
-            console.log(res.trim());
-            console.log(usuario);
             bot.say({ text: 'el RFC que me proporcionó no se encuentra en nuestra lista de clientes' });
             await convo.gotoThread('get-rfc-thread');
         }
