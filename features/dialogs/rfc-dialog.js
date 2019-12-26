@@ -16,11 +16,13 @@ module.exports = function (controller) {
      */
     convo.addAction('get-rfc-thread');
     convo.addQuestion(RFC_ASK, async (res, convo, bot) => {
-        var usuario = await Usuario.findOne({ rfc: res.trim() });//SAMI760605RH6
+        var usuario = await Usuario.findOne({ rfc: res.trim() });
         if (usuario) {
             bot.say({ text: 'Bienvenido(a) ' + usuario.nombre + ' ' + usuario.primerApellido + ' ' + usuario.segundoApellido + ' ' });
             await convo.gotoThread('codigo-error-thread');
         } else {
+            console.log(res.trim());
+            console.log(usuario);
             bot.say({ text: 'el RFC que me proporcionó no se encuentra en nuestra lista de clientes' });
             await convo.gotoThread('get-rfc-thread');
         }
