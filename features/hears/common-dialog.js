@@ -10,8 +10,12 @@ module.exports = function (controller) {
         await bot.say('Hola, estoy para servirte en lo que pueda');
     });
 
-    controller.hears(['eres real'], 'message', async (bot, message) => {
+    controller.hears(['[¿]?eres real[?]?'], 'message', async (bot, message) => {
         await bot.say('soy una inteligencia artificial, que fue creada para ayudarte');
+    });
+
+    controller.hears(['[¿]?tienes nombre[?]?', '[¿]cual es tu nombre[?]?'], 'message', async (bot, message) => {
+        await bot.say('mi nombre es socrates, y estoy para servirte');
     });
 
     controller.hears(['ayuda'], 'message', async (bot, message) => {
@@ -22,8 +26,8 @@ module.exports = function (controller) {
         });
     });
 
-    controller.hears(['c[oó]mo est[áa]s'], 'message', async (bot, message) => {
-        await bot.say('Me encuentro muy bien, gracias por preguntar');
+    controller.hears(['[¿]?c[oó]mo est[áa]s[?]?'], 'message', async (bot, message) => {
+        await bot.say('Me encuentro muy bien, ¡gracias por preguntar!');
         await bot.reply(message, {
             text: '¿Te puedeo apoyar con alguno de los siguientes temas?:',
             quick_replies: helpQuickReplies
