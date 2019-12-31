@@ -8,7 +8,7 @@ exports.typing = async function (bot, message, text, delay) {
         setTimeout(async () => {
             await bot.changeContext(message.reference);
             await bot.reply(message, text);
-            resolve("ok");
+            resolve(true);
         }, delay);
     });
 }
