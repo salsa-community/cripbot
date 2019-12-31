@@ -4,6 +4,7 @@
  */
 
 const { helpQuickReplies } = require('../dialogs/util/info-quick-replies');
+const { typing } = require('../../util/bot.typing');
 
 module.exports = function (controller) {
     controller.hears(['hey', 'hi', 'hello', 'hola'], 'message', async (bot, message) => {
@@ -19,11 +20,10 @@ module.exports = function (controller) {
     });
 
     controller.hears(['ayuda'], 'message', async (bot, message) => {
-        await bot.say('Estoy para ayudarte');
-        await bot.reply(message, {
-            text: '¿Te puedeo apoyar con alguno de los siguientes temas?:',
-            quick_replies: helpQuickReplies
-        });
+        await typing(bot,message,'te puedo ayudar en algo?');
+        await typing(bot,message,'será un placer');
+        await typing(bot,message,'sólo dime cómo');
+
     });
 
     controller.hears(['[¿]?c[oó]mo est[áa]s[?]?'], 'message', async (bot, message) => {
