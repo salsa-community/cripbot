@@ -1,0 +1,39 @@
+<html>
+
+<head>
+  <title>ATEB demo</title>
+  <link rel="stylesheet" href="http://localhost:3000/css/embed.css" />
+  <script src="http://localhost:3000/embed.js"></script>
+  <style>
+    body {
+      background-image: url("images/bot.gif");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  </style>
+</head>
+
+<body bgcolor="#C8EAF1">
+  <div id="embedded_messenger">
+    <header id="message_header" onclick="Botkit.toggle()">
+      <aside style="flex:3">
+        <i class="fa fa-user-circle fa-4x chatbox-popup__avatar" aria-hidden="true"></i>
+      </aside>
+      <aside style="flex:5">
+        <h1>Atención en linea</h1> (Online)
+      </aside>
+    </header>
+    <iframe id="botkit_client" src="http://localhost:3000/index.html"></iframe>
+  </div>
+  <script>
+    var options = {};
+    Botkit.boot(options);
+    Botkit.deactivate();
+    setTimeout(
+      function () {
+        Botkit.activate();
+      }, 600);
+  </script>
+</body>
+
+</html>
