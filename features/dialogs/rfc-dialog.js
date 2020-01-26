@@ -7,6 +7,7 @@ const { RFC_DIALOG_ID } = require('./util/constants');
 var Usuario = require('../../models/Usuario.model');
 var Error = require('../../models/Error.model');
 const { BotkitConversation } = require('botkit');
+const { solicitudesGenerales } = require('./util/info-quick-replies');
 let RFC_ASK = 'Por favor, ingrese el RFC del receptor de la factura';
 
 module.exports = function (controller) {
@@ -30,7 +31,10 @@ module.exports = function (controller) {
      * CODIGO ERROR THREAD
      */
     convo.addAction('codigo-error-thread');
-    convo.addQuestion('Ingrese el código de error que se está presentando', async (res, convo, bot) => {
+    convo.addQuestion({
+        text: 'Ingrese el código de error que se está presentando o consulte alguna de nuestras siguientes secciones:',
+        quick_replies: solicitudesGenerales
+    }, async (res, convo, bot) => {
         var error = await Error.findOne({ clave: res });
         if (error) {
             bot.say({ text: error.desc });
@@ -84,9 +88,9 @@ module.exports = function (controller) {
     }], 'more-info-answer', 'more-info-thread');
 
     convo.addAction('exit-thread');
-    convo.addMessage('Fue un placer ayudarle, estaré aquí si me requiere','exit-thread');
+    convo.addMessage('Fue un placer ayudarle, estaré aquí si me requiere', 'exit-thread');
     controller.addDialog(convo);
-    controller.hears('red-cofidi', 'message', async (bot, message) => {
+    controller.hears('rfc-dialog', 'message', async (bot, message) => {
         await bot.beginDialog(RFC_DIALOG_ID);
     });
 }

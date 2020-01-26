@@ -1,21 +1,21 @@
 exports.infoQuickReplies = [
     {
         title: 'Sí',
-        payload: 'red-cofidi'
+        payload: 'rfc-dialogo'
     },
 ]
 
 exports.menuQuickReplies = [
     {
         title: 'Código de Errores',
-        payload: 'red-cofidi'
+        payload: 'rfc-dialogo'
     },
 ]
 
 exports.helpQuickReplies = [
     {
         title: 'Código de Errores',
-        payload: 'red-cofidi'
+        payload: 'rfc-dialogo'
     },
     {
         title: 'Cuenta con un código CFDI',
@@ -27,4 +27,39 @@ exports.helpQuickReplies = [
         title: 'Crear un ticket',
         payload: 'crear-ticket'
     },
+]
+
+exports.solicitudesGenerales = [
+    {
+        title: 'SOLICITUD DE ACUSES DE RECIBO ',
+        payload: 'SOLACUSE'
+    },
+    {
+        title: 'SOLICITUD DE ESTATUS DE ACUSES DE RECIBO',
+        payload: 'SOLESTATUS'
+    },
+    {
+        title: 'RECUPERACIÓN DE TRACKID',
+        payload: 'SOLTRACKID'
+    },
+    {
+        title: 'AGREGAR ARCHIVOS ANEXOS A RED COFIDI (PDF)',
+        payload: 'SOLARCHIVOS'
+    },
+    {
+        title: 'ERROR EN CODIFICACIÓN UTF-8',
+        payload: 'SOLCODIFICACION'
+    },
+    {
+        title: 'ERROR EN LÍNEAS OC U OP',
+        payload: 'SOLERROR'
+    },
+    {
+        title: 'ERROR EN RFC / NO ES INTEGRANTE DE LA RED COFIDI',
+        payload: 'SOLRFC'
+    },
+    {
+        title: 'CONSULTA DE MANUALES DE APOYO',
+        payload: 'SOLMANUALES'
+    }
 ]
