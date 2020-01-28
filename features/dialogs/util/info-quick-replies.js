@@ -31,7 +31,7 @@ exports.helpQuickReplies = [
 
 exports.solicitudesGenerales = [
     {
-        title: 'SOLICITUD DE ACUSES DE RECIBO ',
+        title: 'SOLICITUD DE ACUSES DE RECIBO',
         payload: 'SOLACUSE'
     },
     {
@@ -41,6 +41,10 @@ exports.solicitudesGenerales = [
     {
         title: 'RECUPERACIÓN DE TRACKID',
         payload: 'SOLTRACKID'
+    },
+    {
+        title: 'RECUPERACIÓN DE TRACKID',
+        payload: 'SOLTRACKID-A'
     },
     {
         title: 'AGREGAR ARCHIVOS ANEXOS A RED COFIDI (PDF)',
