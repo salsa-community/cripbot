@@ -7,8 +7,7 @@ var Usuario = require('../../models/Usuario.model')
 var Error = require('../../models/Error.model')
 const { RFC_DIALOG_ID } = require('./util/constants')
 const { BotkitConversation } = require('botkit')
-const { solicitudesGenerales } = require('./util/info-quick-replies')
-const { resolveCodigo } = require('../../util/commons')
+const { resolveCodigo, resolveOptions, resolvePageNumber } = require('../../util/commons')
 const RFC_ASK = 'Por favor, ingrese el RFC del receptor de la factura'
 
 module.exports = function (controller) {
@@ -24,7 +23,7 @@ module.exports = function (controller) {
             await convo.gotoThread('codigo-error-thread')
         } else {
             bot.say({ text: 'el RFC que me proporcionó no se encuentra en nuestra lista de clientes' })
-            await convo.gotoThread('get-rfc-thread')
+            await convo.gotoThread('ask-user-info-thread')
         }
     }, 'rfc', 'get-rfc-thread')
 
@@ -33,8 +32,11 @@ module.exports = function (controller) {
      */
     convo.addAction('codigo-error-thread')
     convo.addQuestion({
-        text: 'Ingrese el código de error que se está presentando o consulte alguna de nuestras siguientes secciones:',
-        quick_replies: solicitudesGenerales
+        text: '<b>Ingrese el código de error que se está presentando o consulte alguna de nuestras siguientes secciones:</b>',
+        quick_replies: async(template, vars) => { 
+            vars.optionPage = resolvePageNumber(vars.optionPage);
+            return resolveOptions(vars.optionPage)
+        }
     }, async (res, convo, bot) => {
         var error = await Error.findOne({ clave: resolveCodigo(res) });
         if (error) {
@@ -87,6 +89,28 @@ module.exports = function (controller) {
             await convo.gotoThread('codigo-error-thread');
         }
     }], 'more-info-answer', 'more-info-thread');
+
+    /**
+     * Preguntar por información del usuario
+     */
+
+    convo.addAction('ask-user-info-thread');
+    convo.addQuestion({
+        text: '¿Te gustaría dejarnos tus datos?',
+        quick_replies: [{ title: 'No', payload: 'no' }, { title: 'Si', payload: 'si' }]
+    }, [{
+        pattern: 'no',
+        handler: async (response, convo, bot) => {
+            await convo.gotoThread('exit-thread');
+        }
+    },
+    {
+        default: true,
+        handler: async (response, convo, bot) => {
+            await convo.gotoThread('codigo-error-thread');
+        }
+    }], 'ask-user-info-answer', 'ask-user-info-thread');
+
 
     convo.addAction('exit-thread');
     convo.addMessage('Fue un placer ayudarle, estaré aquí si me requiere', 'exit-thread');
