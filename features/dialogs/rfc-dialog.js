@@ -3,39 +3,40 @@
  * Licensed under the MIT License.
  */
 
-const { RFC_DIALOG_ID } = require('./util/constants');
-var Usuario = require('../../models/Usuario.model');
-var Error = require('../../models/Error.model');
-const { BotkitConversation } = require('botkit');
-const { solicitudesGenerales } = require('./util/info-quick-replies');
-let RFC_ASK = 'Por favor, ingrese el RFC del receptor de la factura';
+var Usuario = require('../../models/Usuario.model')
+var Error = require('../../models/Error.model')
+const { RFC_DIALOG_ID } = require('./util/constants')
+const { BotkitConversation } = require('botkit')
+const { solicitudesGenerales } = require('./util/info-quick-replies')
+const { resolveCodigo } = require('../../util/commons')
+const RFC_ASK = 'Por favor, ingrese el RFC del receptor de la factura'
 
 module.exports = function (controller) {
     let convo = new BotkitConversation(RFC_DIALOG_ID, controller);
     /**
      * GET RFC THREAD
      */
-    convo.addAction('get-rfc-thread');
+    convo.addAction('get-rfc-thread')
     convo.addQuestion(RFC_ASK, async (res, convo, bot) => {
-        var usuario = await Usuario.findOne({ rfc: res.trim() });
+        var usuario = await Usuario.findOne({ rfc: res.trim() })
         if (usuario) {
-            bot.say({ text: 'Bienvenido(a) ' + usuario.nombre + ' ' + usuario.primerApellido + ' ' + usuario.segundoApellido + ' ' });
-            await convo.gotoThread('codigo-error-thread');
+            bot.say({ text: 'Bienvenido(a) ' + usuario.nombre + ' ' + usuario.primerApellido + ' ' + usuario.segundoApellido + ' ' })
+            await convo.gotoThread('codigo-error-thread')
         } else {
-            bot.say({ text: 'el RFC que me proporcionó no se encuentra en nuestra lista de clientes' });
-            await convo.gotoThread('get-rfc-thread');
+            bot.say({ text: 'el RFC que me proporcionó no se encuentra en nuestra lista de clientes' })
+            await convo.gotoThread('get-rfc-thread')
         }
-    }, 'rfc', 'get-rfc-thread');
+    }, 'rfc', 'get-rfc-thread')
 
     /**
      * CODIGO ERROR THREAD
      */
-    convo.addAction('codigo-error-thread');
+    convo.addAction('codigo-error-thread')
     convo.addQuestion({
         text: 'Ingrese el código de error que se está presentando o consulte alguna de nuestras siguientes secciones:',
         quick_replies: solicitudesGenerales
     }, async (res, convo, bot) => {
-        var error = await Error.findOne({ clave: res });
+        var error = await Error.findOne({ clave: resolveCodigo(res) });
         if (error) {
             bot.say({ text: error.desc });
             bot.say({ text: error.instrucciones.desc });
