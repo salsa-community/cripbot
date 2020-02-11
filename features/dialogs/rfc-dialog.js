@@ -3,7 +3,12 @@
  * Licensed under the MIT License.
  */
 
-var Usuario = require('../../models/Usuario.model')
+const { Sequelize } = require('sequelize');
+
+const UsuarioModel = require('../../models/Usuario.model')
+
+
+var Usuario = require('../../sequelize')
 var Error = require('../../models/Error.model')
 const { RFC_DIALOG_ID } = require('./util/constants')
 const { BotkitConversation } = require('botkit')
@@ -17,9 +22,38 @@ module.exports = function (controller) {
      */
     convo.addAction('get-rfc-thread')
     convo.addQuestion(RFC_ASK, async (res, convo, bot) => {
-        var usuario = await Usuario.findOne({ rfc: res.trim() })
+        let db_host = process.env.MYSQL_HOST || 'localhost';
+        let db_database = process.env.MYSQL_DB || 'becovtig';
+        let db_username = process.env.MYSQL_USERNAME || 'becovtiguser';
+        let db_password = process.env.MYSQL_PASSWORD || '5g#k@&k2p';
+
+        const sequelize = new Sequelize(db_database, db_username, db_password, {
+            host: db_host,
+            dialect: 'mysql',
+            pool: {
+                max: 5,
+                min: 0,
+                acquire: 30000,
+                idle: 10000
+            }
+        });
+
+        // Test mysql connection
+        sequelize
+            .authenticate()
+            .then(() => {
+                console.log('Connection to Vtiger has been established successfully.');
+            })
+            .catch(err => {
+                console.error('Unable to connect to the database:', err);
+            });
+
+        const Usuario = UsuarioModel(sequelize, Sequelize)
+
+        var usuario = await Usuario.findOne({ where: { siccode: res.trim() }, attributes: ['siccode', 'accountname'] });
+        // var usuario = await Usuario.findOne({ rfc: res.trim() })
         if (usuario) {
-            bot.say({ text: 'Bienvenido(a) ' + usuario.nombre + ' ' + usuario.primerApellido + ' ' + usuario.segundoApellido + ' ' })
+            bot.say({ text: 'Bienvenido(a) ' + usuario.accountname })
             await convo.gotoThread('codigo-error-thread')
         } else {
             bot.say({ text: 'el RFC que me proporcionó no se encuentra en nuestra lista de clientes' })
@@ -33,7 +67,7 @@ module.exports = function (controller) {
     convo.addAction('codigo-error-thread')
     convo.addQuestion({
         text: '<b>Ingrese el código de error que se está presentando o consulte alguna de nuestras siguientes secciones:</b>',
-        quick_replies: async(template, vars) => { 
+        quick_replies: async (template, vars) => {
             vars.optionPage = resolvePageNumber(vars.optionPage);
             return resolveOptions(vars.optionPage)
         }
