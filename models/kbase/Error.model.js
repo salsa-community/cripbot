@@ -8,6 +8,4 @@ let ErrorSchema = new Schema({
     links: [{ url: String }]
 });
 
-
-// Export the model
 module.exports = mongoose.model('Error', ErrorSchema, 'errores');

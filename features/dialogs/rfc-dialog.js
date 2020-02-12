@@ -4,7 +4,7 @@
  */
 
 const { Usuario } = require('../../models/vtiger')
-var Error = require('../../models/Error.model')
+var Error = require('../../models/kbase/Error.model')
 const { RFC_DIALOG_ID } = require('./util/constants')
 const { BotkitConversation } = require('botkit')
 const { resolveCodigo, resolveOptions, resolvePageNumber } = require('../../util/commons')

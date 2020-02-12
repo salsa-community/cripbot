@@ -1,6 +1,6 @@
 const { menuQuickReplies } = require('../dialogs/util/info-quick-replies');
 
-var UnknowIntent = require('../../models/UnknowIntent.model');
+var UnknowIntent = require('../../models/kbase/UnknowIntent.model');
 
 module.exports = function (controller) {
   controller.on('message', function (bot, message) {
