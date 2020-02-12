@@ -4,36 +4,27 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'dev';
 const config = require(__dirname + '/../../config/config.json')[env];
 const db = {};
 
-let db_host = process.env.MYSQL_HOST || 'localhost';
-let db_database = process.env.MYSQL_DB || 'becovtig';
-let db_username = process.env.MYSQL_USERNAME || 'becovtiguser';
-let db_password = process.env.MYSQL_PASSWORD || '5g#k@&k2p';
+config.host = process.env.MYSQL_HOST || 'localhost';
+config.database = process.env.MYSQL_DB || 'develop';
+config.username = process.env.MYSQL_USERNAME || 'admin';
+config.password = process.env.MYSQL_PASSWORD || 'admin';
 
-let sequelize = new Sequelize(db_database, db_username, db_password, {
-    host: db_host,
-    dialect: 'mysql',
-    pool: {
-        max: 5,
-        min: 0,
-        acquire: 30000,
-        idle: 10000
-    }
-});
+let sequelize = new Sequelize(config.database, config.username, config.password, config);
 
 // Test mysql connection
 sequelize
-    .authenticate()
-    .then(() => {
-        console.log('Connection to Vtiger has been established successfully.');
-    })
-    .catch(err => {
-        console.error('Unable to connect to the database:', err);
-    });
-    
+  .authenticate()
+  .then(() => {
+    console.log('Connection to Vtiger has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
+
 fs
   .readdirSync(__dirname)
   .filter(file => {
