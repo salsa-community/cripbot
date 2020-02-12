@@ -33,13 +33,10 @@ sequelize
     .catch(err => {
         console.error('Unable to connect to the database:', err);
     });
-console.log("***********************")
-
+    
 fs
   .readdirSync(__dirname)
   .filter(file => {
-    console.log("***********************")
-    console.log(file)
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
   })
   .forEach(file => {
