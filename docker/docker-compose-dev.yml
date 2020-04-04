@@ -13,7 +13,7 @@ services:
     ports:
       - 8079:8080
     depends_on:
-    - bot-mongodb
+    - kbase-db
     - vtiger-db
   kbase-db:
     container_name: 'kbase-db'
