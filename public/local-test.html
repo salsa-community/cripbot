@@ -10,17 +10,9 @@
 <body bgcolor="#C8EAF1">
   <div id="embedded_messenger">
     <header id="message_header" onclick="Botkit.toggle()">En linea...</header>
-    <iframe id="botkit_client" src="http://localhost:3000/index.html"></iframe>
+    <iframe id="botkit_client" title="bot" src="http://localhost:3000/index.html"/></iframe>
   </div>
-  <script>
-    var options = {};
-    Botkit.boot(options);
-    Botkit.deactivate();
-    setTimeout(
-      function () {
-        Botkit.activate();
-      }, 600);
-  </script>
+  <script src="http://localhost:3000/bot-init.js"></script>
 </body>
 
 </html>
