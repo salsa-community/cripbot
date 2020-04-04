@@ -4,37 +4,37 @@
 
 [a folder full of modules](https://botkit.ai/docs/v4/core.html#organize-your-bot-code). 
 
+## Config eviroment
 
-### Clone the project
+**Clone the project**
 
-```bash
-git clone git@github.com:danimaniarqsoft/socrates.git
+`git clone git@github.com:danimaniarqsoft/socrates.git`
 
-cd socrates
-```
+`cd socrates`
 
-#### Download Dependencies
+**Add env file from template**
 
-```bash
-npm install
-```
-#### Build docker images
+`cp .env_template .env`
 
-```bash
-npm run docker-build
-```
+**Run kbase and vtiger**
 
-#### Start the bot
+`docker-compose -f docker/docker-compose-dev.yml up -d`
 
-```bash
-npm start
-```
+**Config vtiger database**
 
-#### Update CSS
+Connect to the mysql database with the credentials defined at `docker/data/mysql/env`
+Execute the script located in `docker/vtiger-dump.sql`
 
-```bash
-sass --update sass/:public/css/
-```
+**Start the bot**
+
+`npm install`
+`npm start`
+
+## Production
+
+### Build docker images
+
+`npm run docker-build`
 
 ## Run the images
 
@@ -68,6 +68,11 @@ npm version [major|minor|patch]
 CONTEXT=api npm start
 ```
 
+#### Update CSS
+
+```bash
+sass --update sass/:public/css/
+```
 
 #### notes
 
