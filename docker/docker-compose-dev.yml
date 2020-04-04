@@ -1,7 +1,7 @@
 version: '2'
 services:
   kbase-app:
-    name: 'kbase-app'
+    container_name: 'kbase-app'
     image: i2cmx/kbase:latest
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
@@ -16,7 +16,7 @@ services:
     - bot-mongodb
     - vtiger-db
   bot-mongodb:
-    name: 'mongodb'
+    container_name: 'mongodb'
     image: mongo:3.6.14
     environment:
       - MONGO_DATA_DIR=/data/db
@@ -27,12 +27,12 @@ services:
       - ./data/mongo:/data/db
     command: mongod --smallfiles --logpath=/dev/null # --quiet
   vtiger-db:
-    name: 'vtiger-db'
+    container_name: 'vtiger-db'
     image: mysql:5.6.23
     volumes:
       - ./data/mysql/config/my.cnf:/etc/mysql/my.cnf
       - ./data/mysql/db:/var/lib/mysql
     env_file:
-      - env
+      - ./data/mysql/env
     ports:
       - 3306:3306
