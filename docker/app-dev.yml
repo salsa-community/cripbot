@@ -1,0 +1,34 @@
+version: '2'
+services:
+  kbase-app:
+    image: i2cmx/kbase:latest
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,swagger
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - SPRING_DATA_MONGODB_URI=mongodb://bot-mongodb:27017
+      - SPRING_DATA_MONGODB_DATABASE=chatbot
+      - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
+    ports:
+      - 8079:8080
+    depends_on:
+    - bot-mongodb
+  bot-mongodb:
+    image: mongo:3.6.14
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data/mongo:/data/db
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
+  db:
+    image: mysql:5.6.23
+    volumes:
+      - ./data/mysql/config/my.cnf:/etc/mysql/my.cnf
+      - ./data/mysql/db:/var/lib/mysql
+    env_file:
+      - env
+    ports:
+      - 3306:3306

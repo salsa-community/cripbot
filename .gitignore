@@ -1,3 +1,4 @@
 .env
 node_modules/
-docker/data/
+docker/data/mongodb/**
+docker/data/mysql/db/**
