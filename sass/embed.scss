@@ -1,7 +1,9 @@
 $height: 400px;
-$powered_by_background: linear-gradient(to right, #3a6073, #3a6073); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+$powered_by_background: linear-gradient(to right, #26a69a, #229489); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+$header_border_radius: 22px 22px 0px 0px;
 #embedded_messenger {
+
+  border-radius: $header_border_radius;
 
   position: fixed;
   z-index: 1000;
@@ -9,8 +11,12 @@ $powered_by_background: linear-gradient(to right, #3a6073, #3a6073); /* W3C, IE 
   bottom: -$height;
   right: 2rem;
 
-  height: $height + 44;
+  height: $height + 34;
+  -webkit-box-shadow: 10px -8px 8px 0px rgba(128,133,128,0.53);
+  -moz-box-shadow: 10px -8px 8px 0px rgba(128,133,128,0.53);
+  box-shadow: 10px -8px 8px 0px rgba(128,133,128,0.53);
   transition: 1.0s ease-in-out bottom;
+
 
   &.active {
     bottom: 0;
@@ -23,8 +29,10 @@ $powered_by_background: linear-gradient(to right, #3a6073, #3a6073); /* W3C, IE 
   }
 
   #message_header {
+    border-radius: $header_border_radius;
+
     background: #000;
-    padding: 0.5rem 1rem;
+    padding: 1.0rem 2rem;
     font-style: italic;
     background: $powered_by_background;
     color: #FFF;
