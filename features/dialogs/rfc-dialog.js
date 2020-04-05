@@ -20,7 +20,7 @@ module.exports = function (controller) {
         var usuario = await Usuario.findOne({ where: { siccode: res.trim() }, attributes: ['siccode', 'accountname'] });
         // var usuario = await Usuario.findOne({ rfc: res.trim() })
         if (usuario) {
-            bot.say({ text: 'Bienvenido(a) ' + usuario.accountname })
+            bot.say({ text: 'Bienvenido proveedor de ' + usuario.accountname })
             await convo.gotoThread('codigo-error-thread')
         } else {
             bot.say({ text: 'el RFC que me proporcionó no se encuentra en nuestra lista de clientes' })
@@ -76,7 +76,7 @@ module.exports = function (controller) {
 
     convo.addAction('more-info-thread');
     convo.addQuestion({
-        text: '¿Te gustaría ingresar otro código de error?',
+        text: '¿Lo podemos ayudar en algo más? ¿Necesita alguna asesoría adicional?',
         quick_replies: [{ title: 'No', payload: 'no' }, { title: 'Si', payload: 'si' }]
     }, [{
         pattern: 'no',
