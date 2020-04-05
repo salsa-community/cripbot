@@ -43,7 +43,7 @@ footer {
     margin: 0; }
 
 a {
-  color: #26a69a; }
+  color: #00c9b7; }
 
 .copyurl {
   width: 100%;
@@ -75,7 +75,7 @@ div.input label {
       padding: 0.5rem; }
     .addon button:hover {
       background: #FFF;
-      color: #26a69a; }
+      color: #00c9b7; }
 
 div.hr {
   border: 1px dashed #ccc;
@@ -84,7 +84,7 @@ div.hr {
   height: 1px; }
 
 a.button {
-  border: 2px solid #26a69a;
+  border: 2px solid #00c9b7;
   font-weight: bold;
   margin: 0;
   border-radius: 3px;
@@ -151,7 +151,7 @@ a.button {
     flex-direction: column-reverse;
     display: flex;
     overflow-y: auto;
-    background-image: linear-gradient(to top, #c1dfc4 0%, #deecdd 100%); }
+    background-image: linear-gradient(to right top, #eff9f9, #eff9f9, #eff9f9, #eff9f9, #eff9f9); }
     #message_window section div div {
       margin: 0.25rem;
       clear: both; }
@@ -178,15 +178,15 @@ a.button {
   #message_window .message {
     font-size: 14px;
     padding: 0.5rem;
-    background: #F0F0F0;
-    color: #333;
+    background: #9492A3;
+    color: #FFFFFF;
     border-radius: 15px;
     width: auto;
     display: inline-block;
     max-width: 75%; }
   #message_window .file_attachment {
-    background: #F0F0F0;
-    color: #333;
+    background: #9492A3;
+    color: #FFFFFF;
     border-radius: 5px;
     display: inline-block;
     max-width: 75%; }
@@ -212,7 +212,7 @@ a.button {
     margin-bottom: 0; }
   #message_window .message.outgoing {
     float: right;
-    background: #26a69a;
+    background: #00c9b7;
     color: white; }
   #message_window #message_replies {
     text-align: center;
@@ -224,7 +224,7 @@ a.button {
       list-style-type: none;
       margin: 0px auto;
       padding: 0;
-      background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url("../images/bot.gif"); }
+      background-image: linear-gradient(to right top, #eff9f9, #eff9f9, #eff9f9, #eff9f9, #eff9f9); }
       #message_window #message_replies ul li {
         display: inline-block;
         margin: 0.5rem;
@@ -232,14 +232,14 @@ a.button {
     #message_window #message_replies a {
       text-decoration: none;
       display: block;
-      border: 1px solid #26a69a;
-      color: #26a69a;
+      border: 1px solid #00c9b7;
+      color: #00c9b7;
       border-radius: 16px;
       padding: 0.25rem 1rem;
       font-size: 14px;
       cursor: pointer; }
       #message_window #message_replies a:hover {
-        background: #26a69a;
+        background: #00c9b7;
         color: #FFF; }
 
 /* typing indicator CSS based on code by Joseph Fusco -> https://codepen.io/fusco/pen/XbpaYv */
@@ -252,7 +252,7 @@ a.button {
     width: 5px;
     float: left;
     margin: 0 1px;
-    background-color: #333;
+    background-color: #FFFFFF;
     display: block;
     border-radius: 50%;
     opacity: 0.4; }
