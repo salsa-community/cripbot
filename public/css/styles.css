@@ -43,7 +43,7 @@ footer {
     margin: 0; }
 
 a {
-  color: #4CAF50; }
+  color: #26a69a; }
 
 .copyurl {
   width: 100%;
@@ -75,7 +75,7 @@ div.input label {
       padding: 0.5rem; }
     .addon button:hover {
       background: #FFF;
-      color: #4CAF50; }
+      color: #26a69a; }
 
 div.hr {
   border: 1px dashed #ccc;
@@ -84,7 +84,7 @@ div.hr {
   height: 1px; }
 
 a.button {
-  border: 2px solid #4CAF50;
+  border: 2px solid #26a69a;
   font-weight: bold;
   margin: 0;
   border-radius: 3px;
@@ -151,7 +151,7 @@ a.button {
     flex-direction: column-reverse;
     display: flex;
     overflow-y: auto;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)) }
+    background-image: linear-gradient(to top, #c1dfc4 0%, #deecdd 100%); }
     #message_window section div div {
       margin: 0.25rem;
       clear: both; }
@@ -168,8 +168,7 @@ a.button {
       font-style: italic; }
     #message_window footer button {
       border: 0;
-      cursor: pointer;
-     }
+      cursor: pointer; }
   #message_window form {
     display: flex;
     margin: 0;
@@ -225,7 +224,7 @@ a.button {
       list-style-type: none;
       margin: 0px auto;
       padding: 0;
-      background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url("../chat-background.jpg"); }
+      background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url("../images/bot.gif"); }
       #message_window #message_replies ul li {
         display: inline-block;
         margin: 0.5rem;
@@ -233,14 +232,14 @@ a.button {
     #message_window #message_replies a {
       text-decoration: none;
       display: block;
-      border: 1px solid #4CAF50;
-      color: #4CAF50;
+      border: 1px solid #26a69a;
+      color: #26a69a;
       border-radius: 16px;
       padding: 0.25rem 1rem;
       font-size: 14px;
       cursor: pointer; }
       #message_window #message_replies a:hover {
-        background: #4CAF50;
+        background: #26a69a;
         color: #FFF; }
 
 /* typing indicator CSS based on code by Joseph Fusco -> https://codepen.io/fusco/pen/XbpaYv */

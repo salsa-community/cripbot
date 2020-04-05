@@ -4,13 +4,13 @@ $bot_message_background: #F0F0F0;
 $bot_message_text: #333;
 $human_message_background: $botkit_purple;
 $human_message_text: white;
-$chat_background_image_url: '../chat-background.jpg';
+$chat_background_image_url: '../images/bot.gif';
 $powered_by_background: linear-gradient(to right, #3a6073, #3a6073); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 #message_window {
     background: $background;
-    border-left: 1px solid #CCC;
-    border-right: 1px solid #CCC;
+    border-left: 1px solid #FFFFFF;
+    border-right: 1px solid #FFFFFF;
 
     /*height: 500px;
     width: 320px;*/
@@ -75,8 +75,8 @@ $powered_by_background: linear-gradient(to right, #3a6073, #3a6073); /* W3C, IE 
       flex-direction: column-reverse;
       display: flex;
       overflow-y: auto;
-      background-image: linear-gradient(rgba(255,255,255,.8), rgba(255,255,255,.8)), url($chat_background_image_url);
-
+      // background-image: linear-gradient(rgba(255,255,255,.8), rgba(255,255,255,.8)), url($chat_background_image_url);
+      background-image: linear-gradient(to top, #c1dfc4 0%, #deecdd 100%);
      div div {
         margin: 0.25rem;
         clear: both;
@@ -90,20 +90,15 @@ $powered_by_background: linear-gradient(to right, #3a6073, #3a6073); /* W3C, IE 
           flex-grow: 1;
           font-size: 0.9rem;
           outline: none;
+          height: 3rem !important;
           border: none;
       }
       input::placeholder{
         font-style: italic;
       }
       button {
-        background-color: #4CAF50;
         border: 0;
         cursor: pointer;
-        color: white;
-        font-weight: bold;
-        border-radius: 50%;
-        width: 10%;
-        height: 34px;
      }
   }
 
