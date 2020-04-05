@@ -1,12 +1,12 @@
 $action_color: orange;
 $background: #FFFFFF;
-$bot_message_background: #9492A3;
-$bot_message_text: #FFFFFF;
+$bot_message_background: rgb(255, 255, 255);
+$bot_message_text: #b4b4b4;
 $human_message_background: $botkit_purple;
 $human_message_text: white;
 $chat_background_image_url: '../images/bot.gif';
 $powered_by_background: linear-gradient(to right, #3a6073, #3a6073); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-$chat_background_section: linear-gradient(to right top, #eff9f9, #eff9f9, #eff9f9, #eff9f9, #eff9f9);
+$chat_background_section: linear-gradient(to right top, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff);
 
 #message_window {
     background: $background;
@@ -20,8 +20,10 @@ $chat_background_section: linear-gradient(to right top, #eff9f9, #eff9f9, #eff9f
     /*margin: 2rem auto;*/
     display: flex;
     flex-direction: column;
-    font-family: 'Arial', sans-serif;
-
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    font-weight: 300;
+    
     .disconnected {
       background-color: #ff9800;
       color: white;
@@ -55,7 +57,6 @@ $chat_background_section: linear-gradient(to right top, #eff9f9, #eff9f9, #eff9f
       flex-shrink: 0;
       text-align: left;
       border-bottom: 0px solid #333;
-      font-size: 18px;
       padding: 0.25rem;
       background: $powered_by_background;
       color: #FFF;
@@ -89,8 +90,9 @@ $chat_background_section: linear-gradient(to right top, #eff9f9, #eff9f9, #eff9f
       padding: 0.25rem;
       input[type="text"] {
           flex-grow: 1;
-          font-size: 0.9rem;
+          font-size: 1rem;
           outline: none;
+          font-size: 1em;
           height: 3rem !important;
           border: none;
       }
@@ -114,14 +116,18 @@ $chat_background_section: linear-gradient(to right top, #eff9f9, #eff9f9, #eff9f
   }
 
   .message {
-      font-size: 14px;
       padding: 0.5rem;
       background: $bot_message_background;
       color: $bot_message_text;
-      border-radius: 15px;
+      border-radius: 25px;
+      box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
       width: auto;
       display: inline-block;
       max-width: 75%;
+      padding: 15px 20px;
+      text-align: left;
+      transition: all 0.5s;
+      white-space: normal;
 
   }
 
@@ -197,7 +203,6 @@ $chat_background_section: linear-gradient(to right top, #eff9f9, #eff9f9, #eff9f
          color: $botkit_purple;
          border-radius: 16px;
          padding: 0.25rem 1rem;
-         font-size: 14px;
          cursor: pointer;
 
          &:hover {

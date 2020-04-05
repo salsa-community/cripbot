@@ -111,7 +111,9 @@ a.button {
   /*margin: 2rem auto;*/
   display: flex;
   flex-direction: column;
-  font-family: 'Arial', sans-serif; }
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  font-weight: 300; }
   #message_window .disconnected {
     background-color: #ff9800;
     color: white;
@@ -136,7 +138,6 @@ a.button {
     flex-shrink: 0;
     text-align: left;
     border-bottom: 0px solid #333;
-    font-size: 18px;
     padding: 0.25rem;
     background: linear-gradient(to right, #3a6073, #3a6073);
     color: #FFF; }
@@ -151,7 +152,7 @@ a.button {
     flex-direction: column-reverse;
     display: flex;
     overflow-y: auto;
-    background-image: linear-gradient(to right top, #eff9f9, #eff9f9, #eff9f9, #eff9f9, #eff9f9); }
+    background-image: linear-gradient(to right top, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff); }
     #message_window section div div {
       margin: 0.25rem;
       clear: both; }
@@ -160,8 +161,9 @@ a.button {
     padding: 0.25rem; }
     #message_window footer input[type="text"] {
       flex-grow: 1;
-      font-size: 0.9rem;
+      font-size: 1rem;
       outline: none;
+      font-size: 1em;
       height: 3rem !important;
       border: none; }
     #message_window footer input::placeholder {
@@ -176,17 +178,21 @@ a.button {
   #message_window #message_template {
     display: none; }
   #message_window .message {
-    font-size: 14px;
     padding: 0.5rem;
-    background: #9492A3;
-    color: #FFFFFF;
-    border-radius: 15px;
+    background: white;
+    color: #b4b4b4;
+    border-radius: 25px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
     width: auto;
     display: inline-block;
-    max-width: 75%; }
+    max-width: 75%;
+    padding: 15px 20px;
+    text-align: left;
+    transition: all 0.5s;
+    white-space: normal; }
   #message_window .file_attachment {
-    background: #9492A3;
-    color: #FFFFFF;
+    background: white;
+    color: #b4b4b4;
     border-radius: 5px;
     display: inline-block;
     max-width: 75%; }
@@ -224,7 +230,7 @@ a.button {
       list-style-type: none;
       margin: 0px auto;
       padding: 0;
-      background-image: linear-gradient(to right top, #eff9f9, #eff9f9, #eff9f9, #eff9f9, #eff9f9); }
+      background-image: linear-gradient(to right top, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff); }
       #message_window #message_replies ul li {
         display: inline-block;
         margin: 0.5rem;
@@ -236,7 +242,6 @@ a.button {
       color: #00c9b7;
       border-radius: 16px;
       padding: 0.25rem 1rem;
-      font-size: 14px;
       cursor: pointer; }
       #message_window #message_replies a:hover {
         background: #00c9b7;
@@ -252,7 +257,7 @@ a.button {
     width: 5px;
     float: left;
     margin: 0 1px;
-    background-color: #FFFFFF;
+    background-color: #b4b4b4;
     display: block;
     border-radius: 50%;
     opacity: 0.4; }
