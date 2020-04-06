@@ -1,4 +1,5 @@
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 #embedded_messenger {
   position: fixed;
   z-index: 1000;
@@ -28,7 +29,7 @@
     padding: 1.0rem 2rem;
     font-style: italic;
     font-size: 1.2em;
-    background: linear-gradient(to right, #26a69a, #229489);
+    background: #5A5EB9;
     color: #FFF; }
 
 #circle {

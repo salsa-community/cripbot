@@ -1,5 +1,7 @@
+@import '_variables';
+
 $height: 600px;
-$powered_by_background: linear-gradient(to right, #26a69a, #229489); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+$powered_by_background: $botkit_purple; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 $header_border_radius: 22px 22px 0px 0px;
 #embedded_messenger {
 

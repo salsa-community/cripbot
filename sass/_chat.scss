@@ -1,12 +1,4 @@
-$action_color: orange;
-$background: #FFFFFF;
-$bot_message_background: rgb(255, 255, 255);
-$bot_message_text: #a5a2a2;
-$human_message_background: $botkit_purple;
-$human_message_text: white;
-$chat_background_image_url: '../images/bot.gif';
-$powered_by_background: linear-gradient(to right, #3a6073, #3a6073); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-$chat_background_section: linear-gradient(to right top, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff);
+@import '_variables';
 
 #message_window {
     background: $background;
@@ -14,6 +6,8 @@ $chat_background_section: linear-gradient(to right top, #ffffff, #ffffff, #fffff
     border-right: 1px solid #FFFFFF;
 
     scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; /* Lets it scroll lazy */
+
     /*height: 500px;
     width: 320px;*/
     height: 100%;
@@ -85,6 +79,21 @@ $chat_background_section: linear-gradient(to right top, #ffffff, #ffffff, #fffff
         clear: both;
     }
   }
+    
+    section::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+      background-color: #F5F5F5;
+    }
+    
+    section::-webkit-scrollbar {
+      width: 5px;  
+      background-color: #F5F5F5;
+    }
+    
+    section::-webkit-scrollbar-thumb {
+      background-color: $botkit_purple;
+    }
+    
 
   footer {
       border-top: 1px solid #CCC;
@@ -214,7 +223,11 @@ $chat_background_section: linear-gradient(to right top, #ffffff, #ffffff, #fffff
    }
 }
 
-
+#message_indicator_form_id {
+  .btn{
+    background-color: $botkit_purple !important;
+  }
+}
 
 /* typing indicator CSS based on code by Joseph Fusco -> https://codepen.io/fusco/pen/XbpaYv */
 .typing-indicator {

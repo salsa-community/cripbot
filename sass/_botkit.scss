@@ -1,4 +1,5 @@
-$botkit_purple: #00c9b7;
+@import '_variables';
+
 @mixin clearfix {
     &:after {
         content: "";
