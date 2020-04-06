@@ -42,3 +42,23 @@ $header_border_radius: 22px 22px 0px 0px;
   }
 
 }
+
+#circle {
+  background: rgb(195, 48, 4);
+  border-radius: 50%;
+  box-shadow: rgba(245, 0, 0, 0.12) 0px 1px 6px, rgba(216, 0, 0, 0.12) 0px 1px 4px;
+  width: 15px;
+  height: 15px;
+  padding: 2px;
+  border: 10px;
+  float: left;
+}
+
+.circle{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #DC143C;
+    box-shadow: 0 0 50px 0 #DC143C;
+    float: left;
+}

@@ -27,4 +27,22 @@
     background: linear-gradient(to right, #26a69a, #229489);
     color: #FFF; }
 
+#circle {
+  background: #c33004;
+  border-radius: 50%;
+  box-shadow: rgba(245, 0, 0, 0.12) 0px 1px 6px, rgba(216, 0, 0, 0.12) 0px 1px 4px;
+  width: 15px;
+  height: 15px;
+  padding: 2px;
+  border: 10px;
+  float: left; }
+
+.circle {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #DC143C;
+  box-shadow: 0 0 50px 0 #DC143C;
+  float: left; }
+
 /*# sourceMappingURL=embed.css.map */

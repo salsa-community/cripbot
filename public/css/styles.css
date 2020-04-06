@@ -181,7 +181,7 @@ a.button {
   #message_window .message {
     padding: 0.5rem;
     background: white;
-    color: #b4b4b4;
+    color: #a5a2a2;
     border-radius: 25px;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
     width: auto;
@@ -193,7 +193,7 @@ a.button {
     white-space: normal; }
   #message_window .file_attachment {
     background: white;
-    color: #b4b4b4;
+    color: #a5a2a2;
     border-radius: 5px;
     display: inline-block;
     max-width: 75%; }
@@ -258,7 +258,7 @@ a.button {
     width: 5px;
     float: left;
     margin: 0 1px;
-    background-color: #b4b4b4;
+    background-color: #a5a2a2;
     display: block;
     border-radius: 50%;
     opacity: 0.4; }
