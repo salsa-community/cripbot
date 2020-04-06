@@ -5,7 +5,7 @@
 
 const { Usuario } = require('../../models/vtiger')
 var Error = require('../../models/kbase/Error.model')
-const { RFC_DIALOG_ID } = require('./util/constants')
+const { RFC_DIALOG_ID, BOT_CLIENT_PAC_WEB__ID, BOT_CLIENT_RED_COFIDI__ID } = require('./util/constants')
 const { BotkitConversation } = require('botkit')
 const { resolveCodigo, resolveOptions, resolvePageNumber } = require('../../util/commons')
 const RFC_ASK = 'Por favor, ingrese el RFC del receptor de la factura'
@@ -17,6 +17,7 @@ module.exports = function (controller) {
      */
     convo.addAction('get-rfc-thread')
     convo.addQuestion(RFC_ASK, async (res, convo, bot) => {
+        console.log(convo.vars.user);
         var usuario = await Usuario.findOne({ where: { siccode: res.trim() }, attributes: ['siccode', 'accountname'] });
         // var usuario = await Usuario.findOne({ rfc: res.trim() })
         if (usuario) {

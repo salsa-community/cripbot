@@ -55,4 +55,9 @@ module.exports = function (controller) {
     controller.hears(['gracias'], 'message', async (bot, message) => {
         await typing(bot, message, 'es un placer poder servirte');
     });
+
+    controller.hears(['test'], 'message', async (bot, message) => {
+        console.log(bot);
+        await typing(bot, message, message.user);
+    });
 }

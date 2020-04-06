@@ -4,7 +4,7 @@
  * 
  */
 
-var options = {};
+var options = {id:'RedCofidi'};
 Botkit.boot(options);
 Botkit.deactivate();
 setTimeout(
