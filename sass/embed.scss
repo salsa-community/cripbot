@@ -10,17 +10,18 @@ $header_border_radius: 22px 22px 0px 0px;
 
   bottom: -$height;
   right: 2rem;
+  width: 164;
 
-  width: 525;
   height: $height + 34;
   -webkit-box-shadow: 10px -8px 8px 0px rgba(128,133,128,0.53);
   -moz-box-shadow: 10px -8px 8px 0px rgba(128,133,128,0.53);
   box-shadow: 10px -8px 8px 0px rgba(128,133,128,0.53);
-  transition: 1.0s ease-in-out bottom;
+  transition: 1.0s ease-in-out;
 
 
   &.active {
     bottom: 0;
+    width: 650;
   }
 
   iframe {

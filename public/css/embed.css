@@ -5,14 +5,15 @@
   z-index: 1000;
   bottom: -600px;
   right: 2rem;
-  width: 525;
+  width: 164;
   height: 634px;
   -webkit-box-shadow: 10px -8px 8px 0px rgba(128, 133, 128, 0.53);
   -moz-box-shadow: 10px -8px 8px 0px rgba(128, 133, 128, 0.53);
   box-shadow: 10px -8px 8px 0px rgba(128, 133, 128, 0.53);
-  transition: 1.0s ease-in-out bottom; }
+  transition: 1.0s ease-in-out; }
   #embedded_messenger.active {
-    bottom: 0; }
+    bottom: 0;
+    width: 650; }
   #embedded_messenger iframe {
     height: 600px;
     width: 100%;
