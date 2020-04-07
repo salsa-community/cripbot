@@ -172,6 +172,7 @@ a.button {
     border-top: 1px solid #CCC;
     padding: 0.25rem; }
     #message_window footer input[type="text"] {
+      color: #678;
       flex-grow: 1;
       font-size: 1rem;
       outline: none;
@@ -188,20 +189,27 @@ a.button {
     margin: 0;
     padding: 0.25rem; }
   #message_window #message_template {
-    display: none; }
+    display: none;
+    animation: mymove 5s infinite;
+    animation-delay: 2s; }
   #message_window .message {
     padding: 0.5rem;
     background: white;
     color: #678;
     border-radius: 25px;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 2px;
     width: auto;
     display: inline-block;
-    max-width: 75%;
+    max-width: 55%;
     padding: 15px 20px;
     text-align: left;
     transition: all 0.5s;
     white-space: normal; }
+@keyframes mymove {
+  from {
+    left: 0px; }
+  to {
+    left: 200px; } }
   #message_window .file_attachment {
     background: white;
     color: #678;
