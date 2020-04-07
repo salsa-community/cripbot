@@ -242,7 +242,6 @@ var Botkit = {
     },
     renderMessage: function (message) {
         var that = this;
-        that.message_list.scrollTop = that.message_list.scrollHeight;
         if (!that.next_line) {
             that.next_line = document.createElement('div');
             that.message_list.appendChild(that.next_line);
