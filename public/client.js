@@ -231,6 +231,9 @@ var Botkit = {
     clearReplies: function () {
         this.replies.innerHTML = '';
     },
+    scrollBottom: function() {
+        this.message_list.scrollTop = this.message_list.scrollHeight;
+    },
     quickReply: function (payload) {
         this.send(payload);
     },
@@ -239,6 +242,7 @@ var Botkit = {
     },
     renderMessage: function (message) {
         var that = this;
+        that.message_list.scrollTop = that.message_list.scrollHeight;
         if (!that.next_line) {
             that.next_line = document.createElement('div');
             that.message_list.appendChild(that.next_line);
@@ -250,6 +254,7 @@ var Botkit = {
         that.next_line.innerHTML = that.message_template({
             message: message
         });
+        that.next_line.classList.add("message_item");
         if (!message.isTyping) {
             delete (that.next_line);
         }
@@ -388,10 +393,8 @@ var Botkit = {
         });
 
         that.on('message', function (message) {
-
             console.log('RECEIVED MESSAGE', message);
             that.renderMessage(message);
-
         });
 
         that.on('message', function (message) {

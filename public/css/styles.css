@@ -205,11 +205,23 @@ a.button {
     text-align: left;
     transition: all 0.5s;
     white-space: normal; }
-@keyframes mymove {
+  #message_window .message_item {
+    animation: fade 0.8s linear; }
+@keyframes fade {
   from {
-    left: 0px; }
+    opacity: 0; }
   to {
-    left: 200px; } }
+    opacity: 1; } }
+@-webkit-keyframes fadeinout {
+  0%,100% {
+    opacity: 0; }
+  50% {
+    opacity: 1; } }
+@keyframes fadeinout {
+  0%,100% {
+    opacity: 0; }
+  50% {
+    opacity: 1; } }
   #message_window .file_attachment {
     background: white;
     color: #678;

@@ -61,18 +61,6 @@ $header_border_radius: 22px 22px 0px 0px;
 }
 
 .active .circle{
-    width: 15px;
-    height: 15px;
-    padding: .1em;
-    border-radius: 50%;
-    background-color: #DC143C;
-    -webkit-box-shadow:0 0 10px rgba(216, 185, 185, 0.5);
-    -moz-box-shadow:0 0 10px rgba(224, 194, 194, 0.5);
-    box-shadow:0 0 10px rgba(195, 167, 167, 0.5);
-    float: left;
-}
-
-.circle{
   width: 15px;
   height: 15px;
   padding: .1em;
@@ -81,6 +69,18 @@ $header_border_radius: 22px 22px 0px 0px;
   -webkit-box-shadow:0 0 10px rgba(124, 194, 107, 0.5);
   -moz-box-shadow:0 0 10px rgba(150, 192, 96, 0.5);
   box-shadow:0 0 10px rgba(155, 197, 138, 0.5);
+  float: left;
+}
+
+.circle{
+  width: 15px;
+  height: 15px;
+  padding: .1em;
+  border-radius: 50%;
+  background-color: #DC143C;
+  -webkit-box-shadow:0 0 10px rgba(216, 185, 185, 0.5);
+  -moz-box-shadow:0 0 10px rgba(224, 194, 194, 0.5);
+  box-shadow:0 0 10px rgba(195, 167, 167, 0.5);
   float: left;
 }
 
