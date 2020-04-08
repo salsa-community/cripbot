@@ -248,6 +248,10 @@ var Botkit = {
         }
         if (message.text) {
             message.html = converter.makeHtml(message.text);
+            const matchCode = message.text.match(/Paso.*(\d.*)/)
+            if (matchCode) {
+                that.next_line.classList.add("step_message");
+            }
         }
 
         that.next_line.innerHTML = that.message_template({

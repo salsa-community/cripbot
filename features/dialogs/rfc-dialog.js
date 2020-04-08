@@ -59,7 +59,7 @@ module.exports = function (controller) {
      */
     convo.addAction('show-steps-thread');
     convo.addQuestion({
-        text: 'Paso {{vars.currentStep.paso}} : {{vars.currentStep.desc}}',
+        text: '<b>Paso {{vars.currentStep.paso}} :</b> {{vars.currentStep.desc}}',
         quick_replies: [{ title: 'Realizado', payload: 'Realizado' }]
     }, async (res, convo, bot) => {
         if (convo.vars.currentStepIdx < convo.vars.maxStepIdx - 1) {
