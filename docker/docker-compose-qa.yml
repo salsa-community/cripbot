@@ -42,12 +42,12 @@ services:
     container_name: 'vtiger-db'
     image: mysql:5.6.23
     environment:
-      - MYSQL_HOST=db
-      - MYSQL_ROOT_PASSWORD=6k*&lj@;!
-      - MYSQL_USER=becovtiguser
-      - MYSQL_PASSWORD=5g#k@&k2p
-      - MYSQL_DATABASE=becovtig
-      - BASE_URL=http://127.0.0.1
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}}
+      - BASE_URL=${BASE_URL}
     ports:
       - 3306:3306
   mongo-express:
