@@ -1,0 +1,43 @@
+version: '2'
+services:
+  bot-app:
+    image: i2cmx/atebot:${BOT_TAG}
+    environment:
+      - MONGO_URI=mongodb://bot-mongodb:27017
+      - MONGO_KB_URI=mongodb://bot-mongodb:27017/chatbot
+    ports:
+      - 8085:3000
+    depends_on:
+    - bot-mongodb
+  kbase-app:
+    image: i2cmx/kbase:${KBASE_TAG}
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,swagger
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - SPRING_DATA_MONGODB_URI=mongodb://bot-mongodb:27017
+      - SPRING_DATA_MONGODB_DATABASE=chatbot
+      - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
+    ports:
+      - 8082:8080
+    depends_on:
+    - bot-mongodb
+  bot-mongodb:
+    image: mongo:3.6.14
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ./data/db:/data/db
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
+  mongo-express:
+    image: mongo-express:latest
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=bot-mongodb
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_BASICAUTH_USERNAME=${EXPRESS_USER}
+      - ME_CONFIG_BASICAUTH_PASSWORD=${EXPRESS_PASSWORD}
+    ports:
+      - 8090:8081
+    depends_on:
+    - bot-mongodb

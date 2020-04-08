@@ -1,6 +1,7 @@
 version: '2'
 services:
   bot-app:
+    container_name: 'bot-app'
     image: i2cmx/atebot:latest
     environment:
       - MONGO_URI=mongodb://kbase-db:27017
@@ -11,7 +12,7 @@ services:
       - MYSQL_USERNAME=${DB_USERNAME}
       - MYSQL_PASSWORD=${DB_PASSWORD}
     ports:
-      - 3000:3000
+      - 8090:3000
     depends_on:
     - kbase-app
   kbase-app:
@@ -25,7 +26,7 @@ services:
       - SPRING_DATA_MONGODB_DATABASE=chatbot
       - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
     ports:
-      - 8080:8080
+      - 8091:8080
     depends_on:
     - kbase-db
     - vtiger-db
@@ -51,6 +52,7 @@ services:
     ports:
       - 3306:3306
   mongo-express:
+    container_name: 'mongo-express'
     image: mongo-express:latest
     environment:
       - ME_CONFIG_MONGODB_SERVER=kbase-db
@@ -58,6 +60,6 @@ services:
       - ME_CONFIG_BASICAUTH_USERNAME=${EXPRESS_USER}
       - ME_CONFIG_BASICAUTH_PASSWORD=${EXPRESS_PASSWORD}
     ports:
-      - 8090:8081
+      - 8092:8081
     depends_on:
     - kbase-db
