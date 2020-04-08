@@ -1,50 +1,63 @@
 version: '2'
 services:
   bot-app:
-    image: i2cmx/atebot:${BOT_TAG}
+    image: i2cmx/atebot:latest
     environment:
-      - MONGO_URI=mongodb://bot-mongodb:27017
-      - MONGO_KB_URI=mongodb://bot-mongodb:27017/chatbot
+      - MONGO_URI=mongodb://kbase-db:27017
+      - MONGO_KB_URI=mongodb://kbase-db:27017/chatbot
       - NODE_ENV=${BOT_ENV}
       - MYSQL_HOST=${DB_HOST}
       - MYSQL_DB=${DB_NAME}
       - MYSQL_USERNAME=${DB_USERNAME}
       - MYSQL_PASSWORD=${DB_PASSWORD}
     ports:
-      - 8085:3000
+      - 3000:3000
     depends_on:
-    - bot-mongodb
+    - kbase-app
   kbase-app:
-    image: i2cmx/kbase:${KBASE_TAG}
+    container_name: 'kbase-app'
+    image: i2cmx/kbase:latest
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=prod,swagger
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
-      - SPRING_DATA_MONGODB_URI=mongodb://bot-mongodb:27017
+      - SPRING_DATA_MONGODB_URI=mongodb://kbase-db:27017
       - SPRING_DATA_MONGODB_DATABASE=chatbot
       - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
     ports:
-      - 8079:8080
+      - 8080:8080
     depends_on:
-    - bot-mongodb
-  bot-mongodb:
+    - kbase-db
+    - vtiger-db
+  kbase-db:
+    container_name: 'kbase-db'
     image: mongo:3.6.14
     environment:
       - MONGO_DATA_DIR=/data/db
       - MONGO_LOG_DIR=/dev/null
     ports:
       - 27017:27017
-    volumes:
-      - ./data/db:/data/db
     command: mongod --smallfiles --logpath=/dev/null # --quiet
+  vtiger-db:
+    container_name: 'vtiger-db'
+    image: mysql:5.6.23
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_ROOT_PASSWORD=6k*&lj@;!
+      - MYSQL_USER=becovtiguser
+      - MYSQL_PASSWORD=5g#k@&k2p
+      - MYSQL_DATABASE=becovtig
+      - BASE_URL=http://127.0.0.1
+    ports:
+      - 3306:3306
   mongo-express:
     image: mongo-express:latest
     environment:
-      - ME_CONFIG_MONGODB_SERVER=bot-mongodb
+      - ME_CONFIG_MONGODB_SERVER=kbase-db
       - ME_CONFIG_MONGODB_PORT=27017
       - ME_CONFIG_BASICAUTH_USERNAME=${EXPRESS_USER}
       - ME_CONFIG_BASICAUTH_PASSWORD=${EXPRESS_PASSWORD}
     ports:
       - 8090:8081
     depends_on:
-    - bot-mongodb
+    - kbase-db
