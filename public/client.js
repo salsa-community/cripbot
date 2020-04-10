@@ -231,8 +231,8 @@ var Botkit = {
     clearReplies: function () {
         this.replies.innerHTML = '';
     },
-    scrollBottom: function() {
-        this.message_list.scrollTop = this.message_list.scrollHeight;
+    scrollBottom: function(){   
+        setTimeout(() => {this.message_list.scrollTop = this.message_list.scrollHeight },10);
     },
     quickReply: function (payload) {
         this.send(payload);
@@ -261,6 +261,7 @@ var Botkit = {
         if (!message.isTyping) {
             delete (that.next_line);
         }
+        that.scrollBottom();
     },
     triggerScript: function (script, thread) {
         this.deliverMessage({

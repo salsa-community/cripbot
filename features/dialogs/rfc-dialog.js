@@ -16,6 +16,7 @@ module.exports = function (controller) {
      * GET RFC THREAD
      */
     convo.addAction('get-rfc-thread')
+    convo.addAction('timeout');
     convo.addQuestion(RFC_ASK, async (res, convo, bot) => {
         //console.log(convo.vars.user);
         var usuario = await Usuario.findOne({ where: { siccode: res.trim() }, attributes: ['siccode', 'accountname'] });
@@ -108,13 +109,42 @@ module.exports = function (controller) {
     {
         default: true,
         handler: async (response, convo, bot) => {
-            await convo.gotoThread('codigo-error-thread');
+            await convo.gotoThread('get-user-email');
         }
     }], 'ask-user-info-answer', 'ask-user-info-thread');
 
 
+
+    convo.addAction('get-user-email');
+    convo.addQuestion({
+        text: 'Por favor, proporcioname un correo electrónico para contactarte'
+    }, [{
+        pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+        handler: async (response, convo, bot) => {
+            bot.say({ text: 'Gracias, en breve te contactaremos' });
+            await convo.gotoThread('exit-thread');
+        }
+    },
+    {
+        default: true,
+        handler: async (response, convo, bot) => {
+            bot.say({ text: 'El correo electrónico que ingresaste, no es un correo válido' });
+            await convo.gotoThread('get-user-email');
+        }
+    }], 'get-user-email', 'get-user-email');
+
     convo.addAction('exit-thread');
     convo.addMessage('Fue un placer ayudarle, estaré aquí si me requiere', 'exit-thread');
+
+
+    convo.before('next_thread',  async () => {
+        return new Promise((resolve) => {
+            // simulate some long running process
+            setTimeout(resolve, 3000);
+        });
+    });
+
+
     controller.addDialog(convo);
     controller.hears('rfc-dialog', 'message', async (bot, message) => {
         await bot.beginDialog(RFC_DIALOG_ID);

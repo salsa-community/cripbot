@@ -1,5 +1,23 @@
 @import '_variables';
 
+#message_list { 
+  scroll-behavior: smooth;
+  overflow-y: auto; }
+
+#message_list::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #F5F5F5;
+}
+
+#message_list::-webkit-scrollbar {
+  width: 5px;  
+  background-color: #F5F5F5;
+}
+
+#message_list::-webkit-scrollbar-thumb {
+  background-color: $botkit_purple;
+}
+
 #message_window {
     background: $background;
     border-left: 1px solid #FFFFFF;
@@ -79,20 +97,6 @@
         clear: both;
     }
   }
-    
-    section::-webkit-scrollbar-track {
-      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-      background-color: #F5F5F5;
-    }
-    
-    section::-webkit-scrollbar {
-      width: 5px;  
-      background-color: #F5F5F5;
-    }
-    
-    section::-webkit-scrollbar-thumb {
-      background-color: $botkit_purple;
-    }
     
 
   footer {
