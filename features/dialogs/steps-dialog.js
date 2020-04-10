@@ -8,7 +8,7 @@ var Error = require('../../models/kbase/Error.model')
 const { RFC_DIALOG_ID, BOT_CLIENT_PAC_WEB__ID, BOT_CLIENT_RED_COFIDI__ID } = require('./util/constants')
 const { BotkitConversation } = require('botkit')
 const { resolveCodigo, resolveOptions, resolvePageNumber } = require('../../util/commons')
-const { TYPING_DELAY } = require('../../config');
+const { TYPING_DELAY, PAGINATOR_NEXT_LABEL } = require('../../config');
 
 const RFC_ASK = 'Por favor, ingrese el RFC del receptor de la factura'
 
@@ -42,19 +42,24 @@ module.exports = function (controller) {
             return resolveOptions(vars.optionPage)
         }
     }, async (res, convo, bot) => {
-        var error = await Error.findOne({ clave: resolveCodigo(res) });
-        if (error) {
-            bot.say({ text: error.desc });
-            bot.say({ text: error.instrucciones.desc });
-            convo.setVar('error', error);
-            convo.setVar('currentStep', error.instrucciones.pasos[0]);
-            convo.setVar('currentStepIdx', 0);
-            convo.setVar('maxStepIdx', error.instrucciones.pasos.length);
+        if(res == PAGINATOR_NEXT_LABEL){
             bot.say({type: 'typing'}, 'typing');
-            await convo.gotoThread('show-steps-thread');
-        } else {
-            bot.say({ text: 'el código de error ingresado no se encuentra en nuestra base de conocimiento' });
             await convo.gotoThread('codigo-error-thread');
+        }else{
+            var error = await Error.findOne({ clave: resolveCodigo(res) });
+            if (error) {
+                bot.say({ text: error.desc });
+                bot.say({ text: error.instrucciones.desc });
+                convo.setVar('error', error);
+                convo.setVar('currentStep', error.instrucciones.pasos[0]);
+                convo.setVar('currentStepIdx', 0);
+                convo.setVar('maxStepIdx', error.instrucciones.pasos.length);
+                bot.say({type: 'typing'}, 'typing');
+                await convo.gotoThread('show-steps-thread');
+            } else {
+                bot.say({ text: 'el código de error ingresado no se encuentra en nuestra base de conocimiento' });
+                await convo.gotoThread('codigo-error-thread');
+            }
         }
     }, 'codigo-error', 'codigo-error-thread');
 
@@ -170,7 +175,4 @@ module.exports = function (controller) {
     });
 
     controller.addDialog(convo);
-    controller.hears('rfc-dialog', 'message', async (bot, message) => {
-        await bot.beginDialog(RFC_DIALOG_ID);
-    });
 }

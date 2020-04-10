@@ -1,4 +1,6 @@
 const { solicitudesGenerales } = require('../features/dialogs/util/info-quick-replies');
+const { PAGINATOR_NEXT_LABEL } = require('../config');
+
 /**
  * getRandomInt function, it is a utility method
  */
@@ -31,7 +33,7 @@ exports.resolveOptions = function (page) {
     for (let index = leftIndex; index < solicitudesGenerales.length && index < rightIndex; index++) {
         options.push(solicitudesGenerales[index]);
     }
-    options.push({ title: '<b><i>Ver más...</i></b>', payload: 'ver-mas' })
+    options.push({ title: '<b><i>Ver más...</i></b>', payload: PAGINATOR_NEXT_LABEL })
     return options;
 }
 
