@@ -8,6 +8,8 @@ var Error = require('../../models/kbase/Error.model')
 const { RFC_DIALOG_ID, BOT_CLIENT_PAC_WEB__ID, BOT_CLIENT_RED_COFIDI__ID } = require('./util/constants')
 const { BotkitConversation } = require('botkit')
 const { resolveCodigo, resolveOptions, resolvePageNumber } = require('../../util/commons')
+const { TYPING_DELAY } = require('../../config');
+
 const RFC_ASK = 'Por favor, ingrese el RFC del receptor de la factura'
 
 module.exports = function (controller) {
@@ -16,12 +18,12 @@ module.exports = function (controller) {
      * GET RFC THREAD
      */
     convo.addAction('get-rfc-thread')
-    convo.addAction('timeout');
     convo.addQuestion(RFC_ASK, async (res, convo, bot) => {
         //console.log(convo.vars.user);
         var usuario = await Usuario.findOne({ where: { siccode: res.trim() }, attributes: ['siccode', 'accountname'] });
         if (usuario) {
             bot.say({ text: 'Bienvenido proveedor de ' + usuario.accountname })
+            bot.say({type: 'typing'}, 'typing');
             await convo.gotoThread('codigo-error-thread')
         } else {
             bot.say({ text: 'el RFC que me proporcionó no se encuentra en nuestra lista de clientes' })
@@ -48,6 +50,7 @@ module.exports = function (controller) {
             convo.setVar('currentStep', error.instrucciones.pasos[0]);
             convo.setVar('currentStepIdx', 0);
             convo.setVar('maxStepIdx', error.instrucciones.pasos.length);
+            bot.say({type: 'typing'}, 'typing');
             await convo.gotoThread('show-steps-thread');
         } else {
             bot.say({ text: 'el código de error ingresado no se encuentra en nuestra base de conocimiento' });
@@ -65,8 +68,10 @@ module.exports = function (controller) {
     }, async (res, convo, bot) => {
         if (convo.vars.currentStepIdx < convo.vars.maxStepIdx - 1) {
             convo.vars.currentStep = convo.vars.error.instrucciones.pasos[++convo.vars.currentStepIdx];
+            bot.say({type: 'typing'}, 'typing');
             await convo.gotoThread('show-steps-thread');
         } else {
+            bot.say({type: 'typing'}, 'typing');
             await convo.gotoThread('more-info-thread');
         }
     }, 'step-answer', 'show-steps-thread');
@@ -82,12 +87,14 @@ module.exports = function (controller) {
     }, [{
         pattern: 'no',
         handler: async (response, convo, bot) => {
+            bot.say({type: 'typing'}, 'typing');
             await convo.gotoThread('exit-thread');
         }
     },
     {
         default: true,
         handler: async (response, convo, bot) => {
+            bot.say({type: 'typing'}, 'typing');
             await convo.gotoThread('codigo-error-thread');
         }
     }], 'more-info-answer', 'more-info-thread');
@@ -103,6 +110,7 @@ module.exports = function (controller) {
     }, [{
         pattern: 'no',
         handler: async (response, convo, bot) => {
+            bot.say({type: 'typing'}, 'typing');
             await convo.gotoThread('exit-thread');
         }
     },
@@ -122,6 +130,7 @@ module.exports = function (controller) {
         pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
         handler: async (response, convo, bot) => {
             bot.say({ text: 'Gracias, en breve te contactaremos' });
+            bot.say({type: 'typing'}, 'typing');
             await convo.gotoThread('exit-thread');
         }
     },
@@ -137,13 +146,28 @@ module.exports = function (controller) {
     convo.addMessage('Fue un placer ayudarle, estaré aquí si me requiere', 'exit-thread');
 
 
-    convo.before('next_thread',  async () => {
+    convo.before('show-steps-thread',  async () => {
         return new Promise((resolve) => {
-            // simulate some long running process
-            setTimeout(resolve, 3000);
+            setTimeout(resolve, TYPING_DELAY);
+        });
+    });
+    convo.before('more-info-thread',  async () => {
+        return new Promise((resolve) => {
+            setTimeout(resolve, TYPING_DELAY);
         });
     });
 
+    convo.before('codigo-error-thread',  async () => {
+        return new Promise((resolve) => {
+            setTimeout(resolve, TYPING_DELAY);
+        });
+    });
+    
+    convo.before('exit-thread',  async () => {
+        return new Promise((resolve) => {
+            setTimeout(resolve, TYPING_DELAY);
+        });
+    });
 
     controller.addDialog(convo);
     controller.hears('rfc-dialog', 'message', async (bot, message) => {
