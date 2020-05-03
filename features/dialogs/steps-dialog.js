@@ -10,6 +10,7 @@ const { BotkitConversation } = require('botkit')
 const { resolveCodigo, resolveOptions, resolvePageNumber } = require('../../util/commons')
 const { TYPING_DELAY, PAGINATOR_NEXT_LABEL } = require('../../config');
 
+
 const RFC_ASK = 'Por favor, ingrese el RFC del receptor de la factura'
 
 module.exports = function (controller) {
@@ -22,7 +23,8 @@ module.exports = function (controller) {
         //console.log(convo.vars.user);
         var usuario = await Usuario.findOne({ where: { siccode: res.trim() }, attributes: ['siccode', 'accountname'] });
         if (usuario) {
-            bot.say({ text: 'Bienvenido proveedor de ' + usuario.accountname })
+            var subject = convo.vars.user === BOT_CLIENT_RED_COFIDI__ID ? 'proveedor' : 'usuario';
+            bot.say({ text: 'Bienvenido ' + subject +' de ' + usuario.accountname })
             bot.say({type: 'typing'}, 'typing');
             await convo.gotoThread('codigo-error-thread')
         } else {
