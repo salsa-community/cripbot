@@ -1,0 +1,54 @@
+<html>
+
+<head>
+  <title>PAC WEB demo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;900&display=swap" rel="stylesheet">
+  <style>
+      h1 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 48px;
+        color: white;
+      }
+      p {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 24px;
+        color: white;
+      }
+
+      .top-buffer { margin-top:150px; }
+
+  </style>
+  <link rel="stylesheet" href="/css/embed.css" />
+  <script src="/embed.js"></script>
+
+</head>
+
+<body style="background-color:rgb(32, 29, 29)">
+  <div class="container">
+    <div class="row top-buffer">
+      <div class="col-sm">
+        <h1>PAC Web</h1>
+        <p>Página demo para el servicio de <em>Pac Web</em></p>
+      </div>
+      <div class="col-sm">
+      </div>
+      <div class="col-sm">
+      </div>
+    </div>
+  </div>
+  <div id="embedded_messenger">
+    <header id="message_header" onclick="Botkit.toggle()">
+      <div class="circle"></div>
+      <img class="avatar_icon" src="/images/chatbot-icon.svg" alt="Avatar" >
+      <div class="header_text">En línea</div>
+    </header>
+    <iframe id="botkit_client" title="bot" src="/index.html"/></iframe>
+  </div>
+  <script src="/bot-webpack.js"></script>
+</body>
+
+</html>
