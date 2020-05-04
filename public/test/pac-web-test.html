@@ -1,0 +1,22 @@
+<html>
+
+<head>
+  <title>PAC WEB demo</title>
+  <link rel="stylesheet" href="/css/embed.css" />
+  <script src="/embed.js"></script>
+
+</head>
+
+<body style="background-color:#6dd5ed">
+  <div id="embedded_messenger">
+    <header id="message_header" onclick="Botkit.toggle()">
+      <div class="circle"></div>
+      <img class="avatar_icon" src="/images/chatbot-icon.svg" alt="Avatar" >
+      <div class="header_text">En línea</div>
+    </header>
+    <iframe id="botkit_client" title="bot" src="/index.html"/></iframe>
+  </div>
+  <script src="/bot-webpack.js"></script>
+</body>
+
+</html>
