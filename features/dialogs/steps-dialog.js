@@ -10,17 +10,14 @@ const { BotkitConversation } = require('botkit')
 const { resolveCodigo, resolveOptions, resolvePageNumber } = require('../../util/commons')
 const { TYPING_DELAY, PAGINATOR_NEXT_LABEL } = require('../../config');
 
-
-const RFC_ASK = 'Por favor, ingrese el RFC del receptor de la factura'
-
 module.exports = function (controller) {
     let convo = new BotkitConversation(RFC_DIALOG_ID, controller);
+    
     /**
      * GET RFC THREAD
      */
     convo.addAction('get-rfc-thread')
-    convo.addQuestion(RFC_ASK, async (res, convo, bot) => {
-        //console.log(convo.vars.user);
+    convo.addQuestion('{{vars.rfc_ask}}', async (res, convo, bot) => {
         var usuario = await Usuario.findOne({ where: { siccode: res.trim() }, attributes: ['siccode', 'accountname'] });
         if (usuario) {
             var subject = convo.vars.user === BOT_CLIENT_RED_COFIDI__ID ? 'proveedor' : 'usuario';
@@ -86,7 +83,6 @@ module.exports = function (controller) {
     /**
      * ASK for more information
      */
-
     convo.addAction('more-info-thread');
     convo.addQuestion({
         text: '¿Lo podemos ayudar en algo más? ¿Necesita alguna asesoría adicional?',
@@ -107,9 +103,8 @@ module.exports = function (controller) {
     }], 'more-info-answer', 'more-info-thread');
 
     /**
-     * Preguntar por información del usuario
+     * Ask information to the user
      */
-
     convo.addAction('ask-user-info-thread');
     convo.addQuestion({
         text: '¿Te gustaría dejarnos tus datos?',
@@ -152,6 +147,12 @@ module.exports = function (controller) {
     convo.addAction('exit-thread');
     convo.addMessage('Fue un placer ayudarle, estaré aquí si me requiere', 'exit-thread');
 
+    /**
+     * Init common variables into the Dialog
+     */
+    convo.before('default', async(convo, bot) => {
+        convo.setVar('rfc_ask', 'Por favor, ingrese ' + (convo.vars.user === BOT_CLIENT_RED_COFIDI__ID ? 'el RFC del receptor de la factura' : 'su RFC para recibir ayuda'));       
+    });
 
     convo.before('show-steps-thread',  async () => {
         return new Promise((resolve) => {
