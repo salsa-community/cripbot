@@ -27,19 +27,17 @@ exports.resolveCodigo = function (rawCode) {
 }
 
 exports.resolveOptions = function (page) {
-    let leftIndex = page * offset;
-    let rightIndex = leftIndex + offset;
     let options = [];
-    for (let index = leftIndex; index < solicitudesGenerales.length && index < rightIndex; index++) {
-        options.push(solicitudesGenerales[index]);
-    }
+    page.forEach( element => {
+        options.push({ title: element.desc , payload: element.clave })
+    });
     options.push({ title: '<b><i>Ver más...</i></b>', payload: PAGINATOR_NEXT_LABEL })
     return options;
 }
 
 
 exports.resolvePageNumber = function (page) {
-    if ((typeof page === 'undefined') || ((page * offset) + offset) >= solicitudesGenerales.length) {
+    if ((typeof page === 'undefined')) {
         return 0;
     } else {
         return page + 1;

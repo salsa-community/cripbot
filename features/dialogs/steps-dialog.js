@@ -38,14 +38,16 @@ module.exports = function (controller) {
         text: '<b>Ingrese el código de error que se está presentando o consulte alguna de nuestras siguientes secciones:</b>',
         quick_replies: async (template, vars) => {
             vars.optionPage = resolvePageNumber(vars.optionPage);
-            return resolveOptions(vars.optionPage)
+            var errorPage = await Error.find({ contextos: { $in: [ vars.user ] } }).skip(vars.optionPage).limit(3);
+            vars.optionPage = (errorPage && errorPage.length < 3) ? -1 : vars.optionPage;
+            return resolveOptions(errorPage)
         }
     }, async (res, convo, bot) => {
         if(res == PAGINATOR_NEXT_LABEL){
             bot.say({type: 'typing'}, 'typing');
             await convo.gotoThread('codigo-error-thread');
         }else{
-            var error = await Error.findOne({ clave: resolveCodigo(res) });
+            var error = await Error.findOne({ clave: resolveCodigo(res), contextos: { $in: [ convo.vars.user ] } });
             if (error) {
                 bot.say({ text: error.desc });
                 bot.say({ text: error.instrucciones.desc });
