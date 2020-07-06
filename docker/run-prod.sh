@@ -4,12 +4,9 @@ export BOT_ENV='production'
 export BOT_TAG='latest'
 export KBASE_TAG='latest'
 
-export DB_HOST='vtiger-db'
-export DB_NAME='becovtig'
-export DB_USERNAME='becovtiguser'
-export DB_PASSWORD='5g#k@&k2p'
-
-export EXPRESS_USER='bot-express'
-export EXPRESS_PASSWORD='bot123'
+export DB_HOST='192.168.150.53'
+export DB_NAME='vtiger_crm_vde'
+export DB_USERNAME='chatbot'
+export DB_PASSWORD='[PASSWORD]'
 
 docker-compose -f docker-compose.yml up -d

@@ -1,4 +1,4 @@
-MYSQL_HOST=db
+MYSQL_HOST=localhost
 MYSQL_ROOT_PASSWORD=6k*&lj@;!
 MYSQL_USER=becovtiguser
 MYSQL_PASSWORD=5g#k@&k2p

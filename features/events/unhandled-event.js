@@ -4,7 +4,7 @@ var UnknowIntent = require('../../models/kbase/UnknowIntent.model');
 
 module.exports = function (controller) {
   controller.on('message', function (bot, message) {
-    UnknowIntent.create(new UnknowIntent({ word: message.text }));
+    UnknowIntent.create(new UnknowIntent({ word: message.text, context: 'general' }));
     bot.reply(message, {
       text: 'Lo siento, No entiendo lo que me solicitas, pero te puedo apoyar con alguno de lo siguientes temas',
       quick_replies: menuQuickReplies

@@ -28,8 +28,8 @@ exports.resolveCodigo = function (rawCode) {
 
 exports.resolveOptions = function (page) {
     let options = [];
-    page.forEach( element => {
-        options.push({ title: element.desc , payload: element.clave })
+    page.forEach(element => {
+        options.push({ title: element.desc, payload: element.clave })
     });
     options.push({ title: '<b><i>Ver más...</i></b>', payload: PAGINATOR_NEXT_LABEL })
     return options;
@@ -42,4 +42,20 @@ exports.resolvePageNumber = function (page) {
     } else {
         return page + 1;
     }
+}
+
+exports.resolveGreeting = function () {
+    let currentDate = new Date();
+    let hrs = currentDate.getHours();
+
+    if (hrs < 12) {
+        return 'Buenos días';
+    }
+    else if (hrs >= 12 && hrs <= 17) {
+        return 'Buena tarde';
+    }
+    else {
+        return 'Buena noche';
+    }
+
 }
