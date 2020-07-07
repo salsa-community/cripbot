@@ -78,7 +78,7 @@ module.exports = function (controller) {
     convo.addMessage({ type: 'typing', action: 'show-error-instrucciones-desc' }, 'show-error-desc');
 
     /**
-     * SHOW Error Instrucciones
+     * SHOW Error Instrucciones consultados
      */
 
     convo.addAction('show-error-instrucciones-desc');
