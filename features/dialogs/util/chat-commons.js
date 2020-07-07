@@ -15,7 +15,7 @@ exports.hello = async function (bot, message) {
     } else {
         await typing(bot, message, 'PAC Web es un servicio de ATEB para apoyar a sus clientes.');
     }
-    await typing(bot, message, 'Mi nombre es ' + personal[getRandomInt(0, personal.length - 1)]);
+    await typing(bot, message, 'Mi nombre es ' + message.user_profile.asistente);
     await typing(bot, message, {
         text: '¿Requiere ayuda con el servicio?',
         quick_replies: infoQuickReplies
@@ -33,7 +33,7 @@ exports.welcomeBack = async function (bot, message) {
     } else {
         await typing(bot, message, 'PAC Web es un servicio de ATEB para apoyar a sus clientes.');
     }
-    await typing(bot, message, 'Mi nombre es ' + personal[getRandomInt(0, personal.length - 1)]);
+    await typing(bot, message, 'Mi nombre es ' + message.user_profile.asistente);
     await typing(bot, message, {
         text: '¿Requiere ayuda con el servicio?',
         quick_replies: infoQuickReplies

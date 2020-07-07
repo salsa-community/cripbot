@@ -38,7 +38,7 @@ var Botkit = {
                 if (xmlhttp.readyState == XMLHttpRequest.DONE) {
                     if (xmlhttp.status == 200) {
                         var response = xmlhttp.responseText;
-                        if (response !='') {
+                        if (response != '') {
                             var message = null;
                             try {
                                 message = JSON.parse(response);
@@ -231,8 +231,8 @@ var Botkit = {
     clearReplies: function () {
         this.replies.innerHTML = '';
     },
-    scrollBottom: function(){   
-        setTimeout(() => {this.message_list.scrollTop = this.message_list.scrollHeight },10);
+    scrollBottom: function () {
+        setTimeout(() => { this.message_list.scrollTop = this.message_list.scrollHeight }, 10);
     },
     quickReply: function (payload) {
         this.send(payload);
