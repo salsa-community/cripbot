@@ -10,6 +10,7 @@ services:
       - MYSQL_DB=${DB_NAME}
       - MYSQL_USERNAME=${DB_USERNAME}
       - MYSQL_PASSWORD=${DB_PASSWORD}
+      - TZ=America/Mexico_City
     ports:
       - 8085:3000
     depends_on:

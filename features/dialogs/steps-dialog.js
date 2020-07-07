@@ -51,7 +51,7 @@ module.exports = function (controller) {
             var error = await Error.findOne({ clave: resolveCodigo(res), contextos: { $in: [convo.vars.user] } });
             if (error) {
                 bot.say({
-                    text: 'Gracias por la información. A continuación le voy a presentar la información relacionada con su petición.'
+                    text: 'Gracias por su respuesta. A continuación le voy a presentar la información relacionada con su petición.'
                 });
                 convo.setVar('errordesc', error.desc);
                 convo.setVar('instruccionesdesc', error.instrucciones.desc);
