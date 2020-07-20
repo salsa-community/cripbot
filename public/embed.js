@@ -1,12 +1,12 @@
 var Botkit = {
 
-  setCookie: function(cname, cvalue, exdays) {
+  setCookie: function (cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     var expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   },
-  getCookie: function(cname) {
+  getCookie: function (cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(';');
@@ -22,31 +22,31 @@ var Botkit = {
     return "";
   },
   active: false,
-  activate: function() {
+  activate: function () {
     this.active = true;
     if (this.container) {
       this.container.className = 'active';
     }
     this.setCookie('botkit_messenger_active', this.active);
   },
-  deactivate: function() {
+  deactivate: function () {
     this.active = false;
     if (this.container) {
       this.container.className = '';
     }
     this.setCookie('botkit_messenger_active', this.active);
   },
-  toggle: function() {
+  toggle: function () {
     if (this.active) {
       this.deactivate();
     } else {
       this.activate();
     }
   },
-  trigger: function(event) {
+  trigger: function (event) {
     this.chatClient.postMessage(event, '*');
   },
-  receiveMessage: function(message) {
+  receiveMessage: function (message) {
     // message contains the following fields:
     // message.data, message.origin, message.source
 
@@ -67,7 +67,7 @@ var Botkit = {
         break;
     }
   },
-  triggerScript: function(script, thread) {
+  triggerScript: function (script, thread) {
 
     this.trigger({
       type: 'event',
@@ -76,7 +76,7 @@ var Botkit = {
       thread: thread,
     });
   },
-  identifyUser: function(user) {
+  identifyUser: function (user) {
 
     // user should contain any of the following:
     // id, email, name, first_name, last_name, full_name, gender, timezone, timezone_offset
@@ -91,7 +91,7 @@ var Botkit = {
 
 
   },
-  boot: function(user) {
+  boot: function (user) {
     var that = this;
 
     that.container = document.getElementById('embedded_messenger');
