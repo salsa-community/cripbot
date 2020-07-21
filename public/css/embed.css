@@ -41,6 +41,9 @@
     font-size: 1.2em;
     background: #5A5EB9;
     color: #FFF; }
+    #embedded_messenger #message_header #avatar-bot {
+      max-width: 100%;
+      height: auto; }
 
 .circle {
   transition: 1.2s ease-in-out;

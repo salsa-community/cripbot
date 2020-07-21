@@ -59,6 +59,10 @@ $header_border_radius: 22px 22px 0px 0px;
     font-size: 1.2em;
     background: $powered_by_background;
     color: #FFF;
+    #avatar-bot{
+        max-width: 100%;
+        height: auto;
+    }
   }
 
 }

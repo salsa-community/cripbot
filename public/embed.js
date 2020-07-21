@@ -111,7 +111,7 @@ var Botkit = {
     return this;
   },
 
-  asistentes: ['María', 'Isabella', 'Jimena', 'Laura'],
+  asistentes: ['María', 'Isabella', 'Jimena'],
 
   getAsistente: function () {
     min = Math.ceil(0);
