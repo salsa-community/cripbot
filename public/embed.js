@@ -109,5 +109,17 @@ var Botkit = {
     window.addEventListener('message', that.receiveMessage, false);
 
     return this;
+  },
+
+  asistentes: ['María', 'Isabella', 'Jimena', 'Laura'],
+
+  getAsistente: function () {
+    min = Math.ceil(0);
+    max = Math.floor(this.asistentes.length - 1);
+    index = Math.floor(Math.random() * (max - min + 1)) + min;
+    let asistente = this.asistentes[index];
+    let avatar = asistente.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ".png";
+    document.getElementById("avatar-bot").src = "/images/avatares/" + avatar;
+    return asistente;
   }
 }
