@@ -3,10 +3,10 @@
 #embedded_messenger {
   position: fixed;
   z-index: 1000;
-  bottom: -600px;
+  bottom: -500px;
   right: 2rem;
-  width: 164;
-  height: 655px;
+  width: 200;
+  height: 555px;
   -webkit-box-shadow: 10px -8px 8px 0px rgba(128, 133, 128, 0.53);
   -moz-box-shadow: 10px -8px 8px 0px rgba(128, 133, 128, 0.53);
   box-shadow: 10px -8px 8px 0px rgba(128, 133, 128, 0.53);
@@ -14,7 +14,7 @@
   border-radius: 12px 12px 0px 0px; }
   #embedded_messenger.active {
     border-radius: 22px 22px 0px 0px;
-    bottom: 0;
+    bottom: 36;
     width: 650; }
     #embedded_messenger.active #message_header {
       padding: 1.5rem 2rem;
@@ -29,7 +29,7 @@
       font-size: 1.2em;
       padding: 0em 3.5em; }
   #embedded_messenger iframe {
-    height: 600px;
+    height: 500px;
     width: 100%;
     border: 0; }
   #embedded_messenger #message_header {

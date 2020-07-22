@@ -5,6 +5,8 @@
 
 const { Usuario } = require('../../models/vtiger')
 var Error = require('../../models/kbase/Error.model')
+var Contacto = require('../../models/kbase/Contacto.model')
+
 const { RFC_DIALOG_ID, BOT_CLIENT_PAC_WEB__ID, BOT_CLIENT_RED_COFIDI__ID } = require('./util/constants')
 const { BotkitConversation } = require('botkit')
 const { resolveCodigo, resolveOptions, resolvePageNumber } = require('../../util/commons')
@@ -158,6 +160,7 @@ module.exports = function (controller) {
     }, [{
         pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
         handler: async (response, convo, bot) => {
+            Contacto.create(new Contacto({ correo: response, context: convo.vars.user }));
             bot.say({ text: 'Gracias, en breve te contactaremos' });
             bot.say({ type: 'typing' }, 'typing');
             await convo.gotoThread('exit-thread');

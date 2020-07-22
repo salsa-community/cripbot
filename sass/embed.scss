@@ -1,6 +1,6 @@
 @import '_variables';
 
-$height: 600px;
+$height: 500px;
 $powered_by_background: $botkit_purple; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 $header_border_radius: 22px 22px 0px 0px;
 #embedded_messenger {
@@ -10,7 +10,7 @@ $header_border_radius: 22px 22px 0px 0px;
 
   bottom: -$height;
   right: 2rem;
-  width: 164;
+  width: 200;
 
   height: $height + 55;
   -webkit-box-shadow: 10px -8px 8px 0px rgba(128,133,128,0.53);
@@ -22,7 +22,7 @@ $header_border_radius: 22px 22px 0px 0px;
 
   &.active {
     border-radius: $header_border_radius;
-    bottom: 0;
+    bottom: 36;
     width: 650;
     #message_header {
       padding: 1.5rem 2rem;
