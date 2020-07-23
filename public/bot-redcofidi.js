@@ -12,5 +12,8 @@ Botkit.deactivate();
 setTimeout(
   function () {
     document.getElementById("botkit_client").src = "/index.html";
-    Botkit.activate();
-  }, 600);
+    setTimeout(
+      function () {
+        Botkit.activate();
+      }, 1000);
+  }, 1000);
