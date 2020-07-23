@@ -6,6 +6,8 @@
 const { Usuario } = require('../../models/vtiger')
 var Error = require('../../models/kbase/Error.model')
 var Contacto = require('../../models/kbase/Contacto.model')
+const { normalize } = require('../../util/commons');
+
 
 const { RFC_DIALOG_ID, BOT_CLIENT_PAC_WEB__ID, BOT_CLIENT_RED_COFIDI__ID } = require('./util/constants')
 const { BotkitConversation } = require('botkit')
@@ -23,6 +25,7 @@ module.exports = function (controller) {
     convo.addQuestion('{{vars.rfc_ask}}', async (res, convo, bot) => {
         var usuario = await Usuario.findOne({ where: { siccode: res.trim() }, attributes: ['siccode', 'accountname'] });
         if (usuario) {
+            convo.setVar('current_rfc', usuario.siccode);
             var subject = convo.vars.user === BOT_CLIENT_RED_COFIDI__ID ? 'proveedor' : 'usuario';
             bot.say({ text: 'Bienvenido ' + subject + ' de ' + usuario.accountname })
             bot.say({ type: 'typing' }, 'typing');
@@ -55,6 +58,8 @@ module.exports = function (controller) {
                 bot.say({
                     text: 'Gracias por su respuesta. A continuación le voy a presentar la información relacionada con su petición.'
                 });
+
+                error.instrucciones.pasos[0].desc = normalize(error.instrucciones.pasos[0].desc);
                 convo.setVar('errordesc', error.desc);
                 convo.setVar('instruccionesdesc', error.instrucciones.desc);
                 convo.setVar('error', error);
@@ -96,11 +101,12 @@ module.exports = function (controller) {
      */
     convo.addAction('show-steps-thread');
     convo.addQuestion({
-        text: '<b>Paso {{vars.currentStep.paso}} :</b> {{vars.currentStep.desc}}',
+        text: '<b>Paso {{vars.currentStep.paso}} :</b> {{{vars.currentStep.desc}}}',
         quick_replies: [{ title: 'Realizado', payload: 'Realizado' }]
     }, async (res, convo, bot) => {
         if (convo.vars.currentStepIdx < convo.vars.maxStepIdx - 1) {
             convo.vars.currentStep = convo.vars.error.instrucciones.pasos[++convo.vars.currentStepIdx];
+            convo.vars.currentStep.desc = normalize(convo.vars.currentStep.desc);
             bot.say({ type: 'typing' }, 'typing');
             await convo.gotoThread('show-steps-thread');
         } else {
@@ -160,10 +166,9 @@ module.exports = function (controller) {
     }, [{
         pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
         handler: async (response, convo, bot) => {
-            Contacto.create(new Contacto({ correo: response, context: convo.vars.user }));
-            bot.say({ text: 'Gracias, en breve te contactaremos' });
+            convo.setVar('correo', response);
             bot.say({ type: 'typing' }, 'typing');
-            await convo.gotoThread('exit-thread');
+            await convo.gotoThread('get-asunto');
         }
     },
     {
@@ -173,6 +178,19 @@ module.exports = function (controller) {
             await convo.gotoThread('get-user-email');
         }
     }], 'get-user-email', 'get-user-email');
+
+
+    convo.addAction('get-asunto');
+    convo.addQuestion({
+        text: '¿Me podrías indicar la razón por la que requieres que te contactemos?'
+    }, [{
+        handler: async (response, convo, bot) => {
+            Contacto.create(new Contacto({ correo: convo.vars.correo, context: convo.vars.user, rfc: convo.vars.current_rfc, estado: 'NUEVO', desc: response }));
+            bot.say({ text: 'Gracias por la información, en breve te contactaremos' });
+            bot.say({ type: 'typing' }, 'typing');
+            await convo.gotoThread('exit-thread');
+        }
+    }], 'get-asunto', 'get-asunto');
 
     convo.addAction('exit-thread');
     convo.addMessage('Fue un placer ayudarle, estaré aquí si me requiere', 'exit-thread');

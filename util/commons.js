@@ -59,3 +59,7 @@ exports.resolveGreeting = function () {
     }
 
 }
+
+exports.normalize = function (word) {
+    return word.replace(/(\r\n|\n|\r)/gm, "<br>");
+}
