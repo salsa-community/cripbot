@@ -120,7 +120,7 @@ module.exports = function (controller) {
      */
     convo.addAction('more-info-thread');
     convo.addQuestion({
-        text: 'A concluido los pasos para resolver su incidente ¿Requiere alguna ayuda adicional?',
+        text: 'Ha concluido los pasos para resolver su incidente ¿Requiere alguna ayuda adicional?',
         quick_replies: [{ title: 'No', payload: 'no' }, { title: 'Si', payload: 'si' }]
     }, [{
         pattern: 'no',
