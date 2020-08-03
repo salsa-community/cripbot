@@ -25,10 +25,10 @@ module.exports = function (controller) {
     });
 
     controller.middleware.receive.use(function (bot, message, next) {
-        if (message.type=='welcome_back') {
+        if (message.type == 'welcome_back') {
             bot.cancelAllDialogs();
             next();
-        }else{
+        } else {
             next();
         }
     });

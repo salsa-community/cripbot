@@ -6,6 +6,7 @@
 const { Usuario } = require('../../models/vtiger')
 var Error = require('../../models/kbase/Error.model')
 var Contacto = require('../../models/kbase/Contacto.model')
+var Actividad = require('../../models/kbase/Actividad.model')
 const { normalize } = require('../../util/commons');
 
 
@@ -55,6 +56,7 @@ module.exports = function (controller) {
         } else {
             var error = await Error.findOne({ clave: resolveCodigo(res), contextos: { $in: [convo.vars.user] } });
             if (error) {
+                Actividad.create(new Actividad({ contexto: convo.vars.user, valor: error.clave, desc: error.clave, evento: 'CODIGO_ERROR' }));
                 bot.say({
                     text: 'Gracias por su respuesta. A continuación le voy a presentar la información relacionada con su petición.'
                 });
@@ -126,7 +128,7 @@ module.exports = function (controller) {
         pattern: 'no',
         handler: async (response, convo, bot) => {
             bot.say({ type: 'typing' }, 'typing');
-            await convo.gotoThread('exit-thread');
+            await convo.gotoThread('get-customer-feedback-thread');
         }
     },
     {
@@ -136,6 +138,33 @@ module.exports = function (controller) {
             await convo.gotoThread('codigo-error-thread');
         }
     }], 'more-info-answer', 'more-info-thread');
+
+
+
+    /**
+     * Get customer feedback
+     */
+    convo.addAction('get-customer-feedback-thread');
+    convo.addQuestion({
+        text: '¿Qué le pareció nuestro servicio?',
+        quick_replies: [{ title: '<i class= "fa fa-star" aria-hidden="true"><i class= "fa fa-star" aria-hidden="true"><i class= "fa fa-star" aria-hidden="true"></i><i class= "fa fa-star" aria-hidden="true"></i><i class= "fa fa-star" aria-hidden="true"></i>', payload: 'BUENO' }, { title: '<i class= "fa fa-star" aria-hidden="true"><i class= "fa fa-star" aria-hidden="true"></i><i class= "fa fa-star" aria-hidden="true"></i>', payload: 'REGULAR' }, { title: '<i class= "fa fa-star" aria-hidden="true"></i>', payload: 'MALO' }]
+    }, [{
+        pattern: 'BUENO|REGULAR|MALO',
+        handler: async (response, convo, bot) => {
+            Actividad.create(new Actividad({ contexto: convo.vars.user, valor: response, desc: response, evento: 'REGISTRAR_ENCUESTA' }));
+            bot.say({ type: 'typing' }, 'typing');
+            await convo.gotoThread('exit-thread');
+        }
+    },
+    {
+        default: true,
+        handler: async (response, convo, bot) => {
+            bot.say({ type: 'typing' }, 'typing');
+            await convo.gotoThread('get-customer-feedback-thread');
+        }
+    }], 'get-customer-feedback-answer', 'get-customer-feedback-thread');
+
+
 
     /**
      * Ask information to the user
@@ -186,12 +215,17 @@ module.exports = function (controller) {
     }, [{
         handler: async (response, convo, bot) => {
             Contacto.create(new Contacto({ correo: convo.vars.correo, context: convo.vars.user, rfc: convo.vars.current_rfc, estado: 'NUEVO', desc: response }));
+            Actividad.create(new Actividad({ contexto: convo.vars.user, valor: convo.vars.correo, desc: response, evento: 'REGISTRAR_CONTACTO' }));
             bot.say({ text: 'Gracias por la información, en breve te contactaremos' });
             bot.say({ type: 'typing' }, 'typing');
             await convo.gotoThread('exit-thread');
         }
     }], 'get-asunto', 'get-asunto');
 
+
+    /**
+     * Exit Thread
+     */
     convo.addAction('exit-thread');
     convo.addMessage('Fue un placer ayudarle, estaré aquí si me requiere', 'exit-thread');
 
