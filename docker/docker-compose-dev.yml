@@ -1,6 +1,6 @@
 version: '2'
 services:
-  kbase-app:
+  kbase-apps:
     container_name: 'kbase-app'
     image: i2cmx/kbase:latest
     environment:
