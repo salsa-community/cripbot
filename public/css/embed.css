@@ -15,7 +15,7 @@
   #embedded_messenger.active {
     border-radius: 22px 22px 0px 0px;
     bottom: 36;
-    width: 650; }
+    width: 450; }
     #embedded_messenger.active #message_header {
       padding: 1.5rem 2rem;
       border-radius: 22px 22px 0px 0px; }
