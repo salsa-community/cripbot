@@ -2,6 +2,7 @@
 
 #message_list { 
   scroll-behavior: smooth;
+  overflow-wrap: break-word;
   overflow-y: auto; }
 
 #message_list::-webkit-scrollbar-track {
