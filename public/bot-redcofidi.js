@@ -14,11 +14,18 @@ if (!home) {
 let options = { id: appKey, asistente: Botkit.getAsistente() };
 Botkit.boot(options);
 Botkit.deactivate();
-setTimeout(
-  function () {
+let isActivated = false;
+let element = document.getElementById("message_header");
+element.onclick = function (event) {
+  if (!isActivated) {
     document.getElementById("botkit_client").src = home + "/index.html";
     setTimeout(
       function () {
         Botkit.activate();
-      }, 1000);
-  }, 1000);
+      }, 100);
+    isActivated = true;
+  } else {
+    isActivated = false;
+    Botkit.deactivate();
+  }
+}
