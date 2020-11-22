@@ -44,7 +44,7 @@ footer {
     margin: 0; }
 
 a {
-  color: #2CDC1A; }
+  color: #6e1adc; }
 
 .copyurl {
   width: 100%;
@@ -76,7 +76,7 @@ div.input label {
       padding: 0.5rem; }
     .addon button:hover {
       background: #FFF;
-      color: #2CDC1A; }
+      color: #6e1adc; }
 
 div.hr {
   border: 1px dashed #ccc;
@@ -85,7 +85,7 @@ div.hr {
   height: 1px; }
 
 a.button {
-  border: 2px solid #2CDC1A;
+  border: 2px solid #6e1adc;
   font-weight: bold;
   margin: 0;
   border-radius: 3px;
@@ -115,7 +115,7 @@ a.button {
   background-color: #F5F5F5; }
 
 #message_list::-webkit-scrollbar-thumb {
-  background-color: #2CDC1A; }
+  background-color: #6e1adc; }
 
 #message_window {
   background: #FFFFFF;
@@ -260,7 +260,7 @@ a.button {
     margin-bottom: 0; }
   #message_window .message.outgoing {
     float: right;
-    background: #2CDC1A;
+    background: #6e1adc;
     color: white; }
   #message_window #message_replies {
     text-align: center;
@@ -280,17 +280,17 @@ a.button {
     #message_window #message_replies a {
       text-decoration: none;
       display: block;
-      border: 1px solid #2CDC1A;
-      color: #2CDC1A;
+      border: 1px solid #6e1adc;
+      color: #6e1adc;
       border-radius: 16px;
       padding: 0.25rem 1rem;
       cursor: pointer; }
       #message_window #message_replies a:hover {
-        background: #2CDC1A;
+        background: #6e1adc;
         color: #FFF; }
 
 #message_indicator_form_id .btn {
-  background-color: #2CDC1A !important; }
+  background-color: #6e1adc !important; }
 
 /* typing indicator CSS based on code by Joseph Fusco -> https://codepen.io/fusco/pen/XbpaYv */
 .typing-indicator {

@@ -1,10 +1,19 @@
 /**
- * Initi configuration 
- * for the bot
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License.
+ */
+const path = require('path');
+
+
+
+module.exports = scriptTemplate = `
+/**
+ * Init configuration 
+ * for the bot $APP_KEY
  * 
  */
 
-let appKey = "RedCofidi";
+let appKey = "$APP_KEY";
 
 let home = document.getElementById("bot-client-script").getAttribute("bothome");
 if (!home) {
@@ -29,3 +38,5 @@ element.onclick = function (event) {
     Botkit.deactivate();
   }
 }
+
+`
