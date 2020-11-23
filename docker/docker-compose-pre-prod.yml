@@ -1,5 +1,31 @@
 version: '2'
 services:
+  webserver:
+    image: nginx:latest
+    container_name: webserverbot
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./var/www:/var/www
+      - ./etc/nginx/conf.d/:/etc/nginx/conf.d/
+  bot-appss:
+    image: i2cmx/atebot:${BOT_TAG}
+    environment:
+      - MONGO_URI=mongodb://kbase-db:27017
+      - MONGO_KB_URI=mongodb://kbase-db:27017/chatbot
+      - NODE_ENV=${BOT_ENV}
+      - MYSQL_HOST=${DB_HOST}
+      - MYSQL_DB=${DB_NAME}
+      - MYSQL_USERNAME=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - TZ=America/Mexico_City
+    ports:
+      - 8085:3000
+    depends_on:
+    - kbase-db
   kbase-apps:
     container_name: 'kbase-app'
     image: i2cmx/kbase:latest

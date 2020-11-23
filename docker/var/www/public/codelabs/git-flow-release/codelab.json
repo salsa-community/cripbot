@@ -1,0 +1,24 @@
+{
+  "environment": "web",
+  "source": "git-flow.md",
+  "format": "html",
+  "prefix": "../../",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-03-14T19:42:17-06:00",
+  "id": "git-flow-release",
+  "duration": 8,
+  "title": "How to Write a Codelab",
+  "summary": "Uso adecuado del Release",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "git"
+  ],
+  "tags": [
+    "git"
+  ],
+  "feedback": "https://www.conacyt.gob.mx/",
+  "url": "git-flow-release"
+}
