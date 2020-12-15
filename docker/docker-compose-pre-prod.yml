@@ -10,6 +10,7 @@ services:
       - "443:443"
     volumes:
       - ./var/www:/var/www
+      - ./ssl/:/etc/ssl/nginx/
       - ./etc/nginx/conf.d/:/etc/nginx/conf.d/
   bot-appss:
     image: i2cmx/atebot:${BOT_TAG}
