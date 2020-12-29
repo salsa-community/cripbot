@@ -4,7 +4,7 @@
  */
 const path = require('path');
 
-const scriptTemplate = require('./files-templates/script-template.js');
+const scriptTemplate = require('../files-templates/script-template.js');
 
 module.exports = function (controller) {
     var basepath = process.env.CONTEXT ? '/' + process.env.CONTEXT : '/'
@@ -13,11 +13,5 @@ module.exports = function (controller) {
         let appKey = req.params.script.split('.')[0];
         let script = scriptTemplate.replace(/\$APP_KEY/gi, appKey);
         res.send(script);
-    });
-
-    controller.webserver.get('/bot/css/:css(*.css)', (req, res) => {
-        res.setHeader('content-type', 'text/css');
-        info = req.params.css;
-        res.send(info);
     });
 }
