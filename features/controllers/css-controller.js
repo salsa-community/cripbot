@@ -4,8 +4,8 @@
  */
 const path = require('path');
 
-const embedCssTemplate = require('../files-templates/css-template.js');
-const stylesCssTemplate = require('../files-templates/css-template.js');
+const embedCssTemplate = require('../templates/styles-css-template.js');
+const stylesCssTemplate = require('../templates/styles-css-template.js');
 
 module.exports = function (controller) {
     var basepath = process.env.CONTEXT ? '/' + process.env.CONTEXT : '/'
