@@ -3,16 +3,23 @@
  * Licensed under the MIT License.
  */
 const path = require('path');
+const { resolveColor } = require('../../util/request-util');
 
-const embedCssTemplate = require('../templates/styles-css-template.js');
+
+const embedCssTemplate = require('../templates/embed-css-template.js');
 const stylesCssTemplate = require('../templates/styles-css-template.js');
 
 module.exports = function (controller) {
-    var basepath = process.env.CONTEXT ? '/' + process.env.CONTEXT : '/'
-    controller.webserver.get('/bot/css/:css(*.css)', (req, res) => {
+
+    controller.webserver.get('/:context/css/embed.css', (req, res) => {
         res.setHeader('content-type', 'text/css');
-        let appKey = req.params.css.split('.')[0];
-        let script = cssTemplate.replace(/\$APP_KEY/gi, appKey);
-        res.send('ejemplos muiy uenos');
+        let css = embedCssTemplate.replace(/\$CSS_COLOR/gi, resolveColor(req));
+        res.send(css);
+    });
+
+    controller.webserver.get('/:context/css/styles.css', (req, res) => {
+        res.setHeader('content-type', 'text/css');
+        let script = stylesCssTemplate.replace(/\$CSS_COLOR/gi, resolveColor(req));
+        res.send(script);
     });
 }

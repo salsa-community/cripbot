@@ -2560,7 +2560,7 @@ th {
     position: relative; }
 
   table.responsive-table td:empty:before {
-    content: "\00a0"; }
+    content: "\\00a0"; }
 
   table.responsive-table th,
   table.responsive-table td {
@@ -2579,7 +2579,7 @@ th {
     padding: 0 10px 0 0; }
 
   table.responsive-table thead tr th::before {
-    content: "\00a0"; }
+    content: "\\00a0"; }
 
   table.responsive-table tbody {
     display: block;

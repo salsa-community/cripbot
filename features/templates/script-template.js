@@ -27,7 +27,7 @@ let isActivated = false;
 let element = document.getElementById("message_header");
 element.onclick = function (event) {
   if (!isActivated) {
-    document.getElementById("botkit_client").src = home + "/index.html?contexto=$APP_KEY";
+    document.getElementById("botkit_client").src = home + "/index.html?contexto=$APP_KEY&color=$CSS_COLOR";
     setTimeout(
       function () {
         Botkit.activate();
