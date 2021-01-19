@@ -59,6 +59,7 @@ controller.ready(() => {
     controller.loadModules(__dirname + '/features/events');
     controller.loadModules(__dirname + '/features/hears');
     controller.loadModules(__dirname + '/features/interrupts');
+    controller.loadModules(__dirname + '/features/middlewares');
     controller.loadModules(__dirname + '/features/controllers');
 
     /* catch-all that uses the CMS to trigger dialogs */

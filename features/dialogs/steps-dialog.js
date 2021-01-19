@@ -27,7 +27,7 @@ module.exports = function (controller) {
         var usuario = await Usuario.findOne({ where: { siccode: res.trim() }, attributes: ['siccode', 'accountname'] });
         if (usuario) {
             convo.setVar('current_rfc', usuario.siccode);
-            var subject = convo.vars.user === BOT_CLIENT_RED_COFIDI__ID ? 'proveedor' : 'usuario';
+            var subject = convo.vars.context === BOT_CLIENT_RED_COFIDI__ID ? 'proveedor' : 'usuario';
             bot.say({ text: 'Bienvenido ' + subject + ' de ' + usuario.accountname })
             bot.say({ type: 'typing' }, 'typing');
             await convo.gotoThread('codigo-error-thread')
@@ -45,7 +45,7 @@ module.exports = function (controller) {
         text: '<b>Ingrese, por favor, el código de error que le presenta el sistema. También puede seleccionar alguno de los siguientes temas:</b>',
         quick_replies: async (template, vars) => {
             vars.optionPage = resolvePageNumber(vars.optionPage);
-            var errorPage = await Error.find({ contextos: { $in: [vars.user] }, tipo: 'general' }).skip(vars.optionPage).limit(3).sort({ orden: 'asc' });
+            var errorPage = await Error.find({ contextos: { $in: [vars.context] }, tipo: 'general' }).skip(vars.optionPage).limit(3).sort({ orden: 'asc' });
             vars.optionPage = (errorPage && errorPage.length < 3) ? -1 : vars.optionPage;
             return resolveOptions(errorPage)
         }
@@ -54,9 +54,9 @@ module.exports = function (controller) {
             bot.say({ type: 'typing' }, 'typing');
             await convo.gotoThread('codigo-error-thread');
         } else {
-            var error = await Error.findOne({ clave: resolveCodigo(res), contextos: { $in: [convo.vars.user] } });
+            var error = await Error.findOne({ clave: resolveCodigo(res), contextos: { $in: [convo.vars.context] } });
             if (error) {
-                Actividad.create(new Actividad({ contexto: convo.vars.user, valor: error.clave, desc: error.clave, evento: 'CODIGO_ERROR' }));
+                Actividad.create(new Actividad({ contexto: convo.vars.context, valor: error.clave, desc: error.clave, evento: 'CODIGO_ERROR' }));
                 bot.say({
                     text: 'Gracias por su respuesta. A continuación le voy a presentar la información relacionada con su petición.'
                 });
@@ -151,7 +151,7 @@ module.exports = function (controller) {
     }, [{
         pattern: 'BUENO|REGULAR|MALO',
         handler: async (response, convo, bot) => {
-            Actividad.create(new Actividad({ contexto: convo.vars.user, valor: response, desc: response, evento: 'REGISTRAR_ENCUESTA' }));
+            Actividad.create(new Actividad({ contexto: convo.vars.context, valor: response, desc: response, evento: 'REGISTRAR_ENCUESTA' }));
             bot.say({ type: 'typing' }, 'typing');
             await convo.gotoThread('exit-thread');
         }
@@ -214,8 +214,8 @@ module.exports = function (controller) {
         text: '¿Me podrías indicar la razón por la que requieres que te contactemos?'
     }, [{
         handler: async (response, convo, bot) => {
-            Contacto.create(new Contacto({ correo: convo.vars.correo, context: convo.vars.user, rfc: convo.vars.current_rfc, estado: 'NUEVO', desc: response }));
-            Actividad.create(new Actividad({ contexto: convo.vars.user, valor: convo.vars.correo, desc: response, evento: 'REGISTRAR_CONTACTO' }));
+            Contacto.create(new Contacto({ correo: convo.vars.correo, context: convo.vars.context, rfc: convo.vars.current_rfc, estado: 'NUEVO', desc: response }));
+            Actividad.create(new Actividad({ contexto: convo.vars.context, valor: convo.vars.correo, desc: response, evento: 'REGISTRAR_CONTACTO' }));
             bot.say({ text: 'Gracias por la información, en breve te contactaremos' });
             bot.say({ type: 'typing' }, 'typing');
             await convo.gotoThread('exit-thread');
@@ -233,7 +233,7 @@ module.exports = function (controller) {
      * Init common variables into the Dialog
      */
     convo.before('default', async (convo, bot) => {
-        convo.setVar('rfc_ask', 'Por favor, ingrese ' + (convo.vars.user === BOT_CLIENT_RED_COFIDI__ID ? 'el RFC del receptor de la factura' : 'su RFC para recibir ayuda'));
+        convo.setVar('rfc_ask', 'Por favor, ingrese ' + (convo.vars.context === BOT_CLIENT_RED_COFIDI__ID ? 'el RFC del receptor de la factura' : 'su RFC para recibir ayuda'));
     });
 
     convo.before('show-steps-thread', async () => {

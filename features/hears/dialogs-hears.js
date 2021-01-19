@@ -9,6 +9,6 @@ const { RFC_DIALOG_ID, BOT_CLIENT_PAC_WEB__ID, BOT_CLIENT_RED_COFIDI__ID } = req
 
 module.exports = function (controller) {
     controller.hears('rfc-dialog', 'message', async (bot, message) => {
-        await bot.beginDialog(RFC_DIALOG_ID);
+        await bot.beginDialog(RFC_DIALOG_ID, message.user_profile);
     });
 }

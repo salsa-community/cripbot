@@ -10,10 +10,11 @@ var Botkit = {
         ws_url: (location.protocol === 'https:' ? 'wss' : 'ws') + '://' + location.host,
         reconnect_timeout: 3000,
         max_reconnect: 5,
-        enable_history: false,
+        enable_history: true,
     },
     options: {
         use_sockets: true,
+        enable_history: true,
     },
     reconnect_count: 0,
     guid: null,
@@ -90,6 +91,8 @@ var Botkit = {
         return false;
     },
     deliverMessage: function (message) {
+        let that = this;
+        message.user_profile = that.current_user ? that.current_user : null;
         if (this.options.use_sockets) {
             this.socket.send(JSON.stringify(message));
         } else {
@@ -128,11 +131,18 @@ var Botkit = {
 
         var that = this;
 
+
+        if (user) {
+            that.current_user = user;
+        } else {
+            that.current_user = {};
+        }
+
+
         if (user && user.id) {
             Botkit.setCookie('botkit_guid', user.id, 1);
 
             user.timezone_offset = new Date().getTimezoneOffset();
-            that.current_user = user;
             console.log('CONNECT WITH USER', user);
         }
 
@@ -180,6 +190,8 @@ var Botkit = {
             that.guid = that.generate_guid();
             Botkit.setCookie('botkit_guid', that.guid, 1);
         }
+
+        that.current_user.id = that.guid;
 
         if (this.options.enable_history) {
             that.getHistory();
@@ -345,6 +357,54 @@ var Botkit = {
         return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
             s4() + '-' + s4() + s4() + s4();
     },
+    showReplies: function (message) {
+        let that = this;
+
+        that.clearReplies();
+        if (message.quick_replies) {
+
+            var list = document.createElement('ul');
+
+            var elements = [];
+            for (var r = 0; r < message.quick_replies.length; r++) {
+                (function (reply) {
+
+                    var li = document.createElement('li');
+                    var el = document.createElement('a');
+                    el.innerHTML = reply.title;
+                    el.href = '#';
+
+                    el.onclick = function () {
+                        that.quickReply(reply.payload);
+                    }
+
+                    li.appendChild(el);
+                    list.appendChild(li);
+                    elements.push(li);
+
+                })(message.quick_replies[r]);
+            }
+
+            that.replies.appendChild(list);
+
+            // uncomment this code if you want your quick replies to scroll horizontally instead of stacking
+            // var width = 0;
+            // // resize this element so it will scroll horizontally
+            // for (var e = 0; e < elements.length; e++) {
+            //     width = width + elements[e].offsetWidth + 18;
+            // }
+            // list.style.width = width + 'px';
+
+            if (message.disable_input) {
+                that.input.disabled = true;
+            } else {
+                that.input.disabled = false;
+            }
+        } else {
+            that.input.disabled = false;
+        }
+    },
+
     boot: function (user) {
 
         console.log('Booting up');
@@ -409,57 +469,20 @@ var Botkit = {
 
 
         that.on('message', function (message) {
-            that.clearReplies();
-            if (message.quick_replies) {
-
-                var list = document.createElement('ul');
-
-                var elements = [];
-                for (var r = 0; r < message.quick_replies.length; r++) {
-                    (function (reply) {
-
-                        var li = document.createElement('li');
-                        var el = document.createElement('a');
-                        el.innerHTML = reply.title;
-                        el.href = '#';
-
-                        el.onclick = function () {
-                            that.quickReply(reply.payload);
-                        }
-
-                        li.appendChild(el);
-                        list.appendChild(li);
-                        elements.push(li);
-
-                    })(message.quick_replies[r]);
-                }
-
-                that.replies.appendChild(list);
-
-                // uncomment this code if you want your quick replies to scroll horizontally instead of stacking
-                // var width = 0;
-                // // resize this element so it will scroll horizontally
-                // for (var e = 0; e < elements.length; e++) {
-                //     width = width + elements[e].offsetWidth + 18;
-                // }
-                // list.style.width = width + 'px';
-
-                if (message.disable_input) {
-                    that.input.disabled = true;
-                } else {
-                    that.input.disabled = false;
-                }
-            } else {
-                that.input.disabled = false;
-            }
+            that.showReplies(message);
         });
 
         that.on('history_loaded', function (history) {
             if (history) {
-                for (var m = 0; m < history.length; m++) {
+                for (var m = history.length - 1; m >= 0; m--) {
                     that.renderMessage({
                         text: history[m].text,
                         type: history[m].type == 'message_received' ? 'outgoing' : 'incoming', // set appropriate CSS class
+                    });
+                }
+                if (history[0].quick_replies) {
+                    that.showReplies({
+                        quick_replies: history[0].quick_replies, // set appropriate CSS class
                     });
                 }
             }

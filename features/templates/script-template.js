@@ -13,21 +13,19 @@ module.exports = scriptTemplate = `
  * 
  */
 
-let appKey = "$APP_KEY";
+let appkey = "$APP_KEY";
 
 let home = document.getElementById("bot-client-script").getAttribute("bothome");
 if (!home) {
   home = "";
 }
 
-let options = { id: appKey, asistente: Botkit.getAsistente() };
-Botkit.boot(options);
-Botkit.deactivate();
-let isActivated = false;
+let user = { asistente: Botkit.getAsistente(), context: appkey };
+Botkit.boot(user);
 let element = document.getElementById("message_header");
+document.getElementById("botkit_client").src = home + "/index.html?color=$CSS_COLOR";
 element.onclick = function (event) {
-  if (!isActivated) {
-    document.getElementById("botkit_client").src = home + "/index.html?contexto=$APP_KEY&color=$CSS_COLOR";
+  if (!Botkit.active) {
     setTimeout(
       function () {
         Botkit.activate();

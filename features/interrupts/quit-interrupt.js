@@ -23,13 +23,4 @@ module.exports = function (controller) {
         });
         await bot.cancelAllDialogs();
     });
-
-    controller.middleware.receive.use(function (bot, message, next) {
-        if (message.type == 'welcome_back') {
-            bot.cancelAllDialogs();
-            next();
-        } else {
-            next();
-        }
-    });
 }
