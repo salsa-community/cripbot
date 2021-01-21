@@ -23,7 +23,7 @@ if (!home) {
 let user = { asistente: Botkit.getAsistente(), context: appkey };
 Botkit.boot(user);
 let element = document.getElementById("message_header");
-document.getElementById("botkit_client").src = home + "/index.html?color=$CSS_COLOR";
+document.getElementById("botkit_client").src = home + "/index.html?contexto=$APP_KEY&color=$CSS_COLOR";
 element.onclick = function (event) {
   if (!Botkit.active) {
     setTimeout(
