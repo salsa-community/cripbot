@@ -3,7 +3,7 @@
  * Licensed under the MIT License.
  */
 const path = require('path');
-const { resolveColor } = require('../../util/request-util');
+const { resolveColor } = require('@util/request-util');
 
 
 const embedCssTemplate = require('../templates/embed-css-template.js');

@@ -1,8 +1,9 @@
-const { getRandomInt, resolveGreeting } = require('../../../util/commons');
+const { getRandomInt, resolveGreeting } = require('@util/commons');
+const { typing } = require('@util/bot.typing');
+const { i18n } = require('@util/lang');
 const personal = ['María', 'Isabella', 'Jimena', 'Laura'];
 const { infoQuickReplies } = require('./info-quick-replies');
 const { BOT_CLIENT_RED_COFIDI__ID, BOT_CLIENT_PAC_WEB__ID } = require('./constants')
-const { typing } = require('../../../util/bot.typing');
 
 greetings = async function (bot, message, basteText) {
     await typing(bot, message, resolveGreeting());
@@ -22,7 +23,7 @@ greetings = async function (bot, message, basteText) {
         await typing(bot, message, 'Mi nombre es ' + message.user_profile.asistente);
     }
     await typing(bot, message, {
-        text: '¿Requiere ayuda con el servicio?',
+        text: i18n('Hello', 'en'),
         quick_replies: infoQuickReplies
     });
 }

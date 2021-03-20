@@ -3,11 +3,11 @@
  * Licensed under the MIT License.
  */
 
-const { Usuario } = require('../../models/vtiger')
-var Error = require('../../models/kbase/Error.model')
-var Contacto = require('../../models/kbase/Contacto.model')
-var Actividad = require('../../models/kbase/Actividad.model')
-const { normalize } = require('../../util/commons');
+const { Usuario } = require('@model/vtiger')
+var Error = require('@model/kbase/Error.model')
+var Contacto = require('@model/kbase/Contacto.model')
+var Actividad = require('@model/kbase/Actividad.model')
+const { normalize } = require('@util/commons');
 
 
 const { RFC_DIALOG_ID, BOT_CLIENT_PAC_WEB__ID, BOT_CLIENT_RED_COFIDI__ID } = require('./util/constants')

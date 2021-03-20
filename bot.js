@@ -5,6 +5,9 @@
 // This is the main file for the socrates bot.
 
 // Import Botkit's core features
+
+require('module-alias/register')
+
 const { Botkit } = require('botkit');
 const { BotkitCMSHelper } = require('botkit-plugin-cms');
 
