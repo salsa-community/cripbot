@@ -1,4 +1,7 @@
 {   
+    "answer":{
+        "yes":"Si"
+    },
     "welcome":{
         "name":"Mi nombre es",
         "question":"¿Requiere ayuda con el servicio?",

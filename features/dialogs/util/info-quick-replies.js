@@ -1,9 +1,13 @@
-exports.infoQuickReplies = [
-    {
-        title: 'Sí',
-        payload: 'rfc-dialogo'
-    },
-]
+const { i18n } = require('@util/lang');
+
+exports.infoQuickReplies = function (lang) {
+    return [
+        {
+            title: i18n('answer.yes', lang),
+            payload: 'rfc-dialogo'
+        },
+    ]
+}
 
 exports.menuQuickReplies = [
     {
