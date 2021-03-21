@@ -7,11 +7,6 @@ const path = require('path');
 
 
 module.exports = scriptTemplate = `
-/**
- * Init configuration 
- * for the bot $APP_KEY
- * 
- */
 
 let appkey = "$APP_KEY";
 
@@ -20,7 +15,8 @@ if (!home) {
   home = "";
 }
 
-let user = { asistente: Botkit.getAsistente(), context: appkey };
+let language = Botkit.browserLanguage({ languageCodeOnly: true })[0];
+let user = { asistente: Botkit.getAsistente(), context: appkey, lang: language };
 Botkit.boot(user);
 let element = document.getElementById("message_header");
 document.getElementById("botkit_client").src = home + "/index.html?contexto=$APP_KEY&color=$CSS_COLOR";

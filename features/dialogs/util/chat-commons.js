@@ -9,21 +9,21 @@ greetings = async function (bot, message, basteText) {
     await typing(bot, message, resolveGreeting());
     await typing(bot, message, basteText);
     if (message.user_profile && message.user_profile.context == BOT_CLIENT_RED_COFIDI__ID) {
-        await typing(bot, message, 'Red COFIDI es un servicio para intercambiar Comprobantes Fiscales Digitales de una manera rápida y segura.');
+        await typing(bot, message, i18n('redcofidi.objetivo', message.user_profile.lang));
     } else if (message.user_profile && message.user_profile.context == BOT_CLIENT_PAC_WEB__ID) {
-        await typing(bot, message, 'PAC Web es un servicio de ATEB para apoyar a sus clientes.');
+        await typing(bot, message, i18n('pacweb.objetivo', message.user_profile.lang));
     } else {
         if (message.user_profile && message.user_profile.context) {
-            await typing(bot, message, message.user_profile.context + ' es un servicio de ATEB para apoyar a sus clientes.');
+            await typing(bot, message, message.user_profile.context + i18n('context.objetivo', message.user_profile.lang));
         } else {
-            await typing(bot, message, 'No me encuentro ejecutando en un contexto correcto, por favor avise a mis creadores');
+            await typing(bot, message, i18n('context.notfound', message.user_profile.lang));
         }
     }
     if (message.user_profile && message.user_profile.asistente) {
-        await typing(bot, message, 'Mi nombre es ' + message.user_profile.asistente);
+        await typing(bot, message, i18n('welcome.name', message.user_profile.lang) + ' ' + message.user_profile.asistente);
     }
     await typing(bot, message, {
-        text: i18n('Hello', 'en'),
+        text: i18n('welcome.question', message.user_profile.lang),
         quick_replies: infoQuickReplies
     });
 }
@@ -32,13 +32,13 @@ greetings = async function (bot, message, basteText) {
  * This is the hello event
  */
 exports.hello = async function (bot, message) {
-    await greetings(bot, message, 'Bienvenido a ATEB');
+    await greetings(bot, message, i18n('welcome.firstime', message.user_profile.lang));
 }
 
 /**
  * This is the welcome_back event
  */
 exports.welcomeBack = async function (bot, message) {
-    await greetings(bot, message, 'Bienvenido de nuevo a ATEB');
+    await greetings(bot, message, i18n('welcome.again', message.user_profile.lang));
 }
 

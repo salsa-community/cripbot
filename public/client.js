@@ -184,12 +184,10 @@ var Botkit = {
 
         var connectEvent = 'hello';
         if (Botkit.getCookie('botkit_guid')) {
-            Botkit.setCookie('locale', 'es', 1);
             that.guid = Botkit.getCookie('botkit_guid');
             connectEvent = 'welcome_back';
         } else {
             that.guid = that.generate_guid();
-            Botkit.setCookie('locale', 'es', 1);
             Botkit.setCookie('botkit_guid', that.guid, 1);
         }
 

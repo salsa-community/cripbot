@@ -1,3 +1,18 @@
 {
-    "Hello": "Hello"
+    "welcome":{
+        "name":"My name is",
+        "question":"Do you need help with the service?",
+        "firstime":"Welcome to ATEB",
+        "again":"Welcome again to ATEB"
+    },
+    "redcofidi":{
+        "objetivo": "Red COFIDI is a service to exchange Digital Tax Receipts in a fast and secure way."
+    },
+    "pacweb":{
+        "objetivo":"PAC Web is an ATEB service to support its clients."
+    },
+    "context":{
+        "objetivo":"is an ATEB service to support its clients.",
+        "notfound":"I am not running in the correct context, please advise my creators",
+    }
 }

@@ -3,6 +3,7 @@
  * Licensed under the MIT License.
  */
 const path = require('path');
+const package = require('@root/package.json');
 
 module.exports = function (controller) {
     var basepath = process.env.CONTEXT ? '/' + process.env.CONTEXT : '/'
@@ -18,5 +19,5 @@ module.exports = function (controller) {
 
 
 var info = {
-    version: process.env.npm_package_version,
+    version: package.version,
 }

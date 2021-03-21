@@ -1,3 +1,19 @@
-{
-    "Hello": "Hola"
+{   
+    "welcome":{
+        "name":"Mi nombre es",
+        "question":"¿Requiere ayuda con el servicio?",
+        "firstime":"Bienvenido a ATEB",
+        "again":"Bienvenido de nuevo a ATEB"
+    },
+    "redcofidi":{
+        "objetivo": "Red COFIDI es un servicio para intercambiar Comprobantes Fiscales Digitales de una manera rápida y segura."
+    },
+    "pacweb":{
+        "objetivo":"PAC Web es un servicio de ATEB para apoyar a sus clientes."
+    },
+    "context":{
+        "objetivo":"es un servicio de ATEB para apoyar a sus clientes.",
+        "notfound":"No me encuentro ejecutando en un contexto correcto, por favor avise a mis creadores"
+    }
+
 }

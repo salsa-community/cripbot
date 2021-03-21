@@ -3,8 +3,8 @@
  * Licensed under the MIT License.
  */
 
-const { helpQuickReplies } = require('../dialogs/util/info-quick-replies');
-const { typing } = require('../../util/bot.typing');
+const { helpQuickReplies } = require('@feature/dialogs/util/info-quick-replies');
+const { typing } = require('@util/bot.typing');
 
 module.exports = function (controller) {
     controller.hears(['hey', 'hi', 'hello', 'hola'], 'message', async (bot, message) => {

@@ -27,6 +27,7 @@
     "sequelize-cli": "^5.5.1"
   },
   "_moduleAliases": {
+    "@root": ".",
     "@util": "util",
     "@model": "models",
     "@feature": "features"
