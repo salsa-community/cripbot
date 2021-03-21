@@ -6,7 +6,7 @@ const { infoQuickReplies } = require('./info-quick-replies');
 const { BOT_CLIENT_RED_COFIDI__ID, BOT_CLIENT_PAC_WEB__ID } = require('./constants')
 
 greetings = async function (bot, message, basteText) {
-    await typing(bot, message, resolveGreeting());
+    await typing(bot, message, resolveGreeting(message.user_profile.lang));
     await typing(bot, message, basteText);
     if (message.user_profile && message.user_profile.context == BOT_CLIENT_RED_COFIDI__ID) {
         await typing(bot, message, i18n('redcofidi.objetivo', message.user_profile.lang));

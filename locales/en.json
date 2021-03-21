@@ -3,7 +3,10 @@
         "name":"My name is",
         "question":"Do you need help with the service?",
         "firstime":"Welcome to ATEB",
-        "again":"Welcome again to ATEB"
+        "again":"Welcome again to ATEB",
+        "morning":"Good morning",
+        "afternoon":"Good afternoon",
+        "night":"Good night"
     },
     "redcofidi":{
         "objetivo": "Red COFIDI is a service to exchange Digital Tax Receipts in a fast and secure way."

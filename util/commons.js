@@ -1,5 +1,6 @@
 const { solicitudesGenerales } = require('../features/dialogs/util/info-quick-replies');
 const { PAGINATOR_NEXT_LABEL } = require('../config');
+const { i18n } = require('@util/lang');
 
 /**
  * getRandomInt function, it is a utility method
@@ -44,18 +45,18 @@ exports.resolvePageNumber = function (page) {
     }
 }
 
-exports.resolveGreeting = function () {
+exports.resolveGreeting = function (lang) {
     let currentDate = new Date();
     let hrs = currentDate.getHours();
 
     if (hrs < 12) {
-        return 'Buenos días';
+        return i18n('welcome.morning', lang);
     }
     else if (hrs >= 12 && hrs <= 17) {
-        return 'Buena tarde';
+        return i18n('welcome.afternoon', lang);
     }
     else {
-        return 'Buena noche';
+        return i18n('welcome.night', lang);
     }
 
 }

@@ -3,7 +3,10 @@
         "name":"Mi nombre es",
         "question":"¿Requiere ayuda con el servicio?",
         "firstime":"Bienvenido a ATEB",
-        "again":"Bienvenido de nuevo a ATEB"
+        "again":"Bienvenido de nuevo a ATEB",
+        "morning":"Buenos dias",
+        "afternoon":"Buena tarde",
+        "night":"Buena noche"
     },
     "redcofidi":{
         "objetivo": "Red COFIDI es un servicio para intercambiar Comprobantes Fiscales Digitales de una manera rápida y segura."
