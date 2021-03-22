@@ -1,4 +1,33 @@
-{   
+{       
+    "bot":{
+        "whoare":"soy una inteligencia artificial, que fue creada para ayudarte",
+        "name":"mi nombre es %s, y estoy para servirte",
+        "state":"Me encuentro muy bien, ¡gracias por preguntar!"
+    },
+    "help":{
+        "nice-to-see-you":"Es un gusto saludarte",
+        "hello":"Hola, estoy para servirte en lo que pueda;",
+        "question":"¿Te puedo ayudar en alguno de los siguientes temas?",
+        "negative":"lo entiendo, posiblemente en otro momento",
+        "be-online":"estaré aquí por si se te ofrece algo",
+        "attended":"Fue un placer ayudarte, estaré aquí si me necesitas",
+        "attended-alternative":"es un placer poder servirte",
+        "unknow-intent":"Sorry, I do not understand what you are asking me, but I can help you with any of the following topics",
+        "codigos":"Error Code",
+        "cfdi":"It has a CFDI code",
+        "seguimiento-ticket":"Follow up on a ticket",
+        "crear-ticket":"Create a ticket"
+    },
+    "solicitudes":{
+        "acuse":"SOLICITUD DE ACUSES DE RECIBO",
+        "estado":"SOLICITUD DE ESTATUS DE ACUSES DE RECIBO",
+        "recuperacion":"RECUPERACIÓN DE TRACKID",
+        "archivos":"AGREGAR ARCHIVOS ANEXOS A RED COFIDI (PDF)",
+        "error-codificacion":"ERROR EN CODIFICACIÓN UTF-8",
+        "error-lineas":"ERROR EN LÍNEAS OC U OP",
+        "error-rfc":"ERROR EN RFC / NO ES INTEGRANTE DE LA RED COFIDI",
+        "manual":"CONSULTA DE MANUALES DE APOYO"
+    },
     "answer":{
         "yes":"Si"
     },

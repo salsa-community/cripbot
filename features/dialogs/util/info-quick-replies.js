@@ -9,65 +9,72 @@ exports.infoQuickReplies = function (lang) {
     ]
 }
 
-exports.menuQuickReplies = [
-    {
-        title: 'Código de Errores',
-        payload: 'rfc-dialogo'
-    },
-]
+exports.menuQuickReplies = function (lang) {
+    return [
+        {
+            title: i18n('help.codigos', lang),
+            payload: 'rfc-dialogo'
+        },
+    ]
+}
 
-exports.helpQuickReplies = [
-    {
-        title: 'Código de Errores',
-        payload: 'rfc-dialogo'
-    },
-    {
-        title: 'Cuenta con un código CFDI',
-        payload: 'codigo-cfdi'
-    }, {
-        title: 'Seguimiento a un ticket',
-        payload: 'ticket'
-    }, {
-        title: 'Crear un ticket',
-        payload: 'crear-ticket'
-    },
-]
+exports.helpQuickReplies = function (lang) {
+    return [
+        {
+            title: i18n('help.codigos', lang),
+            payload: 'rfc-dialogo'
+        },
+        {
+            title: i18n('help.cfdi', lang),
+            payload: 'codigo-cfdi'
+        },
+        {
+            title: i18n('help.seguimiento-ticket', lang),
+            payload: 'ticket'
+        }, {
+            title: i18n('help.crear-ticket', lang),
+            payload: 'crear-ticket'
+        },
+    ]
+}
 
-exports.solicitudesGenerales = [
-    {
-        title: 'SOLICITUD DE ACUSES DE RECIBO',
-        payload: 'SOLACUSE'
-    },
-    {
-        title: 'SOLICITUD DE ESTATUS DE ACUSES DE RECIBO',
-        payload: 'SOLESTATUS'
-    },
-    {
-        title: 'RECUPERACIÓN DE TRACKID',
-        payload: 'SOLTRACKID'
-    },
-    {
-        title: 'RECUPERACIÓN DE TRACKID',
-        payload: 'SOLTRACKID-A'
-    },
-    {
-        title: 'AGREGAR ARCHIVOS ANEXOS A RED COFIDI (PDF)',
-        payload: 'SOLARCHIVOS'
-    },
-    {
-        title: 'ERROR EN CODIFICACIÓN UTF-8',
-        payload: 'SOLCODIFICACION'
-    },
-    {
-        title: 'ERROR EN LÍNEAS OC U OP',
-        payload: 'SOLERROR'
-    },
-    {
-        title: 'ERROR EN RFC / NO ES INTEGRANTE DE LA RED COFIDI',
-        payload: 'SOLRFC'
-    },
-    {
-        title: 'CONSULTA DE MANUALES DE APOYO',
-        payload: 'SOLMANUALES'
-    }
-]
+exports.solicitudesGenerales = function (lang) {
+    return [
+        {
+            title: i18n('solicitudes.acuse', lang),
+            payload: 'SOLACUSE'
+        },
+        {
+            title: i18n('solicitudes.estado', lang),
+            payload: 'SOLESTATUS'
+        },
+        {
+            title: i18n('solicitudes.recuperacion', lang),
+            payload: 'SOLTRACKID'
+        },
+        {
+            title: i18n('solicitudes.recuperacion', lang),
+            payload: 'SOLTRACKID-A'
+        },
+        {
+            title: i18n('solicitudes.archivos', lang),
+            payload: 'SOLARCHIVOS'
+        },
+        {
+            title: i18n('solicitudes.error-codificacion', lang),
+            payload: 'SOLCODIFICACION'
+        },
+        {
+            title: i18n('solicitudes.error-lineas', lang),
+            payload: 'SOLERROR'
+        },
+        {
+            title: i18n('solicitudes.error-rfc', lang),
+            payload: 'SOLRFC'
+        },
+        {
+            title: i18n('solicitudes.manual', lang),
+            payload: 'SOLMANUALES'
+        }
+    ]
+}

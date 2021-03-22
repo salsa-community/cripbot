@@ -123,6 +123,15 @@ var Botkit = {
     return asistente;
   },
 
+  title: function () {
+    let lang = this.browserLanguage({ languageCodeOnly: true })[0];
+    if (lang === 'es') {
+      return 'En línea';
+    } else {
+      return 'Online';
+    }
+  },
+
   browserLanguage: function (options = {}) {
     const defaultOptions = {
       languageCodeOnly: false,

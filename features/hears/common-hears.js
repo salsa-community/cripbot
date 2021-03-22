@@ -5,58 +5,56 @@
 
 const { helpQuickReplies } = require('@feature/dialogs/util/info-quick-replies');
 const { typing } = require('@util/bot.typing');
+const { i18n } = require('@util/lang');
 
 module.exports = function (controller) {
     controller.hears(['hey', 'hi', 'hello', 'hola'], 'message', async (bot, message) => {
-        await typing(bot, message, 'Hola, estoy para servirte en lo que pueda');
+        await typing(bot, message, i18n('help.hello', message.user_profile.lang));
     });
 
-    controller.hears(['[¿]?eres real[?]?'], 'message', async (bot, message) => {
-        await typing(bot, message, 'soy una inteligencia artificial, que fue creada para ayudarte');
+    controller.hears(['[¿]?eres real[?]?', 'quien eres', 'who are you'], 'message', async (bot, message) => {
+        await typing(bot, message, i18n('bot.whoare', message.user_profile.lang));
     });
 
-    controller.hears(['[¿]?tienes nombre[?]?', '[¿]cual es tu nombre[?]?'], 'message', async (bot, message) => {
-        await typing(bot, message, 'mi nombre es socrates, y estoy para servirte');
+    controller.hears(['[¿]?tienes nombre[?]?', '[¿]cual es tu nombre[?]?', 'nombre', 'name'], 'message', async (bot, message) => {
+        await typing(bot, message, i18n('bot.name', message.user_profile.lang, message.user_profile.asistente));
     });
 
-    controller.hears(['ayuda'], 'message', async (bot, message) => {
+    controller.hears(['ayuda', 'help'], 'message', async (bot, message) => {
         await typing(bot, message, {
-            text: '¿Te puedo ayudar en alguno de los siguientes temas?:',
+            text: i18n('help.question', message.user_profile.lang),
             quick_replies: helpQuickReplies
         });
     });
 
-    controller.hears(['[¿]?c[oó]mo est[áa]s[?]?'], 'message', async (bot, message) => {
-        await typing(bot, message, 'Me encuentro muy bien, ¡gracias por preguntar!');
+    controller.hears(['[¿]?c[oó]mo est[áa]s[?]?', 'who are you'], 'message', async (bot, message) => {
+        await typing(bot, message, i18n('bot.state', message.user_profile.lang));
         await typing(bot, message, {
-            text: '¿Te puedeo apoyar con alguno de los siguientes temas?:',
+            text: i18n('help.question', message.user_profile.lang),
             quick_replies: helpQuickReplies
         });
     });
 
-    controller.hears(['buenos dias', 'buenas noches', 'buenas tardes'], 'message', async (bot, message) => {
-        await typing(bot, message, 'Es un gusto saludarte');
+    controller.hears(['good morning', 'morning', 'good night', 'good afternoon', 'buenos dias', 'buenas noches', 'buenas tardes'], 'message', async (bot, message) => {
+        await typing(bot, message, i18n('help.nice-to-see-you', message.user_profile.lang));
         await typing(bot, message, {
-            text: '¿Te puedeo apoyar con alguno de los siguientes temas?:',
+            text: i18n('help.question', message.user_profile.lang),
             quick_replies: helpQuickReplies
         });
     });
 
-    controller.hears(['adios', 'a dios', 'hasta pronto', 'bye', 'hasta luego'], 'message', async (bot, message) => {
-        await typing(bot, message, 'Fue un placer ayudarte, estaré aquí si me necesitas');
+    controller.hears(['adios', 'a dios', 'hasta pronto', 'bye', 'see you', 'hasta luego'], 'message', async (bot, message) => {
+        await typing(bot, message, i18n('help.attended', message.user_profile.lang));
     });
 
 
-    controller.hears(['no', 'no gracias', 'en otro momento'], 'message', async (bot, message) => {
-        await typing(bot, message, 'lo entiendo, posiblemente en otro momento');
-        await typing(bot, message, 'estaré aquí por si se te ofrece algo');
+    controller.hears(['no', 'no gracias', 'en otro momento', 'no thanks', 'no thank you'], 'message', async (bot, message) => {
+        await typing(bot, message, i18n('help.negative', message.user_profile.lang));
+        await typing(bot, message, i18n('help.be-online', message.user_profile.lang));
     });
 
-    controller.hears(['gracias'], 'message', async (bot, message) => {
-        await typing(bot, message, 'es un placer poder servirte');
+    controller.hears(['gracias', 'thank you', 'thanks'], 'message', async (bot, message) => {
+        await typing(bot, message, i18n('help.attended-alternative', message.user_profile.lang));
     });
 
-    controller.hears(['test'], 'message', async (bot, message) => {
-        await typing(bot, message, 'hola');
-    });
 }

@@ -16,6 +16,7 @@ if (!home) {
 }
 
 let language = Botkit.browserLanguage({ languageCodeOnly: true })[0];
+document.getElementsByClassName("header_text")[0].innerHTML = Botkit.title();
 let user = { asistente: Botkit.getAsistente(), context: appkey, lang: language };
 Botkit.boot(user);
 let element = document.getElementById("message_header");

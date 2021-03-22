@@ -14,3 +14,7 @@ i18n.configure({
 exports.i18n = function (key, lang) {
     return i18n.__({ phrase: key, locale: lang });
 }
+
+exports.i18n = function (key, lang, word) {
+    return i18n.__({ phrase: key, locale: lang }, word);
+}
