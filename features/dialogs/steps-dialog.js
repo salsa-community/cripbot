@@ -10,11 +10,11 @@ var Actividad = require('@model/kbase/Actividad.model')
 const { normalize } = require('@util/commons');
 
 
-const { RFC_DIALOG_ID, BOT_CLIENT_PAC_WEB__ID, BOT_CLIENT_RED_COFIDI__ID } = require('./util/constants')
+const { RFC_DIALOG_ID, BOT_CLIENT_RED_COFIDI__ID } = require('./util/constants')
 const { BotkitConversation } = require('botkit')
 const { resolveCodigo, resolveOptions, resolvePageNumber } = require('../../util/commons')
 const { TYPING_DELAY, PAGINATOR_NEXT_LABEL } = require('../../config');
-const UnknowIntent = require('../../models/kbase/UnknowIntent.model');
+const UnknowIntent = require('@model/kbase/UnknowIntent.model');
 
 module.exports = function (controller) {
     let convo = new BotkitConversation(RFC_DIALOG_ID, controller);
