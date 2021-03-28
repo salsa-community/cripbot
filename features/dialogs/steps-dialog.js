@@ -29,11 +29,11 @@ module.exports = function (controller) {
             convo.setVar('descProp', resolveDescProp(convo.vars.lang));
             convo.setVar('current_rfc', usuario.siccode);
             var subject = convo.vars.context === BOT_CLIENT_RED_COFIDI__ID ? 'proveedor' : 'usuario';
-            bot.say({ text: 'Bienvenido ' + subject + ' de ' + usuario.accountname })
+            bot.say({ text: i18n('welcome.default', message.user_profile.lang) + ' ' + subject + ' ' + i18n('general.of', message.user_profile.lang) + ' ' + usuario.accountname })
             bot.say({ type: 'typing' }, 'typing');
             await convo.gotoThread('codigo-error-thread')
         } else {
-            bot.say({ text: 'el RFC que me proporcionó no se encuentra en nuestra lista de clientes' })
+            bot.say({ text: i18n('dialog.rfc.notfound', message.user_profile.lang) })
             await convo.gotoThread('ask-user-info-thread')
         }
     }, 'rfc', 'get-rfc-thread')
@@ -43,12 +43,12 @@ module.exports = function (controller) {
      */
     convo.addAction('codigo-error-thread')
     convo.addQuestion({
-        text: '<b>Ingrese, por favor, el código de error que le presenta el sistema. También puede seleccionar alguno de los siguientes temas:</b>',
+        text: '{{vars.rfc_insert}}',
         quick_replies: async (template, vars) => {
             vars.optionPage = resolvePageNumber(vars.optionPage);
             var errorPage = await Error.find({ contextos: { $in: [vars.context] }, tipo: 'general' }).skip(vars.optionPage).limit(3).sort({ orden: 'asc' });
             vars.optionPage = (errorPage && errorPage.length < 3) ? -1 : vars.optionPage;
-            return resolveOptions(errorPage)
+            return resolveOptions(errorPage, vars.lang)
         }
     }, async (res, convo, bot) => {
         if (res == PAGINATOR_NEXT_LABEL) {
@@ -59,11 +59,9 @@ module.exports = function (controller) {
             if (error) {
                 Actividad.create(new Actividad({ contexto: convo.vars.context, valor: error.clave, desc: error.clave, evento: 'CODIGO_ERROR' }));
                 bot.say({
-                    text: 'Gracias por su respuesta. A continuación le voy a presentar la información relacionada con su petición.'
+                    text: '{{vars.rfc_insert_answer}}'
                 });
 
-                console.log('descripcion *********');
-                console.log(convo.vars.descProp);
                 error.instrucciones.pasos[0][convo.vars.descProp] = normalize(error.instrucciones.pasos[0][convo.vars.descProp]);
                 convo.setVar('errordesc', error[convo.vars.descProp]);
                 convo.setVar('instruccionesdesc', error.instrucciones[convo.vars.descProp]);
@@ -75,7 +73,7 @@ module.exports = function (controller) {
                 //await convo.gotoThread('show-steps-thread');
                 await convo.gotoThread('show-error-desc');
             } else {
-                bot.say({ text: 'el código de error ingresado no se encuentra en nuestra base de conocimiento' });
+                bot.say({ text: '{{vars.errorcode_notfound}}' });
                 UnknowIntent.create(new UnknowIntent({ word: res, context: 'codigo-error-dialog' }));
                 await convo.gotoThread('codigo-error-thread');
             }
@@ -106,8 +104,8 @@ module.exports = function (controller) {
      */
     convo.addAction('show-steps-thread');
     convo.addQuestion({
-        text: '<b>Paso {{vars.currentStep.paso}} :</b> {{{vars.currentStep.desc}}}',
-        quick_replies: [{ title: 'Realizado', payload: 'Realizado' }]
+        text: '<b>{{vars.step_text}} {{vars.currentStep.paso}} :</b> {{{vars.currentStep.desc}}}',
+        quick_replies: [{ title: '{{vars.done}}', payload: 'Realizado' }]
     }, async (res, convo, bot) => {
         if (convo.vars.currentStepIdx < convo.vars.maxStepIdx - 1) {
             convo.vars.currentStep = convo.vars.error.instrucciones.pasos[++convo.vars.currentStepIdx];
@@ -125,7 +123,7 @@ module.exports = function (controller) {
      */
     convo.addAction('more-info-thread');
     convo.addQuestion({
-        text: 'Ha concluido los pasos para resolver su incidente ¿Requiere alguna ayuda adicional?',
+        text: '{{vars.errorcode_finished}}',
         quick_replies: [{ title: 'No', payload: 'no' }, { title: 'Si', payload: 'si' }]
     }, [{
         pattern: 'no',
@@ -149,7 +147,7 @@ module.exports = function (controller) {
      */
     convo.addAction('get-customer-feedback-thread');
     convo.addQuestion({
-        text: '¿Qué le pareció nuestro servicio?',
+        text: '{{vars.errorcode_feedback}}',
         quick_replies: [{ title: '<i class= "fa fa-star" aria-hidden="true"><i class= "fa fa-star" aria-hidden="true"><i class= "fa fa-star" aria-hidden="true"></i><i class= "fa fa-star" aria-hidden="true"></i><i class= "fa fa-star" aria-hidden="true"></i>', payload: 'BUENO' }, { title: '<i class= "fa fa-star" aria-hidden="true"><i class= "fa fa-star" aria-hidden="true"></i><i class= "fa fa-star" aria-hidden="true"></i>', payload: 'REGULAR' }, { title: '<i class= "fa fa-star" aria-hidden="true"></i>', payload: 'MALO' }]
     }, [{
         pattern: 'BUENO|REGULAR|MALO',
@@ -174,7 +172,7 @@ module.exports = function (controller) {
      */
     convo.addAction('ask-user-info-thread');
     convo.addQuestion({
-        text: '¿Te gustaría dejarnos tus datos?',
+        text: '{{vars.userinfo_getdata}}',
         quick_replies: [{ title: 'No', payload: 'no' }, { title: 'Si', payload: 'si' }]
     }, [{
         pattern: 'no',
@@ -194,7 +192,7 @@ module.exports = function (controller) {
 
     convo.addAction('get-user-email');
     convo.addQuestion({
-        text: 'Por favor, proporcioname un correo electrónico para contactarte'
+        text: '{{vars.userinfo_getemail}}'
     }, [{
         pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
         handler: async (response, convo, bot) => {
@@ -206,7 +204,7 @@ module.exports = function (controller) {
     {
         default: true,
         handler: async (response, convo, bot) => {
-            bot.say({ text: 'El correo electrónico que ingresaste, no es un correo válido' });
+            bot.say({ text: '{{vars.userinfo_getemail_invalid}}' });
             await convo.gotoThread('get-user-email');
         }
     }], 'get-user-email', 'get-user-email');
@@ -214,12 +212,12 @@ module.exports = function (controller) {
 
     convo.addAction('get-asunto');
     convo.addQuestion({
-        text: '¿Me podrías indicar la razón por la que requieres que te contactemos?'
+        text: '{{vars.userinfo_contact_reason}}'
     }, [{
         handler: async (response, convo, bot) => {
             Contacto.create(new Contacto({ correo: convo.vars.correo, context: convo.vars.context, rfc: convo.vars.current_rfc, estado: 'NUEVO', desc: response }));
             Actividad.create(new Actividad({ contexto: convo.vars.context, valor: convo.vars.correo, desc: response, evento: 'REGISTRAR_CONTACTO' }));
-            bot.say({ text: 'Gracias por la información, en breve te contactaremos' });
+            bot.say({ text: '{{vars.userinfo_contact_answer}}' });
             bot.say({ type: 'typing' }, 'typing');
             await convo.gotoThread('exit-thread');
         }
@@ -230,13 +228,26 @@ module.exports = function (controller) {
      * Exit Thread
      */
     convo.addAction('exit-thread');
-    convo.addMessage('Fue un placer ayudarle, estaré aquí si me requiere', 'exit-thread');
+    convo.addMessage('{{vars.userinfo_contact_be_here}}', 'exit-thread');
 
     /**
      * Init common variables into the Dialog
      */
     convo.before('default', async (convo, bot) => {
         convo.setVar('rfc_ask', 'Por favor, ingrese ' + (convo.vars.context === BOT_CLIENT_RED_COFIDI__ID ? 'el RFC del receptor de la factura' : 'su RFC para recibir ayuda'));
+        convo.setVar('rfc_insert', i18n('dialogs.rfc.insert', convo.vars.lang));
+        convo.setVar('rfc_insert_answer', i18n('dialogs.rfc.insert-answer', convo.vars.lang));
+        convo.setVar('errorcode_notfound', i18n('dialogs.errorcode.notfound', convo.vars.lang));
+        convo.setVar('done', i18n('general.done', convo.vars.lang));
+        convo.setVar('step_text', i18n('general.step', convo.vars.lang));
+        convo.setVar('errorcode_finished', i18n('dialogs.errorcode.finished', convo.vars.lang));
+        convo.setVar('errorcode_feedback', i18n('dialogs.errorcode.feedback', convo.vars.lang));
+        convo.setVar('userinfo_getdata', i18n('dialogs.userinfo.getdata', convo.vars.lang));
+        convo.setVar('userinfo_getemail', i18n('dialogs.userinfo.getemail', convo.vars.lang));
+        convo.setVar('userinfo_getemail_invalid', i18n('dialogs.userinfo.getemail-invalid', convo.vars.lang));
+        convo.setVar('userinfo_contact_reason', i18n('dialogs.userinfo.reason', convo.vars.lang));
+        convo.setVar('userinfo_contact_answer', i18n('dialogs.userinfo.answer', convo.vars.lang));
+        convo.setVar('userinfo_contact_be_here', i18n('dialogs.userinfo.behere', convo.vars.lang));
     });
 
     convo.before('show-steps-thread', async () => {
@@ -244,6 +255,7 @@ module.exports = function (controller) {
             setTimeout(resolve, TYPING_DELAY);
         });
     });
+
     convo.before('more-info-thread', async () => {
         return new Promise((resolve) => {
             setTimeout(resolve, TYPING_DELAY);

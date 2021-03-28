@@ -1,4 +1,10 @@
 {       
+    "general":{
+        "ver-mas":"Ver más...",
+        "of": "de",
+        "done":"Realizado",
+        "step":"Paso"
+    },
     "bot":{
         "whoare":"soy una inteligencia artificial, que fue creada para ayudarte",
         "name":"mi nombre es %s, y estoy para servirte",
@@ -32,6 +38,7 @@
         "yes":"Si"
     },
     "welcome":{
+        "default":"Bienvenido",
         "name":"Mi nombre es",
         "question":"¿Requiere ayuda con el servicio?",
         "firstime":"Bienvenido a ATEB",
@@ -49,6 +56,25 @@
     "context":{
         "objetivo":"es un servicio de ATEB para apoyar a sus clientes.",
         "notfound":"No me encuentro ejecutando en un contexto correcto, por favor avise a mis creadores"
+    },
+    "dialogs":{
+        "rfc":{
+            "notfound":"'el RFC que me proporcionó no se encuentra en nuestra lista de clientes'",
+            "insert": "<b>Ingrese, por favor, el código de error que le presenta el sistema. También puede seleccionar alguno de los siguientes temas:</b>",
+            "insert-answer": "Gracias por su respuesta. A continuación le voy a presentar la información relacionada con su petición."
+        },
+        "errorcode":{
+            "notfound":"el código de error ingresado no se encuentra en nuestra base de conocimiento",
+            "finished":"Ha concluido los pasos para resolver su incidente ¿Requiere alguna ayuda adicional?",
+            "feedback":"¿Qué le pareció nuestro servicio?"
+        },
+        "userinfo":{
+            "getdata":"¿Te gustaría dejarnos tus datos?",
+            "getemail":"Por favor, proporcioname un correo electrónico para contactarte",
+            "getemail-invalid":"El correo electrónico que ingresaste, no es un correo válido",
+            "reason":"¿Me podrías indicar la razón por la que requieres que te contactemos?",
+            "answer":"Gracias por la información, en breve te contactaremos",
+            "behere":"Fue un placer ayudarle, estaré aquí si me requiere"
+        }  
     }
-
 }

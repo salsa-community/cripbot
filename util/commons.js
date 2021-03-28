@@ -7,6 +7,19 @@ const { i18n } = require('@util/lang');
  */
 const offset = 3;
 
+function resolveDescProp(lang) {
+    if (lang) {
+        if (lang === 'es') {
+            return 'desc'
+        } else {
+            return 'descEn'
+        }
+    }
+    return 'desc';
+}
+
+exports.resolveDescProp = resolveDescProp;
+
 exports.getRandomInt = function (min, max) {
     min = Math.ceil(min)
     max = Math.floor(max)
@@ -28,12 +41,13 @@ exports.resolveCodigo = function (rawCode, lang) {
     }
 }
 
-exports.resolveOptions = function (page) {
+exports.resolveOptions = function (page, lang) {
     let options = [];
+    let descLang = resolveDescProp(lang);
     page.forEach(element => {
-        options.push({ title: element.desc, payload: element.clave })
+        options.push({ title: element[descLang], payload: element.clave })
     });
-    options.push({ title: '<b><i>Ver más...</i></b>', payload: PAGINATOR_NEXT_LABEL })
+    options.push({ title: '<b><i>' + i18n('general.ver-mas', lang) + '</i></b>', payload: PAGINATOR_NEXT_LABEL })
     return options;
 }
 
@@ -63,16 +77,10 @@ exports.resolveGreeting = function (lang) {
 }
 
 exports.normalize = function (word) {
-    return word.replace(/(\r\n|\n|\r)/gm, "<br>");
+    if (word) {
+        return word.replace(/(\r\n|\n|\r)/gm, "<br>");
+    } else {
+        return '';
+    }
 }
 
-exports.resolveDescProp = function (lang) {
-    if (lang) {
-        if (lang === 'es') {
-            return 'desc'
-        } else {
-            return 'descEn'
-        }
-    }
-    return 'desc';
-}

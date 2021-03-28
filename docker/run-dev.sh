@@ -10,4 +10,4 @@ export DB_NAME=becovtig
 export DB_USERNAME=becovtiguser
 export DB_PASSWORD='5g#k@&k2p'
 
-docker-compose -f docker-compose-dev.yml up
+docker-compose -f docker-compose-dev.yml up &
