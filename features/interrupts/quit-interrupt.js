@@ -6,6 +6,7 @@
 const { menuQuickReplies } = require('@feature/dialogs/util/info-quick-replies');
 const { resolveSaludo } = require('@util/dialogs');
 const { typing } = require('@util/bot.typing');
+const { i18n } = require('@util/lang');
 
 module.exports = function (controller) {
     controller.interrupts(['hola', 'buenos dias', 'saludos'], 'message', async (bot, message) => {
@@ -18,7 +19,7 @@ module.exports = function (controller) {
 
     controller.interrupts('cancelar', 'message', async (bot, message) => {
         await typing(bot, message, {
-            text: 'muy bien, comencemos nuevamente',
+            text: i18n('general.begin', message.user_profile.lang),
             quick_replies: menuQuickReplies(message.user_profile.lang)
         });
         await bot.cancelAllDialogs();

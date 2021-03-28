@@ -3,7 +3,8 @@
         "ver-mas":"See more...",
         "of": "of",
         "done":"Done",
-        "step":"Step"
+        "step":"Step",
+        "begin":"muy bien, comencemos nuevamente"
     },
     "bot":{
         "whoare":"I am an artificial intelligence, who was created to help you",
@@ -60,12 +61,16 @@
     "dialogs":{
         "rfc":{
             "notfound":"the RFC you provided is not in our customer list",
-            "insert": "<b>Please enter the error code presented by the system. You can also select one of the following topics:</b>",
+            "insert-rfc": "Please enter",
+            "red-cofidi-context": "the RFC of the invoice recipient",
+            "no-red-cofidi-context": "your RFC for help",
+            "insert": "Please enter the error code presented by the system. You can also select one of the following topics:",
             "insert-answer": "Thanks for your reply. Next I will present the information related to your request"
         },
         "errorcode":{
             "notfound":"the error code entered is not found in our knowledge base",
             "finished":"You have completed the steps to resolve your incident. Do you need any additional help?",
+            "stepdesc":"I am going to describe the steps to follow to solve your incident. Please, when the step is finished, press the done button",
             "feedback":"What did you think of our service?"
         },
         "userinfo":{

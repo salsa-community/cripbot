@@ -3,7 +3,8 @@
         "ver-mas":"Ver más...",
         "of": "de",
         "done":"Realizado",
-        "step":"Paso"
+        "step":"Paso",
+        "begin":"alright, let's start again"
     },
     "bot":{
         "whoare":"soy una inteligencia artificial, que fue creada para ayudarte",
@@ -60,12 +61,16 @@
     "dialogs":{
         "rfc":{
             "notfound":"'el RFC que me proporcionó no se encuentra en nuestra lista de clientes'",
-            "insert": "<b>Ingrese, por favor, el código de error que le presenta el sistema. También puede seleccionar alguno de los siguientes temas:</b>",
+            "insert-rfc": "Por favor, ingrese",
+            "red-cofidi-context": "el RFC del receptor de la factura",
+            "no-red-cofidi-context": "su RFC para recibir ayuda",
+            "insert": "Ingrese, por favor, el código de error que le presenta el sistema. También puede seleccionar alguno de los siguientes temas:",
             "insert-answer": "Gracias por su respuesta. A continuación le voy a presentar la información relacionada con su petición."
         },
         "errorcode":{
             "notfound":"el código de error ingresado no se encuentra en nuestra base de conocimiento",
             "finished":"Ha concluido los pasos para resolver su incidente ¿Requiere alguna ayuda adicional?",
+            "stepdesc":"Le voy a describir los pasos a seguir para solucionar su incidente. Por favor, cuando concluya el paso, presione el botón de realizado",
             "feedback":"¿Qué le pareció nuestro servicio?"
         },
         "userinfo":{

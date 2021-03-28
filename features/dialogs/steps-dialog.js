@@ -29,11 +29,11 @@ module.exports = function (controller) {
             convo.setVar('descProp', resolveDescProp(convo.vars.lang));
             convo.setVar('current_rfc', usuario.siccode);
             var subject = convo.vars.context === BOT_CLIENT_RED_COFIDI__ID ? 'proveedor' : 'usuario';
-            bot.say({ text: i18n('welcome.default', message.user_profile.lang) + ' ' + subject + ' ' + i18n('general.of', message.user_profile.lang) + ' ' + usuario.accountname })
+            bot.say({ text: i18n('welcome.default', convo.vars.lang) + ' ' + subject + ' ' + i18n('general.of', convo.vars.lang) + ' ' + usuario.accountname })
             bot.say({ type: 'typing' }, 'typing');
             await convo.gotoThread('codigo-error-thread')
         } else {
-            bot.say({ text: i18n('dialog.rfc.notfound', message.user_profile.lang) })
+            bot.say({ text: i18n('dialog.rfc.notfound', convo.vars.lang) })
             await convo.gotoThread('ask-user-info-thread')
         }
     }, 'rfc', 'get-rfc-thread')
@@ -43,7 +43,7 @@ module.exports = function (controller) {
      */
     convo.addAction('codigo-error-thread')
     convo.addQuestion({
-        text: '{{vars.rfc_insert}}',
+        text: '<b>{{vars.rfc_insert}}</b>',
         quick_replies: async (template, vars) => {
             vars.optionPage = resolvePageNumber(vars.optionPage);
             var errorPage = await Error.find({ contextos: { $in: [vars.context] }, tipo: 'general' }).skip(vars.optionPage).limit(3).sort({ orden: 'asc' });
@@ -59,7 +59,7 @@ module.exports = function (controller) {
             if (error) {
                 Actividad.create(new Actividad({ contexto: convo.vars.context, valor: error.clave, desc: error.clave, evento: 'CODIGO_ERROR' }));
                 bot.say({
-                    text: '{{vars.rfc_insert_answer}}'
+                    text: i18n('dialogs.rfc.insert-answer', convo.vars.lang)
                 });
 
                 error.instrucciones.pasos[0][convo.vars.descProp] = normalize(error.instrucciones.pasos[0][convo.vars.descProp]);
@@ -96,7 +96,7 @@ module.exports = function (controller) {
     convo.addMessage({ type: 'typing', action: 'show-mensaje-realizado' }, 'show-error-instrucciones-desc');
 
     convo.addAction('show-mensaje-realizado');
-    convo.addMessage('Le voy a describir los pasos a seguir para solucionar su incidente. Por favor, cuando concluya el paso, presione el botón de realizado', 'show-mensaje-realizado');
+    convo.addMessage('{{vars.errorcode_stepdesc}}', 'show-mensaje-realizado');
     convo.addMessage({ type: 'typing', action: 'show-steps-thread' }, 'show-mensaje-realizado');
 
     /**
@@ -234,7 +234,7 @@ module.exports = function (controller) {
      * Init common variables into the Dialog
      */
     convo.before('default', async (convo, bot) => {
-        convo.setVar('rfc_ask', 'Por favor, ingrese ' + (convo.vars.context === BOT_CLIENT_RED_COFIDI__ID ? 'el RFC del receptor de la factura' : 'su RFC para recibir ayuda'));
+        convo.setVar('rfc_ask', i18n('dialogs.rfc.insert-rfc', convo.vars.lang) + ' ' + (convo.vars.context === BOT_CLIENT_RED_COFIDI__ID ? i18n('dialogs.rfc.red-cofidi-context', convo.vars.lang) : i18n('dialogs.rfc.no-red-cofidi-context', convo.vars.lang)));
         convo.setVar('rfc_insert', i18n('dialogs.rfc.insert', convo.vars.lang));
         convo.setVar('rfc_insert_answer', i18n('dialogs.rfc.insert-answer', convo.vars.lang));
         convo.setVar('errorcode_notfound', i18n('dialogs.errorcode.notfound', convo.vars.lang));
@@ -242,6 +242,7 @@ module.exports = function (controller) {
         convo.setVar('step_text', i18n('general.step', convo.vars.lang));
         convo.setVar('errorcode_finished', i18n('dialogs.errorcode.finished', convo.vars.lang));
         convo.setVar('errorcode_feedback', i18n('dialogs.errorcode.feedback', convo.vars.lang));
+        convo.setVar('errorcode_stepdesc', i18n('dialogs.errorcode.stepdesc', convo.vars.lang));
         convo.setVar('userinfo_getdata', i18n('dialogs.userinfo.getdata', convo.vars.lang));
         convo.setVar('userinfo_getemail', i18n('dialogs.userinfo.getemail', convo.vars.lang));
         convo.setVar('userinfo_getemail_invalid', i18n('dialogs.userinfo.getemail-invalid', convo.vars.lang));
