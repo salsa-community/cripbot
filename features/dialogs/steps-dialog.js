@@ -7,8 +7,8 @@ const { Usuario } = require('@model/vtiger')
 var Error = require('@model/kbase/Error.model')
 var Contacto = require('@model/kbase/Contacto.model')
 var Actividad = require('@model/kbase/Actividad.model')
-const { normalize } = require('@util/commons');
-
+const { normalize, resolveDescProp } = require('@util/commons');
+const { i18n } = require('@util/lang');
 
 const { RFC_DIALOG_ID, BOT_CLIENT_RED_COFIDI__ID } = require('./util/constants')
 const { BotkitConversation } = require('botkit')
@@ -26,6 +26,7 @@ module.exports = function (controller) {
     convo.addQuestion('{{vars.rfc_ask}}', async (res, convo, bot) => {
         var usuario = await Usuario.findOne({ where: { siccode: res.trim() }, attributes: ['siccode', 'accountname'] });
         if (usuario) {
+            convo.setVar('descProp', resolveDescProp(convo.vars.lang));
             convo.setVar('current_rfc', usuario.siccode);
             var subject = convo.vars.context === BOT_CLIENT_RED_COFIDI__ID ? 'proveedor' : 'usuario';
             bot.say({ text: 'Bienvenido ' + subject + ' de ' + usuario.accountname })
@@ -54,16 +55,18 @@ module.exports = function (controller) {
             bot.say({ type: 'typing' }, 'typing');
             await convo.gotoThread('codigo-error-thread');
         } else {
-            var error = await Error.findOne({ clave: resolveCodigo(res), contextos: { $in: [convo.vars.context] } });
+            var error = await Error.findOne({ clave: resolveCodigo(res, convo.vars.lang), contextos: { $in: [convo.vars.context] } });
             if (error) {
                 Actividad.create(new Actividad({ contexto: convo.vars.context, valor: error.clave, desc: error.clave, evento: 'CODIGO_ERROR' }));
                 bot.say({
                     text: 'Gracias por su respuesta. A continuación le voy a presentar la información relacionada con su petición.'
                 });
 
-                error.instrucciones.pasos[0].desc = normalize(error.instrucciones.pasos[0].desc);
-                convo.setVar('errordesc', error.desc);
-                convo.setVar('instruccionesdesc', error.instrucciones.desc);
+                console.log('descripcion *********');
+                console.log(convo.vars.descProp);
+                error.instrucciones.pasos[0][convo.vars.descProp] = normalize(error.instrucciones.pasos[0][convo.vars.descProp]);
+                convo.setVar('errordesc', error[convo.vars.descProp]);
+                convo.setVar('instruccionesdesc', error.instrucciones[convo.vars.descProp]);
                 convo.setVar('error', error);
                 convo.setVar('currentStep', error.instrucciones.pasos[0]);
                 convo.setVar('currentStepIdx', 0);
@@ -108,7 +111,7 @@ module.exports = function (controller) {
     }, async (res, convo, bot) => {
         if (convo.vars.currentStepIdx < convo.vars.maxStepIdx - 1) {
             convo.vars.currentStep = convo.vars.error.instrucciones.pasos[++convo.vars.currentStepIdx];
-            convo.vars.currentStep.desc = normalize(convo.vars.currentStep.desc);
+            convo.vars.currentStep.desc = normalize(convo.vars.currentStep[convo.vars.descProp]);
             bot.say({ type: 'typing' }, 'typing');
             await convo.gotoThread('show-steps-thread');
         } else {

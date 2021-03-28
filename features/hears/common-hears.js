@@ -23,7 +23,7 @@ module.exports = function (controller) {
     controller.hears(['ayuda', 'help'], 'message', async (bot, message) => {
         await typing(bot, message, {
             text: i18n('help.question', message.user_profile.lang),
-            quick_replies: helpQuickReplies
+            quick_replies: helpQuickReplies(message.user_profile.lang)
         });
     });
 
@@ -31,7 +31,7 @@ module.exports = function (controller) {
         await typing(bot, message, i18n('bot.state', message.user_profile.lang));
         await typing(bot, message, {
             text: i18n('help.question', message.user_profile.lang),
-            quick_replies: helpQuickReplies
+            quick_replies: helpQuickReplies(message.user_profile.lang)
         });
     });
 
@@ -39,7 +39,7 @@ module.exports = function (controller) {
         await typing(bot, message, i18n('help.nice-to-see-you', message.user_profile.lang));
         await typing(bot, message, {
             text: i18n('help.question', message.user_profile.lang),
-            quick_replies: helpQuickReplies
+            quick_replies: helpQuickReplies(message.user_profile.lang)
         });
     });
 
