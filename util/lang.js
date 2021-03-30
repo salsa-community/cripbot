@@ -4,6 +4,7 @@ const i18n = require('i18n')
 
 i18n.configure({
     locales: ['es', 'en'],
+    defaultLocale: 'en',
     objectNotation: true,
     directory: path.join(__dirname, '..', 'locales')
 })
