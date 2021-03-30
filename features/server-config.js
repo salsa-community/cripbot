@@ -19,5 +19,5 @@ module.exports = function (controller) {
 
 
 var info = {
-    version: package.version,
+    version: '2.0.0',
 }
