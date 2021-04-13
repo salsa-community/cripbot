@@ -9,13 +9,17 @@ const path = require('path');
 module.exports = scriptTemplate = `
 
 let appkey = "$APP_KEY";
+let language = "$APP_CULTURE";
 
 let home = document.getElementById("bot-client-script").getAttribute("bothome");
 if (!home) {
   home = "";
 }
 
-let language = Botkit.browserLanguage({ languageCodeOnly: true })[0];
+if(language === "undefined"){
+  language = Botkit.browserLanguage({ languageCodeOnly: true })[0];
+}
+
 document.getElementsByClassName("header_text")[0].innerHTML = Botkit.title();
 let user = { asistente: Botkit.getAsistente(), context: appkey, lang: language };
 Botkit.boot(user);

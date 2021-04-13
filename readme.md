@@ -77,3 +77,13 @@ sass --update sass/:public/css/
 #### notes
 
 for mongodb reference: https://github.com/Eslamunto/ProductsApp/blob/master/controllers/product.js
+
+
+
+
+### Versions
+
+## 2.1.0
+    * languages parameter in the url as CULTURE
+## 2.0.0
+    * i18n support for en and es languages

@@ -9,3 +9,12 @@ exports.resolveColor = function (req) {
 
     return '6e1adc';
 }
+
+exports.resolveLang = function (req) {
+
+    if (req.query.culture) {
+        return req.query.culture.split(/-|_/)[0];
+    }
+
+    return undefined;
+}

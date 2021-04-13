@@ -5,13 +5,13 @@
 const path = require('path');
 
 const scriptTemplate = require('../templates/script-template.js');
-const { resolveColor } = require('../../util/request-util');
+const { resolveColor, resolveLang } = require('../../util/request-util');
 
 module.exports = function (controller) {
     var basepath = process.env.CONTEXT ? '/' + process.env.CONTEXT : '/'
     controller.webserver.get('/:context/scripts/bot.js', (req, res) => {
         res.setHeader('content-type', 'application/javascript');
-        let script = scriptTemplate.replace(/\$APP_KEY/gi, req.params.context).replace(/\$CSS_COLOR/gi, resolveColor(req));
+        let script = scriptTemplate.replace(/\$APP_KEY/gi, req.params.context).replace(/\$CSS_COLOR/gi, resolveColor(req)).replace(/\$APP_CULTURE/gi, resolveLang(req));
         res.send(script);
     });
 }
