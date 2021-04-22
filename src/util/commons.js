@@ -8,16 +8,21 @@ const { i18n } = require('@util/lang');
 const offset = 3;
 
 function resolveDescProp(lang) {
-    if (lang) {
-        if (lang === 'es') {
-            return 'desc'
-        } else {
-            return 'descEn'
-        }
-    }
-    return 'desc';
+    return resolveProp('desc', lang);
 }
 
+function resolveProp(prop, lang) {
+    if (lang) {
+        if (lang === 'es') {
+            return prop;
+        } else {
+            return prop + 'En';
+        }
+    }
+    return prop;
+}
+
+exports.resolveProp = resolveProp;
 exports.resolveDescProp = resolveDescProp;
 
 exports.getRandomInt = function (min, max) {
@@ -58,7 +63,7 @@ exports.resolveGreeting = function (lang) {
     let currentDate = new Date();
     let hrs = currentDate.getHours();
 
-    if (hrs < 12) {
+    if (hrs < 12 && hrs >= 6) {
         return i18n('welcome.morning', lang);
     }
     else if (hrs >= 12 && hrs <= 17) {

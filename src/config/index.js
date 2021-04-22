@@ -33,4 +33,14 @@ config.bot.cms.token = process.env.CMS_TOKEN || config.bot.cms.token || '';
  */
 config.bot.app.userservice = process.env.USER_SERVICE || config.bot.app.userservice || 'default';
 
+
+/**
+ * Cache configuration
+ * 
+ */
+const defaultTTL = 1; //default to 1 Hour
+
+config.cache.ttl = process.env.CACHE_TTL || config.cache.ttl || defaultTTL;
+
+console.log(config);
 module.exports = config;

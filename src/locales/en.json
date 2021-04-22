@@ -42,8 +42,8 @@
         "default":"Welcome",
         "name":"My name is",
         "question":"Do you need help with the service?",
-        "firstime":"Welcome to ATEB",
-        "again":"Welcome again to ATEB",
+        "firstime %s":"Welcome to %s",
+        "again %s":"Welcome again to %s",
         "morning":"Good morning",
         "afternoon":"Good afternoon",
         "night":"Good night"

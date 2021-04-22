@@ -19,11 +19,11 @@
 		"be-online": "estaré aquí por si se te ofrece algo",
 		"attended": "Fue un placer ayudarte, estaré aquí si me necesitas",
 		"attended-alternative": "es un placer poder servirte",
-		"unknow-intent": "Sorry, I do not understand what you are asking me, but I can help you with any of the following topics",
+		"unknow-intent": "Lo siento, no entiendo lo que me preguntas, pero puedo ayudarte con cualquiera de los siguientes temas",
 		"codigos": "Códigos de Error",
-		"cfdi": "It has a CFDI code",
-		"seguimiento-ticket": "Follow up on a ticket",
-		"crear-ticket": "Create a ticket"
+		"cfdi": "Tiene un código CFDI",
+		"seguimiento-ticket": "Seguimiento de un ticket",
+		"crear-ticket": "Crear un ticket"
 	},
 	"solicitudes": {
 		"acuse": "SOLICITUD DE ACUSES DE RECIBO",
@@ -42,8 +42,8 @@
 		"default": "Bienvenido",
 		"name": "Mi nombre es",
 		"question": "¿Requiere ayuda con el servicio?",
-		"firstime": "Bienvenido a ATEB",
-		"again": "Bienvenido de nuevo a ATEB",
+		"firstime %s": "Bienvenido a %s",
+		"again %s": "Bienvenido de nuevo a %s",
 		"morning": "Buenos dias",
 		"afternoon": "Buena tarde",
 		"night": "Buena noche"

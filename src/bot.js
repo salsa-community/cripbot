@@ -44,10 +44,10 @@ const controller = new Botkit({
     storage
 });
 
-if (process.env.cms_uri) {
+if (process.env.CMS_URI) {
     controller.usePlugin(new BotkitCMSHelper({
-        uri: process.env.cms_uri,
-        token: process.env.cms_token,
+        uri: process.env.CMS_URI,
+        token: process.env.CMS_TOKEN,
     }));
 }
 
