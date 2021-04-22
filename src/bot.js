@@ -2,11 +2,12 @@
 // |__) /  \  |  |__/ |  |  
 // |__) \__/  |  |  \ |  |  
 
-// This is the main file for the socrates bot.
+// This is the main file for the cripbot.
 
 // Import Botkit's core features
 
-require('module-alias/register')
+require('module-alias/register');
+const config = require('@config');
 
 const { Botkit } = require('botkit');
 const { BotkitCMSHelper } = require('botkit-plugin-cms');
@@ -18,20 +19,17 @@ const { WebAdapter } = require('botbuilder-adapter-web');
 const { MongoDbStorage } = require('botbuilder-storage-mongodb');
 
 // Load process.env values from .env file
-require('dotenv').config();
 
 let storage = null;
-if (process.env.MONGO_URI) {
+if (config.bot.db.core) {
     storage = mongoStorage = new MongoDbStorage({
-        url: process.env.MONGO_URI,
+        url: config.bot.db.core,
     });
 }
 
 // Set up mongoose connection
 var mongoose = require('mongoose');
-var dev_db_url = 'mongodb://localhost:27017/chatbot';
-var mongoDB = process.env.MONGO_KB_URI || dev_db_url;
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(config.bot.db.kbase, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));

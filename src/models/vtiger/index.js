@@ -4,18 +4,11 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'dev';
-const config = require(__dirname + '/../../config/config.json')[env];
+const config = require('@config');
 const db = {};
 
-config.host = process.env.MYSQL_HOST || 'localhost';
-config.database = process.env.MYSQL_DB || 'develop';
-config.username = process.env.MYSQL_USERNAME || 'admin';
-config.password = process.env.MYSQL_PASSWORD || 'admin';
+let sequelize = new Sequelize(config.vtiger.database, config.vtiger.username, config.vtiger.password, config.vtiger);
 
-let sequelize = new Sequelize(config.database, config.username, config.password, config);
-
-// Test mysql connection
 sequelize
   .authenticate()
   .then(() => {

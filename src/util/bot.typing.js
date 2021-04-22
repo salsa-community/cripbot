@@ -1,8 +1,7 @@
-
-const { TYPING_DELAY } = require('../config');
+const config = require('@config');
 
 exports.typing = async function (bot, message, text, delay) {
-    if (!delay) { delay = TYPING_DELAY }
+    if (!delay) { delay = config.bot.app.typingdelay }
     await bot.reply(message, { type: 'typing' });
     return new Promise((resolve) => {
         setTimeout(async () => {

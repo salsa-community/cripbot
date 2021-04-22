@@ -4,7 +4,7 @@
   "description": "chatbot ATEB",
   "main": "bot.js",
   "scripts": {
-    "start": "node bot.js",
+    "start": "node src/bot.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "update:css": "sass --update sass/:public/css/",
     "docker-build": "docker build -t i2cmx/atebot:$npm_package_version ."
@@ -20,6 +20,7 @@
     "module-alias": "^2.2.2",
     "mongoose": "^5.7.10",
     "mysql2": "^2.1.0",
+    "node-cache": "^5.1.2",
     "sequelize": "^5.21.4"
   },
   "devDependencies": {
@@ -28,8 +29,11 @@
   },
   "_moduleAliases": {
     "@root": ".",
-    "@util": "util",
-    "@model": "models",
-    "@feature": "features"
+    "@src": "src",
+    "@util": "src/util",
+    "@model": "src/models",
+    "@feature": "src/features",
+    "@service": "src/features/services",
+    "@config": "src/config"
   }
 }

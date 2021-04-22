@@ -1,0 +1,90 @@
+{
+	"general": {
+		"ver-mas": "Ver más...",
+		"of": "de",
+		"done": "Realizado",
+		"step": "Paso",
+		"begin": "muy bien, vamos a comenzar nuevamente"
+	},
+	"bot": {
+		"whoare": "soy una inteligencia artificial, que fue creada para ayudarte",
+		"name": "mi nombre es %s, y estoy para servirte",
+		"state": "Me encuentro muy bien, ¡gracias por preguntar!"
+	},
+	"help": {
+		"nice-to-see-you": "Es un gusto saludarte",
+		"hello": "Hola, estoy para servirte en lo que pueda;",
+		"question": "¿Te puedo ayudar en alguno de los siguientes temas?",
+		"negative": "lo entiendo, posiblemente en otro momento",
+		"be-online": "estaré aquí por si se te ofrece algo",
+		"attended": "Fue un placer ayudarte, estaré aquí si me necesitas",
+		"attended-alternative": "es un placer poder servirte",
+		"unknow-intent": "Sorry, I do not understand what you are asking me, but I can help you with any of the following topics",
+		"codigos": "Códigos de Error",
+		"cfdi": "It has a CFDI code",
+		"seguimiento-ticket": "Follow up on a ticket",
+		"crear-ticket": "Create a ticket"
+	},
+	"solicitudes": {
+		"acuse": "SOLICITUD DE ACUSES DE RECIBO",
+		"estado": "SOLICITUD DE ESTATUS DE ACUSES DE RECIBO",
+		"recuperacion": "RECUPERACIÓN DE TRACKID",
+		"archivos": "AGREGAR ARCHIVOS ANEXOS A RED COFIDI (PDF)",
+		"error-codificacion": "ERROR EN CODIFICACIÓN UTF-8",
+		"error-lineas": "ERROR EN LÍNEAS OC U OP",
+		"error-rfc": "ERROR EN RFC / NO ES INTEGRANTE DE LA RED COFIDI",
+		"manual": "CONSULTA DE MANUALES DE APOYO"
+	},
+	"answer": {
+		"yes": "Si"
+	},
+	"welcome": {
+		"default": "Bienvenido",
+		"name": "Mi nombre es",
+		"question": "¿Requiere ayuda con el servicio?",
+		"firstime": "Bienvenido a ATEB",
+		"again": "Bienvenido de nuevo a ATEB",
+		"morning": "Buenos dias",
+		"afternoon": "Buena tarde",
+		"night": "Buena noche"
+	},
+	"redcofidi": {
+		"objetivo": "Red COFIDI es un servicio para intercambiar Comprobantes Fiscales Digitales de una manera rápida y segura."
+	},
+	"pacweb": {
+		"objetivo": "PAC Web es un servicio de ATEB para apoyar a sus clientes."
+	},
+	"context": {
+		"objetivo": "es un servicio de ATEB para apoyar a sus clientes.",
+		"notfound": "No me encuentro ejecutando en un contexto correcto, por favor avise a mis creadores"
+	},
+	"dialogs": {
+		"rfc": {
+			"notfound": "el RFC que me proporcionó no se encuentra en nuestra lista de clientes",
+			"insert-rfc": "Por favor, ingrese",
+			"red-cofidi-context": "el RFC del receptor de la factura",
+			"no-red-cofidi-context": "su RFC para recibir ayuda",
+			"insert": "Ingrese, por favor, el código de error que le presenta el sistema. También puede seleccionar alguno de los siguientes temas:",
+			"insert-answer": "Gracias por su respuesta. A continuación le voy a presentar la información relacionada con su petición."
+		},
+		"errorcode": {
+			"notfound": "el código de error ingresado no se encuentra en nuestra base de conocimiento",
+			"finished": "Ha concluido los pasos para resolver su incidente ¿Requiere alguna ayuda adicional?",
+			"stepdesc": "Le voy a describir los pasos a seguir para solucionar su incidente. Por favor, cuando concluya el paso, presione el botón de realizado",
+			"feedback": "¿Qué le pareció nuestro servicio?"
+		},
+		"userinfo": {
+			"getdata": "¿Te gustaría dejarnos tus datos?",
+			"getemail": "Por favor, proporcioname un correo electrónico para contactarte",
+			"getemail-invalid": "El correo electrónico que ingresaste, no es un correo válido",
+			"reason": "¿Me podrías indicar la razón por la que requieres que te contactemos?",
+			"answer": "Gracias por la información, en breve te contactaremos",
+			"behere": "Fue un placer ayudarle, estaré aquí si me requiere"
+		}
+	},
+	"dialog": {
+		"rfc": {
+			"notfound": "dialog.rfc.notfound"
+		}
+	}
+}

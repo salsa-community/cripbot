@@ -3,18 +3,21 @@
  * Licensed under the MIT License.
  */
 
-const { Usuario } = require('@model/vtiger')
+// const { Usuario } = require('@model/vtiger')
+const UserService = require('@service/user/user.service')
 var Error = require('@model/kbase/Error.model')
 var Contacto = require('@model/kbase/Contacto.model')
 var Actividad = require('@model/kbase/Actividad.model')
 const { normalize, resolveDescProp } = require('@util/commons');
 const { i18n } = require('@util/lang');
 
-const { RFC_DIALOG_ID, BOT_CLIENT_RED_COFIDI__ID } = require('./util/constants')
+const { RFC_DIALOG_ID, BOT_CLIENT_RED_COFIDI__ID } = require('@feature/dialogs/util/constants')
 const { BotkitConversation } = require('botkit')
-const { resolveCodigo, resolveOptions, resolvePageNumber } = require('../../util/commons')
-const { TYPING_DELAY, PAGINATOR_NEXT_LABEL } = require('../../config');
+const { resolveCodigo, resolveOptions, resolvePageNumber } = require('@util/commons')
+const config = require('@config');
 const UnknowIntent = require('@model/kbase/UnknowIntent.model');
+
+const TYPING_DELAY = config.bot.app.typingdelay;
 
 module.exports = function (controller) {
     let convo = new BotkitConversation(RFC_DIALOG_ID, controller);
@@ -24,16 +27,18 @@ module.exports = function (controller) {
      */
     convo.addAction('get-rfc-thread')
     convo.addQuestion('{{vars.rfc_ask}}', async (res, convo, bot) => {
-        var usuario = await Usuario.findOne({ where: { siccode: res.trim() }, attributes: ['siccode', 'accountname'] });
+
+        let usuario = await UserService.findByUsername(res.trim());
+        // var usuario = await Usuario.findOne({ where: { siccode: res.trim() }, attributes: ['siccode', 'accountname'] });
         if (usuario) {
             convo.setVar('descProp', resolveDescProp(convo.vars.lang));
-            convo.setVar('current_rfc', usuario.siccode);
+            convo.setVar('current_rfc', usuario.username);
             var subject = convo.vars.context === BOT_CLIENT_RED_COFIDI__ID ? 'proveedor' : 'usuario';
-            bot.say({ text: i18n('welcome.default', convo.vars.lang) + ' ' + subject + ' ' + i18n('general.of', convo.vars.lang) + ' ' + usuario.accountname })
+            bot.say({ text: i18n('welcome.default', convo.vars.lang) + ' ' + subject + ' ' + i18n('general.of', convo.vars.lang) + ' ' + usuario.name })
             bot.say({ type: 'typing' }, 'typing');
             await convo.gotoThread('codigo-error-thread')
         } else {
-            bot.say({ text: i18n('dialog.rfc.notfound', convo.vars.lang) })
+            bot.say({ text: i18n('dialogs.rfc.notfound', convo.vars.lang) })
             await convo.gotoThread('ask-user-info-thread')
         }
     }, 'rfc', 'get-rfc-thread')
@@ -51,7 +56,7 @@ module.exports = function (controller) {
             return resolveOptions(errorPage, vars.lang)
         }
     }, async (res, convo, bot) => {
-        if (res == PAGINATOR_NEXT_LABEL) {
+        if (res == config.bot.app.nextlabel) {
             bot.say({ type: 'typing' }, 'typing');
             await convo.gotoThread('codigo-error-thread');
         } else {

@@ -1,5 +1,5 @@
-const { solicitudesGenerales } = require('../features/dialogs/util/info-quick-replies');
-const { PAGINATOR_NEXT_LABEL } = require('../config');
+const { solicitudesGenerales } = require('@feature/dialogs/util/info-quick-replies');
+const config = require('@config');
 const { i18n } = require('@util/lang');
 
 /**
@@ -31,13 +31,7 @@ exports.resolveCodigo = function (rawCode, lang) {
     if (matchCode) {
         return 'CFDI' + matchCode[0]
     } else {
-        let mensajesGenerales = solicitudesGenerales(lang);
-        for (let index = 0; index < mensajesGenerales.length; index++) {
-            const element = mensajesGenerales[index]
-            if (element.payload == rawCode) {
-                return rawCode
-            }
-        }
+        return rawCode;
     }
 }
 
@@ -47,7 +41,7 @@ exports.resolveOptions = function (page, lang) {
     page.forEach(element => {
         options.push({ title: element[descLang], payload: element.clave })
     });
-    options.push({ title: '<b><i>' + i18n('general.ver-mas', lang) + '</i></b>', payload: PAGINATOR_NEXT_LABEL })
+    options.push({ title: '<b><i>' + i18n('general.ver-mas', lang) + '</i></b>', payload: config.bot.app.nextlabel })
     return options;
 }
 

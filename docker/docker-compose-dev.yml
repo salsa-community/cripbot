@@ -1,6 +1,6 @@
 version: '2'
 services:
-  bot-appss:
+  bot-app:
     image: i2cmx/atebot:${BOT_TAG}
     environment:
       - MONGO_URI=mongodb://kbase-db:27017
@@ -15,7 +15,7 @@ services:
       - 8086:3000
     depends_on:
     - kbase-db
-  kbase-apps:
+  kbase-app:
     container_name: 'kbase-app'
     image: i2cmx/kbase:latest
     environment:

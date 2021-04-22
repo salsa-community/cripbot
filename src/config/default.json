@@ -1,0 +1,58 @@
+{
+  "development": {
+    "bot":{
+      "app":{
+        "port": 3000,
+        "typingdelay": 2000,
+        "nextlabel": "ver-mas"
+      },
+      "db":{
+        "core": "mongodb://localhost:27017",
+        "kbase": "mongodb://localhost:27017/chatbot"
+      },
+      "cms":{
+        "host": "",
+        "token": ""
+      }
+    },
+    "vtiger": {      
+        "username": "becovtiguser",
+        "password": "5g#k@&k2p",
+        "database": "becovtig",
+        "host": "127.0.0.1",
+        "dialect": "mysql",
+        "logging": true, 
+      "operatorsAliases": 0
+    }
+  },
+
+  "production": {
+    "port": 3000,
+    "bot":{
+      "app":{
+        "port": 3000,
+        "typingdelay": 2000,
+        "nextlabel": "ver-mas"
+      },
+      "db":{
+        "bot": "mongodb://localhost:27017",
+        "kbase": "mongodb://localhost:27017/chatbot"
+      },
+      "cms":{
+        "host": "",
+        "token": ""
+      }
+    },
+    "vtiger":{
+        "dialect": "mysql",
+        "operatorsAliases": 0,
+        "logging": false, 
+        "pool": {
+          "max": 5,
+          "min": 0,
+          "acquire": 30000,
+          "idle": 10000
+        }
+    }
+  }
+}
