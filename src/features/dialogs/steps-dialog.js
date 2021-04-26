@@ -8,7 +8,7 @@ const UserService = require('@service/user/user.service')
 var Error = require('@model/kbase/Error.model')
 var Contacto = require('@model/kbase/Contacto.model')
 var Actividad = require('@model/kbase/Actividad.model')
-const { normalize, resolveDescProp } = require('@util/commons');
+const { normalize, resolveDescProp, resolveProp } = require('@util/commons');
 const { i18n } = require('@util/lang');
 
 const { RFC_DIALOG_ID, BOT_CLIENT_RED_COFIDI__ID } = require('@feature/dialogs/util/constants')
@@ -16,6 +16,8 @@ const { BotkitConversation } = require('botkit')
 const { resolveCodigo, resolveOptions, resolvePageNumber } = require('@util/commons')
 const config = require('@config');
 const UnknowIntent = require('@model/kbase/UnknowIntent.model');
+
+const ContextService = require('@service/context/context.service')
 
 const TYPING_DELAY = config.bot.app.typingdelay;
 
@@ -31,10 +33,12 @@ module.exports = function (controller) {
         let usuario = await UserService.findByUsername(res.trim());
         // var usuario = await Usuario.findOne({ where: { siccode: res.trim() }, attributes: ['siccode', 'accountname'] });
         if (usuario) {
+            let context = await ContextService.getContext(convo.vars.context);
+            let welcomeMessage = resolveProp('welcomeMessage', convo.vars.lang);
             convo.setVar('descProp', resolveDescProp(convo.vars.lang));
             convo.setVar('current_rfc', usuario.username);
-            var subject = convo.vars.context === BOT_CLIENT_RED_COFIDI__ID ? 'proveedor' : 'usuario';
-            bot.say({ text: i18n('welcome.default', convo.vars.lang) + ' ' + subject + ' ' + i18n('general.of', convo.vars.lang) + ' ' + usuario.name })
+
+            bot.say({ text: context[welcomeMessage] });
             bot.say({ type: 'typing' }, 'typing');
             await convo.gotoThread('codigo-error-thread')
         } else {
