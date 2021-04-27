@@ -42,5 +42,7 @@ const defaultTTL = 1; //default to 1 Hour
 
 config.cache.ttl = process.env.CACHE_TTL || config.cache.ttl || defaultTTL;
 
-console.log(config);
+if (process.env.BOT_DEBUG) {
+    console.debug(config);
+}
 module.exports = config;

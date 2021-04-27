@@ -7,34 +7,37 @@ const basename = path.basename(__filename);
 const config = require('@config');
 const db = {};
 
-let sequelize = new Sequelize(config.vtiger.database, config.vtiger.username, config.vtiger.password, config.vtiger);
+if (config.bot.app.userservice == 'vtiger') {
+  let sequelize = new Sequelize(config.vtiger.database, config.vtiger.username, config.vtiger.password, config.vtiger);
 
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connection to Vtiger has been established successfully.');
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
+  sequelize
+    .authenticate()
+    .then(() => {
+      console.log('Connection to Vtiger has been established successfully.');
+    })
+    .catch(err => {
+      console.error('Unable to connect to the database:', err);
+    });
+
+  fs
+    .readdirSync(__dirname)
+    .filter(file => {
+      return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+    })
+    .forEach(file => {
+      const model = sequelize['import'](path.join(__dirname, file));
+      db[model.name] = model;
+    });
+
+  Object.keys(db).forEach(modelName => {
+    if (db[modelName].associate) {
+      db[modelName].associate(db);
+    }
   });
 
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
-  })
-  .forEach(file => {
-    const model = sequelize['import'](path.join(__dirname, file));
-    db[model.name] = model;
-  });
+  db.sequelize = sequelize;
+  db.Sequelize = Sequelize;
 
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
-});
+  module.exports = db;
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
-
-module.exports = db;
+}

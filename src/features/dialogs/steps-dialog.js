@@ -33,12 +33,10 @@ module.exports = function (controller) {
         let usuario = await UserService.findByUsername(res.trim());
         // var usuario = await Usuario.findOne({ where: { siccode: res.trim() }, attributes: ['siccode', 'accountname'] });
         if (usuario) {
-            let context = await ContextService.getContext(convo.vars.context);
-            let welcomeMessage = resolveProp('welcomeMessage', convo.vars.lang);
             convo.setVar('descProp', resolveDescProp(convo.vars.lang));
             convo.setVar('current_rfc', usuario.username);
 
-            bot.say({ text: context[welcomeMessage] });
+            bot.say({ text: convo.vars.welcomeMessage });
             bot.say({ type: 'typing' }, 'typing');
             await convo.gotoThread('codigo-error-thread')
         } else {
@@ -243,7 +241,11 @@ module.exports = function (controller) {
      * Init common variables into the Dialog
      */
     convo.before('default', async (convo, bot) => {
-        convo.setVar('rfc_ask', i18n('dialogs.rfc.insert-rfc', convo.vars.lang) + ' ' + (convo.vars.context === BOT_CLIENT_RED_COFIDI__ID ? i18n('dialogs.rfc.red-cofidi-context', convo.vars.lang) : i18n('dialogs.rfc.no-red-cofidi-context', convo.vars.lang)));
+        let context = await ContextService.getContext(convo.vars.context);
+        let welcomeMessage = resolveProp('welcomeMessage', convo.vars.lang);
+        let loginMessage = resolveProp('loginMessage', convo.vars.lang);
+        convo.setVar('welcomeMessage', context[welcomeMessage]);
+        convo.setVar('rfc_ask', context[loginMessage]);
         convo.setVar('rfc_insert', i18n('dialogs.rfc.insert', convo.vars.lang));
         convo.setVar('rfc_insert_answer', i18n('dialogs.rfc.insert-answer', convo.vars.lang));
         convo.setVar('errorcode_notfound', i18n('dialogs.errorcode.notfound', convo.vars.lang));

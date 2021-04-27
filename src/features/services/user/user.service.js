@@ -6,7 +6,7 @@ const config = require('@config');
 
 let userservice = null;
 
-if (config.bot.app.userservice == 'default') {
+if (config.bot.app.userservice == 'vtiger') {
     userservice = new VtigerUserService();
 } else {
     userservice = new DefaultUserService();

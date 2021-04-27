@@ -4,7 +4,7 @@ exports.infoQuickReplies = function (lang) {
     return [
         {
             title: i18n('answer.yes', lang),
-            payload: 'rfc-dialogo'
+            payload: 'pasos-dialog'
         },
     ]
 }
@@ -13,7 +13,7 @@ exports.menuQuickReplies = function (lang) {
     return [
         {
             title: i18n('help.codigos', lang),
-            payload: 'rfc-dialogo'
+            payload: 'pasos-dialog'
         },
     ]
 }
@@ -22,7 +22,7 @@ exports.helpQuickReplies = function (lang) {
     return [
         {
             title: i18n('help.codigos', lang),
-            payload: 'rfc-dialogo'
+            payload: 'pasos-dialog'
         },
         {
             title: i18n('help.cfdi', lang),

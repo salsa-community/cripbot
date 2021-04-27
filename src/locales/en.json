@@ -20,7 +20,7 @@
         "attended":"It was a pleasure to help you, I'll be here if you need me",
         "attended-alternative":"it is a pleasure to be able to serve you",
         "unknow-intent":"Sorry, I do not understand what you are asking me, but I can help you with any of the following topics",
-        "codigos":"Error Code",
+        "codigos":"Help",
         "cfdi":"It has a CFDI code",
         "seguimiento-ticket":"Follow up on a ticket",
         "crear-ticket":"Create a ticket"

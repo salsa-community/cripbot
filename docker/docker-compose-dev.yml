@@ -1,7 +1,7 @@
 version: '2'
 services:
   bot-app:
-    image: i2cmx/atebot:${BOT_TAG}
+    image: conacyt/cripbot:${BOT_TAG}
     environment:
       - MONGO_URI=mongodb://kbase-db:27017
       - MONGO_KB_URI=mongodb://kbase-db:27017/chatbot
@@ -12,12 +12,12 @@ services:
       - MYSQL_PASSWORD=${DB_PASSWORD}
       - TZ=America/Mexico_City
     ports:
-      - 8086:3000
+      - 3000:3000
     depends_on:
     - kbase-db
   kbase-app:
     container_name: 'kbase-app'
-    image: i2cmx/kbase:latest
+    image: conacyt/kbase:latest
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=prod,swagger

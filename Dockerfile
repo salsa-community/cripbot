@@ -13,4 +13,4 @@ RUN cd /usr/src/app \
 WORKDIR /usr/src/app
 
 EXPOSE 8080
-CMD [ "node", "bot.js"]
+CMD [ "node", "src/bot.js"]
