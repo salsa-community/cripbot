@@ -35,7 +35,7 @@ module.exports = function (controller) {
             convo.setVar('descProp', resolveDescProp(convo.vars.lang));
             convo.setVar('username', usuario.username);
 
-            bot.say({ text: convo.vars.welcomeMessage });
+            //bot.say({ text: convo.vars.welcomeMessage });
             bot.say({ type: 'typing' }, 'typing');
             await convo.gotoThread('codigo-error-thread')
         } else {
@@ -49,7 +49,7 @@ module.exports = function (controller) {
      */
     convo.addAction('codigo-error-thread')
     convo.addQuestion({
-        text: '<b>{{vars.rfc_insert}}</b>',
+        text: '{{vars.welcomeMessage}}',
         quick_replies: async (template, vars) => {
             vars.optionPage = resolvePageNumber(vars.optionPage);
             var errorPage = await Error.find({ contextos: { $in: [vars.context] }, tipo: 'general' }).skip(vars.optionPage).limit(3).sort({ orden: 'asc' });
