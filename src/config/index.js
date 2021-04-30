@@ -39,10 +39,13 @@ config.bot.app.userservice = process.env.USER_SERVICE || config.bot.app.userserv
  * 
  */
 const defaultTTL = 1; //default to 1 Hour
+const defaultCheckperiod = defaultTTL * 0.2;
 
-config.cache.ttl = process.env.CACHE_TTL || config.cache.ttl || defaultTTL;
+config.cache.ttl = parseInt(process.env.CACHE_TTL) || config.cache.ttl || defaultTTL;
+config.cache.checkperiod = parseInt(process.env.CACHE_CHECK_PERIOD) || config.cache.checkperiod || defaultCheckperiod;
 
 if (process.env.BOT_DEBUG) {
     console.debug(config);
 }
+
 module.exports = config;

@@ -22,7 +22,7 @@ class ContextService {
     }
 }
 
-const cache = new NodeCache({ stdTTL: config.cache.ttl, checkperiod: config.cache.ttl * 0.2 });
+const cache = new NodeCache({ stdTTL: config.cache.ttl, checkperiod: config.cache.checkperiod });
 let contextService = new ContextService(cache);
 
 module.exports = contextService;

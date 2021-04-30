@@ -1,6 +1,6 @@
 {
   "name": "botkit-socrates",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "chatbot ATEB",
   "main": "bot.js",
   "scripts": {

@@ -41,7 +41,7 @@
 	"welcome": {
 		"default": "Bienvenido",
 		"name": "Mi nombre es",
-		"question": "¿Requiere ayuda con el servicio?",
+		"question": "¿Solicitas ayuda de los servicios en línea?",
 		"firstime %s": "Bienvenido a %s",
 		"again %s": "Bienvenido de nuevo a %s",
 		"morning": "Buenos dias",
@@ -65,12 +65,12 @@
 			"red-cofidi-context": "el RFC del receptor de la factura",
 			"no-red-cofidi-context": "su RFC para recibir ayuda",
 			"insert": "Ingrese, por favor, el código de error que le presenta el sistema. También puede seleccionar alguno de los siguientes temas:",
-			"insert-answer": "Gracias por su respuesta. A continuación le voy a presentar la información relacionada con su petición."
+			"insert-answer": "Gracias por su respuesta. Voy a presentar información relacionada con su petición."
 		},
 		"errorcode": {
 			"notfound": "el código de error ingresado no se encuentra en nuestra base de conocimiento",
 			"finished": "Ha concluido los pasos para resolver su incidente ¿Requiere alguna ayuda adicional?",
-			"stepdesc": "Le voy a describir los pasos a seguir para solucionar su incidente. Por favor, cuando concluya el paso, presione el botón de realizado",
+			"stepdesc": "Te voy a describir los pasos a seguir. Por favor, cuando concluyas el paso, presiona el botón de realizado",
 			"feedback": "¿Qué le pareció nuestro servicio?"
 		},
 		"userinfo": {

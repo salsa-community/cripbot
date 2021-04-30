@@ -5,7 +5,8 @@
       "app":{
         "port": 3000,
         "typingdelay": 2000,
-        "nextlabel": "ver-mas"
+        "nextlabel": "ver-mas",
+        "userservice": "default"
       },
       "db":{
         "core": "mongodb://localhost:27017",
@@ -18,11 +19,12 @@
     },
     "vtiger": {      
         "username": "becovtiguser",
-        "password": "5g#k@&k2p",
         "database": "becovtig",
         "host": "127.0.0.1",
         "dialect": "mysql",
-        "logging": true, 
+        "logging": true,
+        "pool": {
+        }, 
       "operatorsAliases": 0
     }
   },
@@ -34,7 +36,8 @@
       "app":{
         "port": 3000,
         "typingdelay": 2000,
-        "nextlabel": "ver-mas"
+        "nextlabel": "ver-mas",
+        "userservice": "default"
       },
       "db":{
         "bot": "mongodb://localhost:27017",

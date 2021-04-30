@@ -11,7 +11,7 @@ var Actividad = require('@model/kbase/Actividad.model')
 const { normalize, resolveDescProp, resolveProp } = require('@util/commons');
 const { i18n } = require('@util/lang');
 
-const { RFC_DIALOG_ID, BOT_CLIENT_RED_COFIDI__ID } = require('@feature/dialogs/util/constants')
+const { RFC_DIALOG_ID } = require('@feature/dialogs/util/constants')
 const { BotkitConversation } = require('botkit')
 const { resolveCodigo, resolveOptions, resolvePageNumber } = require('@util/commons')
 const config = require('@config');
@@ -31,10 +31,9 @@ module.exports = function (controller) {
     convo.addQuestion('{{vars.rfc_ask}}', async (res, convo, bot) => {
 
         let usuario = await UserService.findByUsername(res.trim());
-        // var usuario = await Usuario.findOne({ where: { siccode: res.trim() }, attributes: ['siccode', 'accountname'] });
         if (usuario) {
             convo.setVar('descProp', resolveDescProp(convo.vars.lang));
-            convo.setVar('current_rfc', usuario.username);
+            convo.setVar('username', usuario.username);
 
             bot.say({ text: convo.vars.welcomeMessage });
             bot.say({ type: 'typing' }, 'typing');
@@ -222,7 +221,7 @@ module.exports = function (controller) {
         text: '{{vars.userinfo_contact_reason}}'
     }, [{
         handler: async (response, convo, bot) => {
-            Contacto.create(new Contacto({ correo: convo.vars.correo, context: convo.vars.context, rfc: convo.vars.current_rfc, estado: 'NUEVO', desc: response }));
+            Contacto.create(new Contacto({ correo: convo.vars.correo, context: convo.vars.context, rfc: convo.vars.username, estado: 'NUEVO', desc: response }));
             Actividad.create(new Actividad({ contexto: convo.vars.context, valor: convo.vars.correo, desc: response, evento: 'REGISTRAR_CONTACTO' }));
             bot.say({ text: '{{vars.userinfo_contact_answer}}' });
             bot.say({ type: 'typing' }, 'typing');
