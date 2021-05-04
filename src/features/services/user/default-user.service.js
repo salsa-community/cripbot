@@ -3,7 +3,7 @@ const User = require('@model/bot/User.js')
 class DefaultUserService {
 
     constructor() {
-        console.log('using default Userservice');
+
     }
 
     async findByUsername(username) {

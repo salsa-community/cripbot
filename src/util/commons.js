@@ -32,6 +32,9 @@ exports.getRandomInt = function (min, max) {
 }
 
 exports.resolveCodigo = function (rawCode, lang) {
+    if (!rawCode) {
+        return rawCode;
+    }
     const matchCode = rawCode.match(/(\d+.*)/)
     if (matchCode) {
         return 'CFDI' + matchCode[0]

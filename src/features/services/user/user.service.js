@@ -5,6 +5,7 @@ const DefaultUserService = require('@service/user/default-user.service')
 const config = require('@config');
 
 let userservice = null;
+config.bot.app.userservice;
 
 if (config.bot.app.userservice == 'vtiger') {
     userservice = new VtigerUserService();
@@ -12,4 +13,5 @@ if (config.bot.app.userservice == 'vtiger') {
     userservice = new DefaultUserService();
 }
 
+console.log('User service: ' + config.bot.app.userservice);
 module.exports = userservice;

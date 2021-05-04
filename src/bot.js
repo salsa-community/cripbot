@@ -17,64 +17,72 @@ const { BotkitCMSHelper } = require('botkit-plugin-cms');
 const { WebAdapter } = require('botbuilder-adapter-web');
 
 const { MongoDbStorage } = require('botbuilder-storage-mongodb');
+const { MongoClient } = require('mongodb');
 
-// Load process.env values from .env file
 
-let storage = null;
-if (config.bot.db.core) {
-    storage = mongoStorage = new MongoDbStorage({
-        url: config.bot.db.core,
-    });
+async function initBotStorage() {
+
+    const mongoClient = new MongoClient(config.bot.db.core, { useUnifiedTopology: true });
+    await mongoClient.connect();
+    const collection = MongoDbStorage.getCollection(mongoClient);
+    return new MongoDbStorage(collection);
+
 }
 
-// Set up mongoose connection
-var mongoose = require('mongoose');
-mongoose.connect(config.bot.db.kbase, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.Promise = global.Promise;
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-const adapter = new WebAdapter({});
+function initKbaseStorage() {
 
+    var mongoose = require('mongoose');
+    mongoose.connect(config.bot.db.kbase, { useNewUrlParser: true, useUnifiedTopology: true });
+    mongoose.Promise = global.Promise;
+    var db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-const controller = new Botkit({
-    debug: true,
-    webhook_uri: '/api/messages',
-    adapter: adapter,
-    storage
-});
-
-if (process.env.CMS_URI) {
-    controller.usePlugin(new BotkitCMSHelper({
-        uri: process.env.CMS_URI,
-        token: process.env.CMS_TOKEN,
-    }));
 }
 
-// Once the bot has booted up its internal services, you can use them to do stuff.
-controller.ready(() => {
 
-    // load traditional developer-created local custom feature modules
-    controller.loadModules(__dirname + '/features');
-    controller.loadModules(__dirname + '/features/dialogs');
-    controller.loadModules(__dirname + '/features/events');
-    controller.loadModules(__dirname + '/features/hears');
-    controller.loadModules(__dirname + '/features/interrupts');
-    controller.loadModules(__dirname + '/features/middlewares');
-    controller.loadModules(__dirname + '/features/controllers');
+(async () => {
 
-    /* catch-all that uses the CMS to trigger dialogs */
-    if (controller.plugins.cms) {
-        controller.on('message,direct_message', async (bot, message) => {
-            let results = false;
-            results = await controller.plugins.cms.testTrigger(bot, message);
+    try {
+        let storage = null;
 
-            if (results !== false) {
-                // do not continue middleware!
-                return false;
-            }
+        if (config.bot.db.core) {
+            storage = await initBotStorage();
+        }
+
+        initKbaseStorage();
+
+        const adapter = new WebAdapter({});
+
+        const controller = new Botkit({
+            debug: true,
+            webhook_uri: '/api/messages',
+            adapter: adapter,
+            storage
         });
-    }
 
-});
+        if (process.env.CMS_URI) {
+            controller.usePlugin(new BotkitCMSHelper({
+                uri: process.env.CMS_URI,
+                token: process.env.CMS_TOKEN,
+            }));
+        }
+
+        controller.ready(() => {
+
+            // load traditional developer-created local custom feature modules
+            controller.loadModules(__dirname + '/features');
+            controller.loadModules(__dirname + '/features/dialogs');
+            controller.loadModules(__dirname + '/features/events');
+            controller.loadModules(__dirname + '/features/hears');
+            controller.loadModules(__dirname + '/features/interrupts');
+            controller.loadModules(__dirname + '/features/middlewares');
+            controller.loadModules(__dirname + '/features/controllers');
+
+        });
+
+    } catch (ex) {
+        console.error(ex);
+    }
+})();
 

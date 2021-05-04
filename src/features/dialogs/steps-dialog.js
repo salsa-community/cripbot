@@ -58,10 +58,14 @@ module.exports = function (controller) {
         }
     }, async (res, convo, bot) => {
         if (res == config.bot.app.nextlabel) {
+
             bot.say({ type: 'typing' }, 'typing');
             await convo.gotoThread('codigo-error-thread');
+
         } else {
+
             var error = await Error.findOne({ clave: resolveCodigo(res, convo.vars.lang), contextos: { $in: [convo.vars.context] } });
+
             if (error) {
                 Actividad.create(new Actividad({ contexto: convo.vars.context, valor: error.clave, desc: error.clave, evento: 'CODIGO_ERROR' }));
                 bot.say({
@@ -73,16 +77,19 @@ module.exports = function (controller) {
                 convo.setVar('instruccionesdesc', error.instrucciones[convo.vars.descProp]);
                 convo.setVar('error', error);
                 convo.setVar('currentStep', error.instrucciones.pasos[0]);
+                convo.vars.currentStep.desc = normalize(convo.vars.currentStep[convo.vars.descProp]);
                 convo.setVar('currentStepIdx', 0);
                 convo.setVar('maxStepIdx', error.instrucciones.pasos.length);
                 bot.say({ type: 'typing' }, 'typing');
                 //await convo.gotoThread('show-steps-thread');
                 await convo.gotoThread('show-error-desc');
             } else {
-                bot.say({ text: '{{vars.errorcode_notfound}}' });
+                bot.say({ text: i18n('dialogs.errorcode.notfound', convo.vars.lang) });
+                res = res ? res : 'empty-word';
                 UnknowIntent.create(new UnknowIntent({ word: res, context: 'codigo-error-dialog' }));
                 await convo.gotoThread('codigo-error-thread');
             }
+
         }
     }, 'codigo-error', 'codigo-error-thread');
 
@@ -111,7 +118,7 @@ module.exports = function (controller) {
     convo.addAction('show-steps-thread');
     convo.addQuestion({
         text: '<b>{{vars.step_text}} {{vars.currentStep.paso}} :</b> {{{vars.currentStep.desc}}}',
-        quick_replies: [{ title: '{{vars.done}}', payload: 'Realizado' }]
+        quick_replies: [{ title: '{{vars.done}}', payload: 'Realizado' }, { title: '{{vars.cancel}}', payload: 'Cancelar' }]
     }, async (res, convo, bot) => {
         if (convo.vars.currentStepIdx < convo.vars.maxStepIdx - 1) {
             convo.vars.currentStep = convo.vars.error.instrucciones.pasos[++convo.vars.currentStepIdx];
@@ -247,8 +254,8 @@ module.exports = function (controller) {
         convo.setVar('rfc_ask', context[loginMessage]);
         convo.setVar('rfc_insert', i18n('dialogs.rfc.insert', convo.vars.lang));
         convo.setVar('rfc_insert_answer', i18n('dialogs.rfc.insert-answer', convo.vars.lang));
-        convo.setVar('errorcode_notfound', i18n('dialogs.errorcode.notfound', convo.vars.lang));
         convo.setVar('done', i18n('general.done', convo.vars.lang));
+        convo.setVar('cancel', i18n('general.cancel', convo.vars.lang));
         convo.setVar('step_text', i18n('general.step', convo.vars.lang));
         convo.setVar('errorcode_finished', i18n('dialogs.errorcode.finished', convo.vars.lang));
         convo.setVar('errorcode_feedback', i18n('dialogs.errorcode.feedback', convo.vars.lang));

@@ -4,19 +4,30 @@
  * @author danimaniARQSOFT
  */
 
-let Message = require('../../models/kbase/Message.model')
+let Message = require('@model/kbase/Message.model')
 
 module.exports = function (controller) {
+
     controller.middleware.receive.use(function (bot, message, next) {
+
         if (message.type == 'welcome_back') {
-            next();
+            if (bot.isDialogActive('rfc-dialog-id')) {
+                return true;
+            } else {
+                next();
+            }
         } else {
-            Message.create(new Message({ user: message.user_profile.id, text: message.text, type: 'message_received' }));
+            Message.create(new Message({
+                user: message.user_profile.id,
+                text: message.text,
+                type: 'message_received'
+            }));
             next();
         }
     });
 
     controller.middleware.send.use(function (bot, message, next) {
+
         if (message.type == 'message') {
             Message.create(new Message({
                 user: bot._config.reference.user.id,
@@ -27,4 +38,5 @@ module.exports = function (controller) {
         }
         next();
     });
+
 }
