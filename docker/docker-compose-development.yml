@@ -36,3 +36,14 @@ services:
     volumes:
       - ./data/mongo:/data/db
     command: mongod --smallfiles --logpath=/dev/null # --quiet
+  mongo-express:
+    image: mongo-express:latest
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=kbase-db
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_BASICAUTH_USERNAME=user
+      - ME_CONFIG_BASICAUTH_PASSWORD=user
+    ports:
+      - 8090:8081
+    depends_on:
+      - kbase-db

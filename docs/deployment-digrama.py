@@ -1,8 +1,18 @@
-# diagram.py
-from diagrams import Diagram
-from diagrams.aws.compute import EC2
-from diagrams.aws.database import RDS
-from diagrams.aws.network import ELB
+from diagrams import Cluster, Diagram
 
-with Diagram("Web Service", show=False):
-    ELB("lb") >> EC2("web") >> RDS("userdb")
+from diagrams.programming.language import Nodejs
+from diagrams.onprem.network import Nginx
+from diagrams.onprem.container import Docker
+from diagrams.onprem.database import Mongodb
+from diagrams.programming.language import Java
+
+from diagrams.generic.storage import Storage
+with Diagram("Bot para desarrollo", show=False):
+    proxy = Storage("Proxy")
+    bot = Nodejs("bot")
+    kbase = Java("Kbase")
+    mongodb = Mongodb("mongodb")
+    docker = Docker("docker")
+
+    proxy >> bot >> mongodb
+    proxy >> kbase >> mongodb >> docker

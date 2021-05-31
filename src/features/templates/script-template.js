@@ -23,12 +23,18 @@ if(language === "undefined"){
 document.getElementsByClassName("header_text")[0].innerHTML = Botkit.title();
 let user = { asistente: Botkit.getAsistente('$ASISTENTE', '$EXTENSION'), context: appkey, lang: language };
 Botkit.boot(user);
-let element = document.getElementById("message_header");
-document.getElementById("botkit_client").src = home + "/index.html?contexto=$APP_KEY&color=$CSS_COLOR";
-element.onclick = function (event) {
+
+if(Botkit.isActivated()){
+  document.getElementById("botkit_client").src = home + "/index.html?contexto=$APP_KEY&color=$CSS_COLOR";
+}
+
+document.getElementById("message_header").onclick = function (event) {
   if (!Botkit.active) {
     setTimeout(
       function () {
+        if(!Botkit.booted){
+          document.getElementById("botkit_client").src = home + "/index.html?contexto=$APP_KEY&color=$CSS_COLOR";
+        }
         Botkit.activate();
       }, 100);
     isActivated = true;

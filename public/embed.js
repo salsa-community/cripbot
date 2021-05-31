@@ -22,6 +22,7 @@ var Botkit = {
     return "";
   },
   active: false,
+  booted: false,
   activate: function () {
     this.active = true;
     if (this.container) {
@@ -35,6 +36,9 @@ var Botkit = {
       this.container.className = '';
     }
     this.setCookie('botkit_messenger_active', this.active);
+  },
+  isActivated: function () {
+    return Botkit.getCookie('botkit_messenger_active') == 'true' ? true : false;
   },
   toggle: function () {
     if (this.active) {
@@ -56,7 +60,7 @@ var Botkit = {
           name: 'connect',
           user: Botkit.current_user ? Botkit.current_user : null,
         });
-
+        Botkit.booted = true;
         if (Botkit.getCookie('botkit_messenger_active') == 'true') {
           Botkit.activate();
         }

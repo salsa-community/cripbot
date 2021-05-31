@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let MessageSchema = new Schema({
-    user: { type: String },
+    user: { type: String, index: true },
     text: { type: String },
     type: { type: String },
     quick_replies: [{ title: String, payload: String }],

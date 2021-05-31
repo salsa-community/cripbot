@@ -7,7 +7,7 @@
 // Import Botkit's core features
 
 require('module-alias/register');
-const config = require('@config');
+const { config } = require('@config');
 
 const { Botkit } = require('botkit');
 const { BotkitCMSHelper } = require('botkit-plugin-cms');
@@ -17,12 +17,13 @@ const { BotkitCMSHelper } = require('botkit-plugin-cms');
 const { WebAdapter } = require('botbuilder-adapter-web');
 
 const { MongoDbStorage } = require('botbuilder-storage-mongodb');
-const { MongoClient } = require('mongodb');
+const { MongoClient, Logger } = require('mongodb');
 
 
 async function initBotStorage() {
 
-    const mongoClient = new MongoClient(config.bot.db.core, { useUnifiedTopology: true });
+    const mongoClient = new MongoClient(config.bot.db.core.uri, { useUnifiedTopology: true });
+    Logger.setLevel(config.bot.db.core.loggerLevel);
     await mongoClient.connect();
     const collection = MongoDbStorage.getCollection(mongoClient);
     return new MongoDbStorage(collection);
@@ -33,7 +34,10 @@ async function initBotStorage() {
 function initKbaseStorage() {
 
     var mongoose = require('mongoose');
-    mongoose.connect(config.bot.db.kbase, { useNewUrlParser: true, useUnifiedTopology: true });
+    if (config.bot.db.kbase.loggerLevel === 'debug') {
+        mongoose.set('debug', { shell: true });
+    }
+    mongoose.connect(config.bot.db.kbase.uri, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true });
     mongoose.Promise = global.Promise;
     var db = mongoose.connection;
     db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -46,7 +50,7 @@ function initKbaseStorage() {
     try {
         let storage = null;
 
-        if (config.bot.db.core) {
+        if (config.bot.db.core.uri) {
             storage = await initBotStorage();
         }
 

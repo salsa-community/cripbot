@@ -5,7 +5,7 @@
 
 // const { Usuario } = require('@model/vtiger')
 const UserService = require('@service/user/user.service')
-var Error = require('@model/kbase/Error.model')
+const ErrorService = require('@service/error/error.service')
 var Contacto = require('@model/kbase/Contacto.model')
 var Actividad = require('@model/kbase/Actividad.model')
 const { normalize, resolveDescProp, resolveProp } = require('@util/commons');
@@ -13,8 +13,8 @@ const { i18n } = require('@util/lang');
 
 const { RFC_DIALOG_ID } = require('@feature/dialogs/util/constants')
 const { BotkitConversation } = require('botkit')
-const { resolveCodigo, resolveOptions, resolvePageNumber } = require('@util/commons')
-const config = require('@config');
+const { resolveOptions, resolvePageNumber } = require('@util/commons')
+const { config } = require('@config');
 const UnknowIntent = require('@model/kbase/UnknowIntent.model');
 
 const ContextService = require('@service/context/context.service')
@@ -31,6 +31,7 @@ module.exports = function (controller) {
     convo.addQuestion('{{vars.rfc_ask}}', async (res, convo, bot) => {
 
         let usuario = await UserService.findByUsername(res.trim());
+
         if (usuario) {
             convo.setVar('descProp', resolveDescProp(convo.vars.lang));
             convo.setVar('username', usuario.username);
@@ -52,7 +53,7 @@ module.exports = function (controller) {
         text: '{{vars.welcomeMessage}}',
         quick_replies: async (template, vars) => {
             vars.optionPage = resolvePageNumber(vars.optionPage);
-            var errorPage = await Error.find({ contextos: { $in: [vars.context] }, tipo: 'general' }).skip(vars.optionPage).limit(3).sort({ orden: 'asc' });
+            let errorPage = await ErrorService.findByGeneral(vars.context, vars.optionPage);
             vars.optionPage = (errorPage && errorPage.length < 3) ? -1 : vars.optionPage;
             return resolveOptions(errorPage, vars.lang)
         }
@@ -64,7 +65,7 @@ module.exports = function (controller) {
 
         } else {
 
-            var error = await Error.findOne({ clave: resolveCodigo(res, convo.vars.lang), contextos: { $in: [convo.vars.context] } });
+            let error = await ErrorService.findByClaveAndContext(res, convo.vars.context);
 
             if (error) {
                 Actividad.create(new Actividad({ contexto: convo.vars.context, valor: error.clave, desc: error.clave, evento: 'CODIGO_ERROR' }));

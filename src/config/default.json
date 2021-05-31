@@ -2,6 +2,7 @@
   "development": {
     "cache": { },
     "bot":{
+      "loggerLevel": "debug",
       "app":{
         "port": 3000,
         "typingdelay": 2000,
@@ -9,8 +10,14 @@
         "userservice": "default"
       },
       "db":{
-        "core": "mongodb://localhost:27017",
-        "kbase": "mongodb://localhost:27017/chatbot"
+        "core":{
+          "uri": null,
+          "loggerLevel": " debug"
+        },
+        "kbase": {
+          "uri": "mongodb://localhost:27017/chatbot",
+          "loggerLevel": "debug"
+        }
       },
       "cms":{
         "host": "",
@@ -33,6 +40,7 @@
     "cache": { },
     "port": 3000,
     "bot":{
+      "loggerLevel": "info",
       "app":{
         "port": 3000,
         "typingdelay": 2000,
@@ -40,8 +48,14 @@
         "userservice": "default"
       },
       "db":{
-        "bot": "mongodb://localhost:27017",
-        "kbase": "mongodb://localhost:27017/chatbot"
+        "core":{
+          "uri": null,
+          "loggerLevel": "info"
+        },
+        "kbase": {
+          "uri": "mongodb://localhost:27017/chatbot",
+          "loggerLevel": "info"
+        }
       },
       "cms":{
         "host": "",
