@@ -22,7 +22,11 @@ config.vtiger.password = process.env.MYSQL_PASSWORD || config.vtiger.password ||
 config.bot.app.port = parseInt(process.env.PORT) || config.bot.app.port || 3000;
 config.bot.app.typingdelay = parseInt(process.env.TYPING_DELAY) || config.bot.app.typingdelay || 2000;
 config.bot.app.nextlabel = process.env.PAGINATOR_NEXT_LABEL || config.bot.app.nextlabel || 'ver-mas';
-config.bot.db.core.uri = process.env.MONGO_URI || config.bot.db.core.uri || null;
+if (process.env.DISABLE_STATE_STORAGE && process.env.DISABLE_STATE_STORAGE === 'true') {
+    config.bot.db.core.uri = null;
+} else {
+    config.bot.db.core.uri = process.env.MONGO_URI || config.bot.db.core.uri || null;
+}
 config.bot.db.kbase.uri = process.env.MONGO_KB_URI || config.bot.db.kbase || 'mongodb://localhost:27017';
 config.bot.cms.uri = process.env.CMS_URI || config.bot.cms.uri || '';
 config.bot.cms.token = process.env.CMS_TOKEN || config.bot.cms.token || '';
