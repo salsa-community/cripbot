@@ -15,38 +15,37 @@ module.exports = embedCssTemplate = `
   right: 2rem;
   width: 200;
   height: 555px;
-  -webkit-box-shadow: 10px -8px 8px 0px rgba(128, 133, 128, 0.53);
-  -moz-box-shadow: 10px -8px 8px 0px rgba(128, 133, 128, 0.53);
-  box-shadow: 10px -8px 8px 0px rgba(128, 133, 128, 0.53);
+  -webkit-box-shadow: 0px 0px 16px 3px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 0px 16px 3px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 16px 3px rgba(0,0,0,0.2);
   transition: 1.0s ease-in-out;
   border-radius: 12px 12px 0px 0px; }
   #embedded_messenger.active {
-    border-radius: 22px 22px 0px 0px;
+    border-radius: 2px 2px 0px 0px;
     bottom: 36;
     width: 450; }
     #embedded_messenger.active #message_header {
       padding: 1.5rem 2rem;
-      border-radius: 22px 22px 0px 0px; }
+      border-radius: 2px 2px 0px 0px; }
     #embedded_messenger.active .circle {
       float: right;
       opacity: 1; }
     #embedded_messenger.active .avatar_icon {
       float: left;
-      width: 50px; }
+      width: 40px; }
     #embedded_messenger.active .header_text {
-      font-size: 1.2em;
+      font-size: 1em;
       padding: 0em 3.5em; }
   #embedded_messenger iframe {
     height: 500px;
     width: 100%;
     border: 0; }
   #embedded_messenger #message_header {
-    border-radius: 12px 12px 0px 0px;
+    border-radius: 2px 2px 0px 0px;
     transition: 1.0s ease-in-out;
     background: #000;
     padding: 1.1rem 2rem;
-    font-style: italic;
-    font-size: 1.2em;
+    font-size: 1em;
     background: #$CSS_COLOR;
     color: #FFF; }
     #embedded_messenger #message_header #avatar-bot {
@@ -59,10 +58,8 @@ module.exports = embedCssTemplate = `
   height: 15px;
   padding: .1em;
   border-radius: 50%;
-  background-color: #57985a;
-  -webkit-box-shadow: 0 0 10px rgba(124, 194, 107, 0.5);
-  -moz-box-shadow: 0 0 10px rgba(150, 192, 96, 0.5);
-  box-shadow: 0 0 10px rgba(155, 197, 138, 0.5);
+  background-color: #35AC19;
+  border:1px solid #021326;
   float: left; }
 
 .active_text {
