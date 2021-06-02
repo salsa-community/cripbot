@@ -68,7 +68,9 @@ module.exports = function (controller) {
             let error = await ErrorService.findByClaveAndContext(res, convo.vars.context);
 
             if (error) {
-                Actividad.create(new Actividad({ contexto: convo.vars.context, valor: error.clave, desc: error.clave, evento: 'CODIGO_ERROR' }));
+                if (config.analytics) {
+                    Actividad.create(new Actividad({ contexto: convo.vars.context, valor: error.clave, desc: error.clave, evento: 'CODIGO_ERROR' }));
+                }
                 bot.say({
                     text: i18n('dialogs.rfc.insert-answer', convo.vars.lang)
                 });
@@ -166,7 +168,9 @@ module.exports = function (controller) {
     }, [{
         pattern: 'BUENO|REGULAR|MALO',
         handler: async (response, convo, bot) => {
-            Actividad.create(new Actividad({ contexto: convo.vars.context, valor: response, desc: response, evento: 'REGISTRAR_ENCUESTA' }));
+            if (config.analytics) {
+                Actividad.create(new Actividad({ contexto: convo.vars.context, valor: response, desc: response, evento: 'REGISTRAR_ENCUESTA' }));
+            }
             bot.say({ type: 'typing' }, 'typing');
             await convo.gotoThread('exit-thread');
         }
@@ -230,7 +234,9 @@ module.exports = function (controller) {
     }, [{
         handler: async (response, convo, bot) => {
             Contacto.create(new Contacto({ correo: convo.vars.correo, context: convo.vars.context, rfc: convo.vars.username, estado: 'NUEVO', desc: response }));
-            Actividad.create(new Actividad({ contexto: convo.vars.context, valor: convo.vars.correo, desc: response, evento: 'REGISTRAR_CONTACTO' }));
+            if (config.analytics) {
+                Actividad.create(new Actividad({ contexto: convo.vars.context, valor: convo.vars.correo, desc: response, evento: 'REGISTRAR_CONTACTO' }));
+            }
             bot.say({ text: '{{vars.userinfo_contact_answer}}' });
             bot.say({ type: 'typing' }, 'typing');
             await convo.gotoThread('exit-thread');

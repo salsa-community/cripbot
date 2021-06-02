@@ -8,6 +8,18 @@ const env = process.env.NODE_ENV;
 const config = require('@config/default.json')[env];
 
 /**
+ * Analytics configuration
+ */
+
+config.analytics = process.env.DISABLE_ANALYTICS || config.analytics || true;
+
+if (process.env.DISABLE_ANALYTICS === 'true') {
+    config.analytics = false;
+} else {
+    config.analytics = true;
+}
+
+/**
  * Mysql database configuration
  */
 config.vtiger.host = process.env.MYSQL_HOST || config.vtiger.host || 'localhost';

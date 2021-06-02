@@ -24,6 +24,7 @@ var Botkit = {
             handler(evt.detail);
         });
     },
+    history: { data: [], count: 0, maxSize: 20 },
     trigger: function (event, details) {
         var event = new CustomEvent(event, {
             detail: details
@@ -98,15 +99,38 @@ var Botkit = {
         } else {
             this.webhook(message);
         }
+        if (message.type === 'message') {
+            message.type = 'message_received';
+            that.saveMessage(message);
+        }
+    },
+    saveMessage: function (message) {
+        if (message.type === 'message' || message.type === 'message_received') {
+            message.order = this.history.count;
+            this.history.count = this.history.count + 1;
+            if (this.history.data.length > this.history.maxSize) {
+                this.history.data.shift();
+            }
+            this.history.data.push(message);
+            localStorage.setItem('history', JSON.stringify(this.history.data));
+        }
     },
     getHistory: function (guid) {
         var that = this;
-        if (that.guid) {
-            that.request('/botkit/history', {
-                user: that.guid
+
+        let rawHistory = localStorage.getItem('history');
+
+        if (rawHistory !== null) {
+            new Promise((resolve, reject) => {
+                let history = JSON.parse(rawHistory);
+                that.history.data = history.sort((a, b) => (a.order > b.order) ? 1 : -1);
+                let lastElement = that.history.data[that.history.data.length - 1];
+                that.history.count = lastElement.order + 1;
+                that.history.success = true;
+                resolve(that.history)
             }).then(function (history) {
                 if (history.success) {
-                    that.trigger('history_loaded', history.history);
+                    that.trigger('history_loaded', history.data.slice().reverse());
                 } else {
                     that.trigger('history_error', new Error(history.error));
                 }
@@ -457,7 +481,8 @@ var Botkit = {
         });
 
         that.on('message', function (message) {
-            console.log('RECEIVED MESSAGE', message);
+            // on RECEIVED MESSAGE
+            that.saveMessage(message);
             that.renderMessage(message);
         });
 

@@ -1,5 +1,6 @@
 {
   "development": {
+    "analytics": true,
     "cache": { },
     "bot":{
       "loggerLevel": "debug",
@@ -37,6 +38,7 @@
   },
 
   "production": {
+    "analytics": true,
     "cache": { },
     "port": 3000,
     "bot":{
