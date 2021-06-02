@@ -1,6 +1,7 @@
 'use strict';
 
 const dotenv = require('dotenv').config();
+const packagejson = require('@root/package.json');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -94,6 +95,7 @@ const logger = createLogger({
     ]
 });
 
+logger.info('bot version: ' + packagejson.version);
 logger.debug('config', config);
 
 module.exports = { logger, config };

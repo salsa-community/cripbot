@@ -1,7 +1,7 @@
 {
   "name": "botkit-socrates",
-  "version": "2.1.4",
-  "description": "chatbot ATEB",
+  "version": "2.1.5",
+  "description": "Cripbot",
   "main": "bot.js",
   "scripts": {
     "start": "node src/bot.js",
