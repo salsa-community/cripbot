@@ -8,32 +8,40 @@ const path = require('path');
 
 module.exports = scriptTemplate = `
 
+function renderChatbot() {
+    let home = document.getElementById("bot-client-script").getAttribute("bothome");
+    home = home ? home : "";
+
+    let iframe = document.getElementById("botkit_client");
+    iframe.src = home + "/index.html?contexto=$APP_KEY&color=$CSS_COLOR";
+    iframe.onload = () => {
+      Botkit.activate();
+    }
+}
+
 let appkey = "$APP_KEY";
 let language = "$APP_CULTURE";
-
-let home = document.getElementById("bot-client-script").getAttribute("bothome");
-if (!home) {
-  home = "";
-}
 
 if(language === "undefined"){
   language = Botkit.browserLanguage({ languageCodeOnly: true })[0];
 }
 
 document.getElementsByClassName("header_text")[0].innerHTML = Botkit.title();
-let user = { asistente: Botkit.getAsistente(), context: appkey, lang: language };
+let user = { asistente: Botkit.getAsistente('$ASISTENTE', '$EXTENSION'), context: appkey, lang: language };
 Botkit.boot(user);
-let element = document.getElementById("message_header");
-document.getElementById("botkit_client").src = home + "/index.html?contexto=$APP_KEY&color=$CSS_COLOR";
-element.onclick = function (event) {
+
+if(Botkit.isActivated()){
+  renderChatbot();
+}
+
+document.getElementById("message_header").onclick = function (event) {
   if (!Botkit.active) {
-    setTimeout(
-      function () {
-        Botkit.activate();
-      }, 100);
-    isActivated = true;
+    if(!Botkit.booted){
+      renderChatbot();
+    }else {
+      Botkit.activate();
+    }
   } else {
-    isActivated = false;
     Botkit.deactivate();
   }
 }

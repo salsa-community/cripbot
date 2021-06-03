@@ -1,5 +1,5 @@
 const NodeCache = require("node-cache");
-const config = require('@config');
+const { config, logger } = require('@config');
 const Contexto = require('@model/kbase/Contexto.model')
 
 class ContextService {
@@ -10,6 +10,7 @@ class ContextService {
 
     async getContext(key) {
         let context = this.cache.get(key);
+        logger.debug(`context.service.getContext() from cache (${key}): ` + JSON.stringify(context));
 
         if (context == undefined) {
             context = await Contexto.findOne({ clave: key });

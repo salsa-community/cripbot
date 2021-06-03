@@ -1,7 +1,7 @@
 {
   "name": "botkit-socrates",
-  "version": "2.1.3",
-  "description": "chatbot ATEB",
+  "version": "2.1.5",
+  "description": "Cripbot",
   "main": "bot.js",
   "scripts": {
     "start": "node src/bot.js",
@@ -22,7 +22,8 @@
     "mongoose": "^5.7.10",
     "mysql2": "^2.1.0",
     "node-cache": "^5.1.2",
-    "sequelize": "^5.21.4"
+    "sequelize": "^5.21.4",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "jsdoc": "^3.6.3",

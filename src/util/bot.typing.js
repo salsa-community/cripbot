@@ -1,4 +1,4 @@
-const config = require('@config');
+const { config } = require('@config');
 
 exports.typing = async function (bot, message, text, delay) {
     if (!delay) { delay = config.bot.app.typingdelay }

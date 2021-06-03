@@ -1,11 +1,9 @@
-const { solicitudesGenerales } = require('@feature/dialogs/util/info-quick-replies');
-const config = require('@config');
+const { config } = require('@config');
 const { i18n } = require('@util/lang');
 
 /**
  * getRandomInt function, it is a utility method
  */
-const offset = 3;
 
 function resolveDescProp(lang) {
     return resolveProp('desc', lang);

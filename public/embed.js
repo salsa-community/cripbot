@@ -22,6 +22,7 @@ var Botkit = {
     return "";
   },
   active: false,
+  booted: false,
   activate: function () {
     this.active = true;
     if (this.container) {
@@ -35,6 +36,9 @@ var Botkit = {
       this.container.className = '';
     }
     this.setCookie('botkit_messenger_active', this.active);
+  },
+  isActivated: function () {
+    return Botkit.getCookie('botkit_messenger_active') == 'true' ? true : false;
   },
   toggle: function () {
     if (this.active) {
@@ -56,7 +60,7 @@ var Botkit = {
           name: 'connect',
           user: Botkit.current_user ? Botkit.current_user : null,
         });
-
+        Botkit.booted = true;
         if (Botkit.getCookie('botkit_messenger_active') == 'true') {
           Botkit.activate();
         }
@@ -113,12 +117,17 @@ var Botkit = {
 
   asistentes: ['María', 'Isabella', 'Jimena'],
 
-  getAsistente: function () {
-    min = Math.ceil(0);
-    max = Math.floor(this.asistentes.length - 1);
-    index = Math.floor(Math.random() * (max - min + 1)) + min;
-    let asistente = this.asistentes[index];
-    let avatar = asistente.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ".png";
+  getAsistente: function (asistente, extension) {
+    extension = typeof extension === 'undefined' ? 'png' : extension;
+
+    if (typeof asistente === 'undefined' || asistente === 'random') {
+      min = Math.ceil(0);
+      max = Math.floor(this.asistentes.length - 1);
+      index = Math.floor(Math.random() * (max - min + 1)) + min;
+      asistente = this.asistentes[index];
+    }
+
+    let avatar = asistente.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") + "." + extension;
     document.getElementById("avatar-bot").src = "/images/avatares/" + avatar;
     return asistente;
   },

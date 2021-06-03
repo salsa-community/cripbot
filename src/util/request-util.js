@@ -18,3 +18,12 @@ exports.resolveLang = function (req) {
 
     return undefined;
 }
+
+exports.resolveAsistente = function (req) {
+    return typeof req.query.asistente === 'undefined' ? 'random' : req.query.asistente;
+}
+
+
+exports.resolveExtension = function (req) {
+    return typeof req.query.extension === 'undefined' ? 'png' : req.query.extension;
+}
