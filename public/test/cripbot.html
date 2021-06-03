@@ -8,36 +8,52 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;900&display=swap" rel="stylesheet">    
   <style>
-      h1 {
+      h1 {        
         font-family: 'Montserrat', sans-serif;
         font-size: 48px;
         font-weight:100;
         color: white;
+        
       }
       p {
         font-family: 'Montserrat', sans-serif;
         font-size: 24px;
-        color: white;
+        color: #003466;
+      }
+      .title {
+        background-color: #072146;
+        padding: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+      }
+      .subtitle {
+        padding-left: 1rem;
+      }
+      img {
+        width: 40px;
       }
 
       .top-buffer { margin-top:150px; }
 
   </style>
-  <link rel="stylesheet" href="/cripbot/css/embed.css?color=34495E" />
+  <link rel="stylesheet" href="/cripbot/css/embed.css?color=072146" />
   <script src="/embed.js"></script>
 
 </head>
 
-<body style="background-color:rgb(35, 53, 70)">
+<body style="background: url('/images/bg.png');  background-repeat: no-repeat;">
   <div class="container">
     <div class="row top-buffer">
-      <div class="col-sm">
-        <h1>Cripbot</h1>
-        <p>Chat bot del CONACYT<em>(Cripbot)</em></p>
+      <div class="col-sm-6">
+        <div class="title">            
+          <h1>
+            <img src="/images/logo.svg" alt="Logotipo del CONACYT">
+            Cripbot
+          </h1>
+        </div>          
+        <p class="subtitle">Chat bot del CONACYT</p>     
       </div>
-      <div class="col-sm">
-      </div>
-      <div class="col-sm">
+      <div class="col-sm-6">
       </div>
     </div>
   </div>
@@ -49,7 +65,7 @@
     </header>
     <iframe id="botkit_client" title="bot" /></iframe>
   </div>
-  <script id="bot-client-script" bothome="" src="/cripbot/scripts/bot.js?color=34495E&asistente=cripbot&extension=gif"></script>
+  <script id="bot-client-script" bothome="" src="/cripbot/scripts/bot.js?color=072146&asistente=cripbot&extension=gif"></script>
 </body>
 
 </html>
