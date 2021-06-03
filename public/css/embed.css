@@ -17,17 +17,18 @@
     bottom: 36;
     width: 450; }
     #embedded_messenger.active #message_header {
-      padding: 1.5rem 2rem;
+      padding: .25rem 2rem;
       border-radius: 2px 2px 0px 0px; }
     #embedded_messenger.active .circle {
       float: right;
+      margin-top: 1.25rem;
       opacity: 1; }
     #embedded_messenger.active .avatar_icon {
       float: left;
-      width: 40px; }
+      width: 60px; }
     #embedded_messenger.active .header_text {
       font-size: 1em;
-      padding: 0em 3.5em; }
+      padding: 1em 3.5em; }
   #embedded_messenger iframe {
     height: 500px;
     width: 100%;
@@ -53,7 +54,8 @@
   border-radius: 50%;
   background-color: #35AC19;
   border:1px solid #021326;  
-  float: left; }
+  float: left;
+  margin-top: .25rem;}
 
 .active_text {
   display: none; }
