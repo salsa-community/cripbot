@@ -2,8 +2,8 @@
 	"general": {
 		"ver-mas": "Ver más...",
 		"of": "de",
-		"done": "Realizado",
-		"cancel": "Cancelar",
+		"done": "Continuar",
+		"cancel": "Salir",
 		"step": "Paso",
 		"begin": "muy bien, vamos a comenzar nuevamente"
 	},

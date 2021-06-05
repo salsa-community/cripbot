@@ -50,9 +50,9 @@ https://nodejs.org/de/docs/guides/nodejs-docker-webapp/
 #### Push Image to Docker Hub
 
 ```bash
-docker login --username=i2cmx
-docker tag 3bb870e7a6d4 i2cmx/atebot:0.0.1
-docker push i2cmx/atebot:0.0.1
+docker login --username=conacyt
+docker tag 3bb870e7a6d4 conacyt/cripbot:0.0.1
+docker push conacyt/cripbot:0.0.1
 ```
 
 #### Versioning
