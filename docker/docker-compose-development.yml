@@ -11,6 +11,9 @@ services:
       - DISABLE_STATE_STORAGE=${DISABLE_STATE_STORAGE}
       - DISABLE_ANALYTICS=${DISABLE_ANALYTICS}
       - CACHE_TTL=${CACHE_TTL}
+      - BOT_LOGGER_LEVEL=info
+      - BOT_DB_CORE_LOGGER_LEVEL=info
+      - BOT_DB_KBASE_LOGGER_LEVEL=info
     ports:
       - 3000:3000
     depends_on:

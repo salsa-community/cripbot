@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export BOT_ENV='production'
-export BOT_TAG='2.1.6'
+export BOT_TAG='2.1.7'
 export KBASE_TAG='latest'
 
 export BOT_ENV=production
