@@ -3,6 +3,8 @@ services:
   bot-app:
     image: conacyt/cripbot:${BOT_TAG}
     environment:
+      - DISABLE_STATE_STORAGE=${DISABLE_STATE_STORAGE}
+      - DISABLE_ANALYTICS=${DISABLE_ANALYTICS}
       - MONGO_URI=mongodb://kbase-db:27017
       - MONGO_KB_URI=mongodb://kbase-db:27017/chatbot
       - NODE_ENV=${BOT_ENV}

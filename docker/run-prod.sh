@@ -9,4 +9,7 @@ export DB_NAME='vtiger_crm_vde'
 export DB_USERNAME='chatbot'
 export DB_PASSWORD='[PASSWORD]'
 
+export DISABLE_STATE_STORAGE='true'
+export DISABLE_ANALYTICS='true'
+
 docker-compose -f docker-compose.yml up -d

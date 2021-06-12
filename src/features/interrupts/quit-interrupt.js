@@ -8,6 +8,9 @@ const { resolveSaludo } = require('@util/dialogs');
 const { typing } = require('@util/bot.typing');
 const { i18n } = require('@util/lang');
 
+let cancelEn = i18n('general.cancel', 'en');
+let cancelEs = i18n('general.cancel', 'es');
+
 module.exports = function (controller) {
     controller.interrupts(['hola', 'buenos dias', 'saludos'], 'message', async (bot, message) => {
         await typing(bot, message, {
@@ -17,7 +20,7 @@ module.exports = function (controller) {
         await bot.cancelAllDialogs();
     });
 
-    controller.interrupts('cancelar', 'message', async (bot, message) => {
+    controller.interrupts([cancelEn, cancelEs], 'message', async (bot, message) => {
         await typing(bot, message, {
             text: i18n('general.begin', message.user_profile.lang),
             quick_replies: menuQuickReplies(message.user_profile.lang)
