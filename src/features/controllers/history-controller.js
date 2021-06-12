@@ -4,7 +4,7 @@
  */
 const path = require('path');
 
-let Message = require('../../models/kbase/Message.model')
+let Message = require('@model/kbase/Message.model')
 
 module.exports = function (controller) {
 
