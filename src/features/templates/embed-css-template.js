@@ -2,8 +2,6 @@
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License.
  */
-const path = require('path');
-
 
 module.exports = embedCssTemplate = `
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -13,7 +11,7 @@ module.exports = embedCssTemplate = `
   z-index: 1000;
   bottom: -500px;
   right: 2rem;
-  width: 200;
+  width: 200px;
   height: 555px;
   -webkit-box-shadow: 0px 0px 16px 3px rgba(0,0,0,0.2);
   -moz-box-shadow: 0px 0px 16px 3px rgba(0,0,0,0.2);
@@ -22,8 +20,8 @@ module.exports = embedCssTemplate = `
   border-radius: 12px 12px 0px 0px; }
   #embedded_messenger.active {
     border-radius: 2px 2px 0px 0px;
-    bottom: 36;
-    width: 450; }
+    bottom: 36px;
+    width: 450px; }
     #embedded_messenger.active #message_header {
       padding: .25rem 2rem;
       border-radius: 2px 2px 0px 0px; }
@@ -33,7 +31,10 @@ module.exports = embedCssTemplate = `
       opacity: 1; }
     #embedded_messenger.active .avatar_icon {
       float: left;
-      width: 60px; }
+      position: absolute;
+      width: $AVATAR_WIDTH;
+      left: $AVATAR_LEFT;
+      top: $AVATAR_TOP;}
     #embedded_messenger.active .header_text {
       font-size: 1em;
       padding: 1em 3.5em; }
@@ -68,7 +69,7 @@ module.exports = embedCssTemplate = `
   display: none; }
 
 .avatar_icon {
-  transition: 1.2s ease-in-out;
+  transition: width 0.2s ease-in-out;
   width: 0px; }
 
 .header_text {

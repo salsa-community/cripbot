@@ -137,7 +137,7 @@ a.button {
   display: flex;
   flex-direction: column;
   font-family: 'Roboto', sans-serif;
-  font-size: 1em; }
+  font-size: $FONT_SIZE; }
   #message_window .disconnected {
     background-color: #ff9800;
     color: white;
