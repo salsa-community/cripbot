@@ -23,11 +23,10 @@ module.exports = embedCssTemplate = `
     bottom: 36px;
     width: 450px; }
     #embedded_messenger.active #message_header {
-      padding: .25rem 2rem;
+      padding: 1.1rem 2rem;
       border-radius: 2px 2px 0px 0px; }
     #embedded_messenger.active .circle {
       float: right;
-      margin-top: 1.25rem;
       opacity: 1; }
     #embedded_messenger.active .avatar_icon {
       float: left;
@@ -73,6 +72,7 @@ module.exports = embedCssTemplate = `
   width: 0px; }
 
 .header_text {
+  display: inline;
   font-size: 1em;
   transition: 1.2s ease-in-out;
   padding-left: 1.7em; }
