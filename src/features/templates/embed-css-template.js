@@ -11,7 +11,7 @@ module.exports = embedCssTemplate = `
   z-index: 1000;
   bottom: -500px;
   right: 2rem;
-  width: 200;
+  width: 200px;
   height: 555px;
   -webkit-box-shadow: 0px 0px 16px 3px rgba(0,0,0,0.2);
   -moz-box-shadow: 0px 0px 16px 3px rgba(0,0,0,0.2);
@@ -20,8 +20,8 @@ module.exports = embedCssTemplate = `
   border-radius: 12px 12px 0px 0px; }
   #embedded_messenger.active {
     border-radius: 2px 2px 0px 0px;
-    bottom: 36;
-    width: 450; }
+    bottom: 36px;
+    width: 450px; }
     #embedded_messenger.active #message_header {
       padding: .25rem 2rem;
       border-radius: 2px 2px 0px 0px; }
