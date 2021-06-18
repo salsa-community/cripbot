@@ -77,16 +77,11 @@ module.exports = embedCssTemplate = `
   transition: 1.2s ease-in-out;
   padding-left: 1.7em; }
 
-@media only screen and (max-width: 767px) and (min-width: 320px) {  
+@media only screen and (max-width: 767px) {  
   #embedded_messenger.active {
+    bottom: 180px;
     height: 400px;
     width: 320px;
-  }
-}
-
-@media only screen and (max-width: 992px) {  
-  #embedded_messenger.active {
-    height: 420px;
   }
 }
 
