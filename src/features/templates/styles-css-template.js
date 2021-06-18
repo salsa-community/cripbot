@@ -7701,6 +7701,12 @@ input[type="range"]::-ms-thumb {
     text-align: center;
     margin-top: 1.2rem; } }
 
+@media only screen and (max-width: 767px) and (min-width: 320px)  {  
+  #message_window .message {
+    max-width: 80%;
+  }
+}
+
 /*# sourceMappingURL=styles.css.map */
 
 `
