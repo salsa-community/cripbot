@@ -13,6 +13,7 @@
         "state":"I'm feeling fine, thanks for asking!"
     },
     "help":{
+		"message": "help",
         "nice-to-see-you":"It is a pleasure to greet you",
         "hello":"Hello, I am here to serve you in whatever way I can",
         "question":"Can I help you with any of the following topics?",

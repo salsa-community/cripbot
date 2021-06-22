@@ -20,13 +20,6 @@ module.exports = function (controller) {
         await typing(bot, message, i18n('bot.name', message.user_profile.lang, message.user_profile.asistente));
     });
 
-    controller.hears(['ayuda', 'help'], 'message', async (bot, message) => {
-        await typing(bot, message, {
-            text: i18n('help.question', message.user_profile.lang),
-            quick_replies: helpQuickReplies(message.user_profile.lang)
-        });
-    });
-
     controller.hears(['[¿]?c[oó]mo est[áa]s[?]?', 'who are you'], 'message', async (bot, message) => {
         await typing(bot, message, i18n('bot.state', message.user_profile.lang));
         await typing(bot, message, {

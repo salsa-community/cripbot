@@ -13,6 +13,7 @@
 		"state": "Me encuentro muy bien, ¡gracias por preguntar!"
 	},
 	"help": {
+		"message": "ayuda",
 		"nice-to-see-you": "Es un gusto saludarte",
 		"hello": "Hola, estoy para servirte en lo que pueda;",
 		"question": "¿Te puedo ayudar en alguno de los siguientes temas?",
