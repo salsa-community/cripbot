@@ -24,6 +24,36 @@ var Botkit = {
             handler(evt.detail);
         });
     },
+    isRunning: false,
+    wasTyping: false,
+    defaultTime: 2000,
+    incomingMessageList: [],
+    scheduleMessage: function (message) {
+        let that = this;
+        let time = that.defaultTime;
+        if (!that.isRunning) {
+            that.isRunning = true;
+            if (!that.wasTyping && message.type != 'typing') {
+                that.trigger('typing');
+            }
+            if (that.wasTyping) {
+                that.wasTyping = false;
+            }
+            if (message.type === 'typing') {
+                that.wasTyping = true;
+                time = 0;
+            }
+            setTimeout(function () {
+                that.isRunning = false;
+                that.trigger(message.type, message);
+                if (that.incomingMessageList.length > 0) {
+                    that.scheduleMessage(that.incomingMessageList.shift());
+                }
+            }, time);
+        } else {
+            that.incomingMessageList.push(message);
+        }
+    },
     history: { data: [], count: 0, maxSize: 20 },
     trigger: function (event, details) {
         var event = new CustomEvent(event, {
@@ -261,7 +291,7 @@ var Botkit = {
                 return;
             }
 
-            that.trigger(message.type, message);
+            that.trigger('message_received', message);
         });
     },
     clearReplies: function () {
@@ -467,6 +497,10 @@ var Botkit = {
             alert('Error sending message!');
             console.error('Webhook Error', err);
 
+        });
+
+        that.on('message_received', function (message) {
+            that.scheduleMessage(message);
         });
 
         that.on('typing', function () {

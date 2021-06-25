@@ -24,8 +24,8 @@ const TYPING_DELAY = config.bot.app.typingdelay;
 module.exports = function (controller) {
     let convo = new BotkitConversation(GENERIC_STEP_DIALOG_ID, controller);
 
-    convo.addAction('get-rfc-thread')
-    convo.addMessage({ type: 'typing', action: 'codigo-error-thread' }, 'get-rfc-thread');
+    convo.addAction('get-steps-thread')
+    convo.addMessage({ type: 'typing', action: 'codigo-error-thread' }, 'get-steps-thread');
 
     /**
      * CODIGO ERROR THREAD
