@@ -41,6 +41,7 @@
         "yes":"Yes"
     },
     "welcome":{
+        "dialog":"Let me show you some information",
         "default":"Welcome",
         "name":"My name is",
         "question":"Do you need help with the service?",

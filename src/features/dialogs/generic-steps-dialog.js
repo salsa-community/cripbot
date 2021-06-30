@@ -46,8 +46,7 @@ module.exports = function (controller) {
             await convo.gotoThread('codigo-error-thread');
 
         } else {
-
-            let error = await ErrorService.findByClaveAndContext(res, convo.vars.context);
+            let error = await ErrorService.findByClaveAndContext(convo.vars.intent, convo.vars.context);
 
             if (error) {
                 if (config.analytics) {
@@ -237,11 +236,8 @@ module.exports = function (controller) {
      */
     convo.before('default', async (convo, bot) => {
         let context = await ContextService.getContext(convo.vars.context);
-        let welcomeMessage = resolveProp('welcomeMessage', convo.vars.lang);
-        let loginMessage = resolveProp('loginMessage', convo.vars.lang);
         convo.setVar('descProp', resolveDescProp(convo.vars.lang));
-        convo.setVar('welcomeMessage', context[welcomeMessage]);
-        convo.setVar('rfc_ask', context[loginMessage]);
+        convo.setVar('welcomeMessage', i18n('welcome.dialog', convo.vars.lang));
         convo.setVar('rfc_insert', i18n('dialogs.rfc.insert', convo.vars.lang));
         convo.setVar('rfc_insert_answer', i18n('dialogs.rfc.insert-answer', convo.vars.lang));
         convo.setVar('done', i18n('general.done', convo.vars.lang));

@@ -41,6 +41,7 @@
 		"yes": "Si"
 	},
 	"welcome": {
+        "dialog":"Tengo información para tu consulta",
 		"default": "Bienvenido",
 		"name": "Mi nombre es",
 		"question": "¿Solicitas ayuda de los servicios en línea?",
@@ -67,7 +68,7 @@
 			"red-cofidi-context": "el RFC del receptor de la factura",
 			"no-red-cofidi-context": "su RFC para recibir ayuda",
 			"insert": "Ingrese, por favor, el código de error que le presenta el sistema. También puede seleccionar alguno de los siguientes temas:",
-			"insert-answer": "Gracias por su respuesta. Voy a presentar información relacionada con su petición."
+			"insert-answer": "voy a presentarte información que te puede ser de utilidad"
 		},
 		"errorcode": {
 			"notfound": "el código de error ingresado no se encuentra en nuestra base de conocimiento",

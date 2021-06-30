@@ -84,3 +84,20 @@ exports.normalize = function (word) {
     }
 }
 
+
+exports.resolveIntent = function (flows, message) {
+    if (flows) {
+        for (let i = 0; i < flows.length; i++) {
+            const flow = flows[i];
+            for (let j = 0; j < flow.hears.length; j++) {
+                const hear = flow.hears[j];
+                founted = message.match(new RegExp(hear, 'gi'));
+                if (founted) {
+                    return flow.clave;
+                }
+            }
+        }
+
+    } else { return undefined }
+}
+
