@@ -1,4 +1,9 @@
-{
+{	
+	"common": {
+		"location": "Av. de los Insurgentes Sur 1582, Crédito Constructor, Benito Juárez, 03940 Ciudad de México, CDMX",
+		"what-are-you-doing": "Estoy aqui para ayudarte y atender tu dudas",
+		"preferences": "pienso que es una buena persona"
+	},
 	"general": {
 		"ver-mas": "Ver más...",
 		"of": "de",
