@@ -15,6 +15,8 @@ module.exports = function (controller) {
 
     if (matchedMessage == false) {
       UnknowIntent.create(new UnknowIntent({ word: message.text, context: 'general' }));
+      console.log('consultar info' + message.user_profile.lang);
+      console.log(i18n('help.unknow-intent', message.user_profile.lang));
       bot.reply(message, {
         text: i18n('help.unknow-intent', message.user_profile.lang),
         quick_replies: menuQuickReplies(message.user_profile.lang)
