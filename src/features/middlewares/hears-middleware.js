@@ -4,7 +4,7 @@
  * @author danimaniARQSOFT
  */
 
-const { GENERIC_STEP_DIALOG_ID } = require('@feature/dialogs/util/constants')
+const { INTENT_DIALOG_ID } = require('@feature/dialogs/util/constants')
 const ErrorService = require('@service/error/error.service')
 const { resolveIntent } = require('@util/commons');
 const { logger } = require('@config');
@@ -21,7 +21,8 @@ module.exports = function (controller) {
             if (intent) {
                 logger.debug(`intent((${intent})): `);
                 message.user_profile.intent = intent;
-                await bot.beginDialog(GENERIC_STEP_DIALOG_ID, message.user_profile);
+                await bot.cancelAllDialogs();
+                await bot.beginDialog(INTENT_DIALOG_ID, message.user_profile);
             }
         }
         next()

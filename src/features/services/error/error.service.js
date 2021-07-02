@@ -11,7 +11,6 @@ class ErrorService {
     }
 
     async findByClaveAndContext(errorCode, context) {
-        errorCode = resolveCodigo(errorCode);
         let error = CacheService.get(errorCode);
 
         if (error == undefined) {

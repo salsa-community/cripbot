@@ -8,7 +8,8 @@ let ErrorSchema = new Schema({
     instrucciones: { desc: { type: String, required: true, max: 1000 }, descEn: { type: String, required: true, max: 1000 }, pasos: [{ paso: Number, desc: String, descEn: String }] },
     links: [{ url: String }],
     contextos: [String],
-    hears: [String]
+    hears: [String],
+    mensajes: [{ orden: Number, desc: String, descEn: String }]
 });
 
 module.exports = mongoose.model('Error', ErrorSchema, 'errores');
