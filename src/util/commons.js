@@ -84,7 +84,7 @@ exports.normalize = function (word) {
     }
 }
 
-
+// TODO: cambiar de O(N2) a O(lgn)
 exports.resolveIntent = function (flows, message) {
     if (flows) {
         for (let i = 0; i < flows.length; i++) {

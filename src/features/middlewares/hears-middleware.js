@@ -9,8 +9,6 @@ const ErrorService = require('@service/error/error.service')
 const { resolveIntent } = require('@util/commons');
 const { logger } = require('@config');
 
-//import Error.service
-
 module.exports = function (controller) {
 
     controller.middleware.receive.use(async function (bot, message, next) {

@@ -3,16 +3,17 @@ const { config, logger } = require('@config');
 
 class CacheService {
 
-
     constructor(cache) {
         this.flowKey = 'flow-';
         this.cache = cache;
     }
 
     get(key) {
-        let element = this.cache.get(key);
-        logger.debug(`cache.get((${key})): ` + JSON.stringify(element));
-        return element;
+        if (key) {
+            let element = this.cache.get(key);
+            logger.debug(`cache.get((${key})): ` + JSON.stringify(element));
+            return element;
+        } else return undefined;
     }
 
     set(key, element) {
