@@ -58,7 +58,7 @@ docker push conacyt/cripbot:0.0.1
 #### Versioning
 
 ```bash
-npm version [major|minor|patch]
+npm version [major|minor|patch] -m "message to %s this version"
 ```
 
 

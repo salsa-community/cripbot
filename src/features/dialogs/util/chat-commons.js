@@ -26,8 +26,11 @@ greetings = async function (bot, message, isFirstime) {
 
     let messageWithReplay = undefined;
     for (let index = 0; index < context.mensajes.length; index++) {
-        if (context.mensajes[index].replies && context.mensajes[index].replies.length > 0) {
-            console.log(context.mensajes[index].replies);
+        if (
+            index == context.mensajes.length - 1
+            && context.mensajes[index].replies
+            && context.mensajes[index].replies.length > 0
+        ) {
             messageWithReplay = context.mensajes[index];
         } else {
             let mensaje = context.mensajes[index][descProp]
