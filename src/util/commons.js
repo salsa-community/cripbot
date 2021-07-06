@@ -51,6 +51,21 @@ exports.resolveOptions = function (page, lang) {
     return options;
 }
 
+exports.arrayToReplies = function (replies) {
+    let quickReplies = [];
+    if (replies && replies.length > 0) {
+        for (let index = 0; index < replies.length; index++) {
+            quickReplies.push({
+                title: replies[index],
+                payload: replies[index],
+            });
+        }
+
+    } else {
+        return [];
+    }
+    return quickReplies;
+}
 
 exports.resolvePageNumber = function (page) {
     if ((typeof page === 'undefined')) {

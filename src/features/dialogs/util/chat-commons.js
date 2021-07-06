@@ -1,8 +1,7 @@
 const { resolveGreeting } = require('@util/commons');
 const { typing } = require('@util/bot.typing');
 const { i18n } = require('@util/lang');
-const { infoQuickReplies } = require('./info-quick-replies');
-const { normalize, resolveProp } = require('@util/commons');
+const { normalize, resolveProp, arrayToReplies } = require('@util/commons');
 
 const ContextService = require('@service/context/context.service')
 
@@ -25,12 +24,27 @@ greetings = async function (bot, message, isFirstime) {
     //await bot.reply(message, resolveGreeting(message.user_profile.lang));
     //await bot.reply(message, baseText);
 
+    let messageWithReplay = undefined;
     for (let index = 0; index < context.mensajes.length; index++) {
-        let mensaje = context.mensajes[index][descProp]
-            .replace(/\$ORGANIZACION/gi, context.organizacion)
-            .replace(/\$CONTEXTO/gi, context.nombre);
-        await bot.reply(message, normalize(mensaje));
+        if (context.mensajes[index].replies && context.mensajes[index].replies.length > 0) {
+            console.log(context.mensajes[index].replies);
+            messageWithReplay = context.mensajes[index];
+        } else {
+            let mensaje = context.mensajes[index][descProp]
+                .replace(/\$ORGANIZACION/gi, context.organizacion)
+                .replace(/\$CONTEXTO/gi, context.nombre);
+            await bot.reply(message, normalize(mensaje));
+        }
     }
+
+    if (messageWithReplay) {
+        await bot.reply(message,
+            {
+                text: normalize(messageWithReplay[descProp]),
+                quick_replies: arrayToReplies(messageWithReplay.replies)
+            });
+    }
+
 }
 
 /**

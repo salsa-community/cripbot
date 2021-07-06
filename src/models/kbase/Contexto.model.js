@@ -7,7 +7,7 @@ let ContextoSchema = new Schema({
     desc: { type: String },
     descEn: { type: String },
     organizacion: { type: String },
-    mensajes: [{ orden: Number, desc: String, descEn: String }]
+    mensajes: [{ orden: Number, desc: String, descEn: String, replies: [] }]
 });
 
 module.exports = mongoose.model('Contexto', ContextoSchema, 'contexto');
