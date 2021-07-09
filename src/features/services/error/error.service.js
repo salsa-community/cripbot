@@ -1,13 +1,7 @@
-const NodeCache = require("node-cache");
-const { config, logger } = require('@config');
 const { resolveCodigo } = require('@util/commons')
 const Error = require('@model/kbase/Error.model');
-
+const CacheService = require('@service/cache/cache.service')
 class ErrorService {
-
-    constructor(cache) {
-        this.cache = cache;
-    }
 
     async findByGeneral(context, optionPage) {
         let errorPage = await Error.find({ contextos: { $in: [context] }, tipo: 'general' }).skip(optionPage).limit(3).sort({ orden: 'asc' });
@@ -17,15 +11,12 @@ class ErrorService {
     }
 
     async findByClaveAndContext(errorCode, context) {
-        errorCode = resolveCodigo(errorCode);
-        let error = this.cache.get(errorCode);
-
-        logger.debug(`error.service.findByClaveAndContext from cache (${errorCode}): ` + JSON.stringify(error));
+        let error = CacheService.get(errorCode);
 
         if (error == undefined) {
-            error = await Error.findOne({ clave: errorCode, contextos: { $in: [context] } });
+            error = await Error.findOne({ clave: errorCode });
             if (error) {
-                this.cache.set(errorCode, error);
+                CacheService.set(errorCode, error);
             }
         }
 
@@ -37,9 +28,22 @@ class ErrorService {
             resolve(error)
         });
     }
+
+
+    async findAllFlows(context) {
+        let flows = CacheService.getFlows(context);
+
+        if (flows == undefined) {
+            flows = await Error.find({ contextos: { $in: [context] } }, 'clave hears');
+            if (flows) {
+                CacheService.setFlows(context, flows);
+            }
+        }
+
+        return new Promise(resolve => {
+            resolve(flows)
+        });
+    }
 }
 
-const cache = new NodeCache({ stdTTL: config.cache.ttl, checkperiod: config.cache.checkperiod, useClones: false });
-let errorService = new ErrorService(cache);
-
-module.exports = errorService;
+module.exports = new ErrorService();

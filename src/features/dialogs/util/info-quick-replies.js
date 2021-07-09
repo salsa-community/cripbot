@@ -4,7 +4,7 @@ exports.infoQuickReplies = function (lang) {
     return [
         {
             title: i18n('answer.yes', lang),
-            payload: 'pasos-dialog'
+            payload: i18n('help.message', lang)
         },
     ]
 }
@@ -13,7 +13,7 @@ exports.menuQuickReplies = function (lang) {
     return [
         {
             title: i18n('help.codigos', lang),
-            payload: 'pasos-dialog'
+            payload: i18n('help.message', lang)
         },
     ]
 }
@@ -22,7 +22,7 @@ exports.helpQuickReplies = function (lang) {
     return [
         {
             title: i18n('help.codigos', lang),
-            payload: 'pasos-dialog'
+            payload: i18n('help.message', lang)
         }
     ]
 }

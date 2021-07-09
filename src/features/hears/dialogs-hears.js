@@ -3,10 +3,16 @@
  * Licensed under the MIT License.
  */
 
-const { RFC_DIALOG_ID } = require('@feature/dialogs/util/constants')
+const { GENERIC_STEP_DIALOG_ID, CONTACTO_DIALOG_ID } = require('@feature/dialogs/util/constants')
 
 module.exports = function (controller) {
-    controller.hears('pasos-dialog', 'message', async (bot, message) => {
-        await bot.beginDialog(RFC_DIALOG_ID, message.user_profile);
+
+    controller.hears(['ayuda', 'help'], 'message', async (bot, message) => {
+        await bot.beginDialog(GENERIC_STEP_DIALOG_ID, message.user_profile);
+    });
+
+    controller.hears(['contactar con una persona', 'contactar con humano', 'contacto', 'persona'], 'message', async (bot, message) => {
+        await bot.reply(message, 'contactar persona');
+        await bot.beginDialog(CONTACTO_DIALOG_ID, message.user_profile);
     });
 }

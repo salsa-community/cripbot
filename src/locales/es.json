@@ -1,4 +1,9 @@
-{
+{	
+	"common": {
+		"location": "Av. de los Insurgentes Sur 1582, Crédito Constructor, Benito Juárez, 03940 Ciudad de México, CDMX",
+		"what-are-you-doing": "Estoy aqui para ayudarte y atender tu dudas",
+		"preferences": "pienso que es una buena persona"
+	},
 	"general": {
 		"ver-mas": "Ver más...",
 		"of": "de",
@@ -13,6 +18,7 @@
 		"state": "Me encuentro muy bien, ¡gracias por preguntar!"
 	},
 	"help": {
+		"message": "ayuda",
 		"nice-to-see-you": "Es un gusto saludarte",
 		"hello": "Hola, estoy para servirte en lo que pueda;",
 		"question": "¿Te puedo ayudar en alguno de los siguientes temas?",
@@ -20,7 +26,7 @@
 		"be-online": "estaré aquí por si se te ofrece algo",
 		"attended": "Fue un placer ayudarte, estaré aquí si me necesitas",
 		"attended-alternative": "es un placer poder servirte",
-		"unknow-intent": "Lo siento, no entiendo lo que me preguntas, pero puedo ayudarte con cualquiera de los siguientes temas",
+		"unknow-intent": "Por el momento, no tengo una respuesta para eso, quizas más adelante, pero puedo ayudarte con cualquiera de los siguientes temas",
 		"codigos": "Ver ayuda",
 		"cfdi": "Tiene un código CFDI",
 		"seguimiento-ticket": "Seguimiento de un ticket",
@@ -40,6 +46,7 @@
 		"yes": "Si"
 	},
 	"welcome": {
+        "dialog":"Tengo información para tu consulta",
 		"default": "Bienvenido",
 		"name": "Mi nombre es",
 		"question": "¿Solicitas ayuda de los servicios en línea?",
@@ -65,11 +72,11 @@
 			"insert-rfc": "Por favor, ingrese",
 			"red-cofidi-context": "el RFC del receptor de la factura",
 			"no-red-cofidi-context": "su RFC para recibir ayuda",
-			"insert": "Ingrese, por favor, el código de error que le presenta el sistema. También puede seleccionar alguno de los siguientes temas:",
-			"insert-answer": "Gracias por su respuesta. Voy a presentar información relacionada con su petición."
+			"insert": "Ingresa, por favor, el código de error que le presenta el sistema. También puede seleccionar alguno de los siguientes temas:",
+			"insert-answer": "voy a presentarte información que te puede ser de utilidad"
 		},
 		"errorcode": {
-			"notfound": "el código de error ingresado no se encuentra en nuestra base de conocimiento",
+			"notfound": "es opción no la tengo",
 			"finished": "Ha concluido los pasos para resolver su incidente ¿Requiere alguna ayuda adicional?",
 			"stepdesc": "Te voy a describir los pasos a seguir. Por favor, cuando concluyas el paso, presiona el botón de realizado",
 			"feedback": "¿Qué le pareció nuestro servicio?"
@@ -77,15 +84,15 @@
 		"userinfo": {
 			"getdata": "¿Te gustaría dejarnos tus datos?",
 			"getemail": "Por favor, proporcioname un correo electrónico para contactarte",
-			"getemail-invalid": "El correo electrónico que ingresaste, no es un correo válido",
+			"getemail-invalid": "me podrías proporcionar un correo electrónico valido?",
 			"reason": "¿Me podrías indicar la razón por la que requieres que te contactemos?",
 			"answer": "Gracias por la información, en breve te contactaremos",
-			"behere": "Fue un placer ayudarle, estaré aquí si me requiere"
+			"behere": "Fue un placer ayudarte, estaré aquí si me requieres"
 		}
 	},
 	"dialog": {
 		"rfc": {
-			"notfound": "dialog.rfc.notfound"
+			"notfound": "el RFC que ingresaste no lo tengo registrado"
 		}
 	}
 }

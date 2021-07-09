@@ -51,6 +51,21 @@ exports.resolveOptions = function (page, lang) {
     return options;
 }
 
+exports.arrayToReplies = function (replies) {
+    let quickReplies = [];
+    if (replies && replies.length > 0) {
+        for (let index = 0; index < replies.length; index++) {
+            quickReplies.push({
+                title: replies[index],
+                payload: replies[index],
+            });
+        }
+
+    } else {
+        return [];
+    }
+    return quickReplies;
+}
 
 exports.resolvePageNumber = function (page) {
     if ((typeof page === 'undefined')) {
@@ -82,5 +97,22 @@ exports.normalize = function (word) {
     } else {
         return '';
     }
+}
+
+// TODO: cambiar de O(N2) a O(lgn)
+exports.resolveIntent = function (flows, message) {
+    if (flows) {
+        for (let i = 0; i < flows.length; i++) {
+            const flow = flows[i];
+            for (let j = 0; j < flow.hears.length; j++) {
+                const hear = flow.hears[j];
+                founted = message.match(new RegExp(hear, 'gi'));
+                if (founted) {
+                    return flow.clave;
+                }
+            }
+        }
+
+    } else { return undefined }
 }
 
