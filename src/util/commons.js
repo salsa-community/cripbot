@@ -115,4 +115,10 @@ exports.resolveIntent = function (flows, message) {
 
     } else { return undefined }
 }
+exports.resolveMessage = function (message, context) {
+    return message
+        .replace(/\$ORGANIZACION/gi, context.organizacion)
+        .replace(/\$CONTEXTO/gi, context.nombre)
+        .replace(/\$USUARIO/gi, context.username);
+}
 

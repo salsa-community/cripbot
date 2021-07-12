@@ -10,7 +10,6 @@ const { config } = require('@config')
 module.exports = function (controller) {
 
     controller.middleware.receive.use(function (bot, message, next) {
-        console.log('2');
         if (message.type === 'welcome_back') {
             if (bot.isDialogActive('rfc-dialog-id')) {
                 return true;

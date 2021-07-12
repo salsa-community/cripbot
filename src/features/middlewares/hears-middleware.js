@@ -12,6 +12,8 @@ const { logger } = require('@config');
 module.exports = function (controller) {
 
     controller.middleware.receive.use(async function (bot, message, next) {
+        logger.debug(`userprofile((${JSON.stringify(message.user_profile)})): `);
+
         if (message.type == 'message') {
             let context = message.user_profile.context;
             let flows = await ErrorService.findAllFlows(context);

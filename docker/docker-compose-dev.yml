@@ -1,25 +1,8 @@
 version: '2'
 services:
-  bot-app:
-    image: conacyt/cripbot:${BOT_TAG}
-    environment:
-      - DISABLE_STATE_STORAGE=${DISABLE_STATE_STORAGE}
-      - DISABLE_ANALYTICS=${DISABLE_ANALYTICS}
-      - MONGO_URI=mongodb://kbase-db:27017
-      - MONGO_KB_URI=mongodb://kbase-db:27017/chatbot
-      - NODE_ENV=${BOT_ENV}
-      - MYSQL_HOST=${DB_HOST}
-      - MYSQL_DB=${DB_NAME}
-      - MYSQL_USERNAME=${DB_USERNAME}
-      - MYSQL_PASSWORD=${DB_PASSWORD}
-      - TZ=America/Mexico_City
-    ports:
-      - 3000:3000
-    depends_on:
-    - kbase-db
   kbase-app:
     container_name: 'kbase-app'
-    image: conacyt/kbase:latest
+    image: conacyt/kbase:${KBASE_TAG}
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=prod,swagger

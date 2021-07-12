@@ -8,8 +8,7 @@ class DefaultUserService {
 
     async findByUsername(username) {
         return new Promise(resolve => {
-            resolve(new User(username, 'default user'))
-            resolve(user);
+            resolve(new User(username, 'default user'));
         });
     }
 }

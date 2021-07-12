@@ -91,8 +91,8 @@
             "answer":"Thanks for the information, we will contact you shortly",
             "behere":"It was a pleasure to help you, I will be here if you require me",
 			"getnombre":"what is your name es tu nombre?",
-			"confirmnombre %s":"is your name %s?",
-			"outnombre %":"I will call you %"
+			"confirmnombre":"is your name",
+			"outnombre":"I will call you"
         }
     }
 }

@@ -2,7 +2,7 @@
 
 export BOT_ENV='production'
 export BOT_TAG='2.1.0'
-export KBASE_TAG='latest'
+export KBASE_TAG='2.2.2'
 
 export BOT_ENV=production
 export DB_HOST='vtiger-db'

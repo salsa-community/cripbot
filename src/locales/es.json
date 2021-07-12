@@ -1,4 +1,4 @@
-{	
+{
 	"common": {
 		"location": "Av. de los Insurgentes Sur 1582, Crédito Constructor, Benito Juárez, 03940 Ciudad de México, CDMX",
 		"what-are-you-doing": "Estoy aqui para ayudarte y atender tu dudas",
@@ -48,7 +48,7 @@
 		"yes": "Si"
 	},
 	"welcome": {
-        "dialog":"Tengo información para tu consulta",
+		"dialog": "Tengo información para tu consulta",
 		"default": "Bienvenido",
 		"name": "Mi nombre es",
 		"question": "¿Solicitas ayuda de los servicios en línea?",
@@ -90,9 +90,9 @@
 			"reason": "¿Me podrías indicar la razón por la que requieres que te contactemos?",
 			"answer": "Gracias por la información, en breve te contactaremos",
 			"behere": "Fue un placer ayudarte, estaré aquí si me requieres",
-			"getnombre":"Cuál es tu nombre?",
-			"confirmnombre %s":"Tú nombre es %s",
-			"outnombre %":"De aquí en adelante te llamaré %"
+			"getnombre": "Cuál es tu nombre?",
+			"confirmnombre": "Tú nombre es",
+			"outnombre": "De aquí en adelante te llamaré"
 		}
 	},
 	"dialog": {

@@ -247,6 +247,10 @@ var Botkit = {
 
         that.current_user.id = that.guid;
 
+        if (Botkit.getCookie('botkit_username')) {
+            that.username = Botkit.getCookie('botkit_username');
+            that.current_user.username = that.username;
+        }
         if (this.options.enable_history) {
             that.getHistory();
         }
@@ -500,7 +504,11 @@ var Botkit = {
         });
 
         that.on('message_received', function (message) {
-            that.scheduleMessage(message);
+            if (message.type === 'update-username') {
+                Botkit.setCookie('botkit_username', message.text, 1);
+            } else {
+                that.scheduleMessage(message);
+            }
         });
 
         that.on('typing', function () {
