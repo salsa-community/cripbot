@@ -10,7 +10,9 @@
 		"done": "Continuar",
 		"cancel": "Salir",
 		"step": "Paso",
-		"begin": "muy bien, vamos a comenzar nuevamente"
+		"begin": "muy bien, vamos a comenzar nuevamente",
+		"yes": "Si",
+		"no": "No"
 	},
 	"bot": {
 		"whoare": "soy una inteligencia artificial, que fue creada para ayudarte",
@@ -87,7 +89,10 @@
 			"getemail-invalid": "me podrías proporcionar un correo electrónico valido?",
 			"reason": "¿Me podrías indicar la razón por la que requieres que te contactemos?",
 			"answer": "Gracias por la información, en breve te contactaremos",
-			"behere": "Fue un placer ayudarte, estaré aquí si me requieres"
+			"behere": "Fue un placer ayudarte, estaré aquí si me requieres",
+			"getnombre":"Cuál es tu nombre?",
+			"confirmnombre %s":"Tú nombre es %s",
+			"outnombre %":"De aquí en adelante te llamaré %"
 		}
 	},
 	"dialog": {
