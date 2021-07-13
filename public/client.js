@@ -506,6 +506,7 @@ var Botkit = {
         that.on('message_received', function (message) {
             if (message.type === 'update-username') {
                 Botkit.setCookie('botkit_username', message.text, 1);
+                that.current_user.username = message.text;
             } else {
                 that.scheduleMessage(message);
             }

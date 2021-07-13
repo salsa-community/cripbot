@@ -116,9 +116,16 @@ exports.resolveIntent = function (flows, message) {
     } else { return undefined }
 }
 exports.resolveMessage = function (message, context) {
+    context.username = context.username ? context.username : '';
     return message
         .replace(/\$ORGANIZACION/gi, context.organizacion)
         .replace(/\$CONTEXTO/gi, context.nombre)
         .replace(/\$USUARIO/gi, context.username);
+}
+
+exports.resolveMessageWithUsername = function (message, username) {
+    username = username ? username : '';
+    return message
+        .replace(/\$USUARIO/gi, username);
 }
 
