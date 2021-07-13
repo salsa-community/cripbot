@@ -16,7 +16,7 @@ module.exports = function (controller) {
         await bot.beginDialog(CONTACTO_DIALOG_ID, message.user_profile);
     });
 
-    controller.hears(['usuario'], 'message', async (bot, message) => {
+    controller.hears(['usuario-identidad'], 'message', async (bot, message) => {
         await bot.beginDialog(GET_NAME_DIALOG_ID, message.user_profile);
     });
 }

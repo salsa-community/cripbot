@@ -7,6 +7,7 @@ const { i18n } = require('@util/lang');
 
 const { GET_NAME_DIALOG_ID } = require('@feature/dialogs/util/constants')
 const { BotkitConversation } = require('botkit')
+const { hello, welcomeBack } = require('@feature/dialogs/util/chat-commons');
 
 module.exports = function (controller) {
     let convo = new BotkitConversation(GET_NAME_DIALOG_ID, controller);

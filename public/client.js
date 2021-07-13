@@ -507,6 +507,12 @@ var Botkit = {
             if (message.type === 'update-username') {
                 Botkit.setCookie('botkit_username', message.text, 1);
                 that.current_user.username = message.text;
+                that.deliverMessage({
+                    type: 'welcome_back',
+                    user: that.guid,
+                    channel: 'socket',
+                    user_profile: that.current_user ? that.current_user : null,
+                });
             } else {
                 that.scheduleMessage(message);
             }
