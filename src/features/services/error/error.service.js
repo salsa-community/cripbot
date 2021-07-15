@@ -4,7 +4,7 @@ const CacheService = require('@service/cache/cache.service')
 class ErrorService {
 
     async findByGeneral(context, optionPage) {
-        let errorPage = await Error.find({ contextos: { $in: [context] }, tipo: 'general' }).skip(optionPage).limit(3).sort({ orden: 'asc' });
+        let errorPage = await Error.find({ contextos: { $in: [context] }, tipo: 'general' }).skip(optionPage).limit(8).sort({ orden: 'asc' });
         return new Promise(resolve => {
             resolve(errorPage)
         });

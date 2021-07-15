@@ -36,7 +36,7 @@ module.exports = function (controller) {
         quick_replies: async (template, vars) => {
             vars.optionPage = resolvePageNumber(vars.optionPage);
             let errorPage = await ErrorService.findByGeneral(vars.context, vars.optionPage);
-            vars.optionPage = (errorPage && errorPage.length < 3) ? -1 : vars.optionPage;
+            vars.optionPage = (errorPage && errorPage.length < 8) ? -1 : vars.optionPage;
             return resolveOptions(errorPage, vars.lang)
         }
     }, async (res, convo, bot) => {

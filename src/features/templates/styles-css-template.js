@@ -294,6 +294,23 @@ a.button {
         background: #$CSS_COLOR;
         color: #FFF; }
 
+      #message_replies::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+      border-radius: 4px;
+      background-color: #F5F5F5; }
+
+      #message_replies::-webkit-scrollbar-thumb {
+        background-color: #$CSS_COLOR; }
+
+      #message_replies::-webkit-scrollbar-thumb:hover {
+      height: 10px;
+      box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2); }
+
+      #message_replies::-webkit-scrollbar-thumb:active {
+      height: 10px;
+      box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2); }
+
 #message_indicator_form_id .btn {
   background-color: #$CSS_COLOR !important; }
 
