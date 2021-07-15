@@ -52,9 +52,6 @@ module.exports = function (controller) {
                 if (config.analytics) {
                     Actividad.create(new Actividad({ contexto: convo.vars.context, valor: error.clave, desc: error.clave, evento: 'CODIGO_ERROR' }));
                 }
-                bot.say({
-                    text: i18n('dialogs.rfc.insert-answer', convo.vars.lang)
-                });
 
                 error.instrucciones.pasos[0][convo.vars.descProp] = normalize(error.instrucciones.pasos[0][convo.vars.descProp]);
                 convo.setVar('errordesc', error[convo.vars.descProp]);

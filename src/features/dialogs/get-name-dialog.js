@@ -7,7 +7,6 @@ const { i18n } = require('@util/lang');
 
 const { GET_NAME_DIALOG_ID } = require('@feature/dialogs/util/constants')
 const { BotkitConversation } = require('botkit')
-const { hello, welcomeBack } = require('@feature/dialogs/util/chat-commons');
 
 module.exports = function (controller) {
     let convo = new BotkitConversation(GET_NAME_DIALOG_ID, controller);
@@ -15,7 +14,7 @@ module.exports = function (controller) {
     convo.addAction('get-name-thread');
     convo.addQuestion('{{vars.getnombre}}', async (response, convo, bot) => {
         convo.setVar('nombre', response);
-        await convo.gotoThread('confirm-name-thread');
+        await convo.gotoThread('exit-thread');
     }, 'get-name', 'get-name-thread');
 
 
@@ -36,7 +35,7 @@ module.exports = function (controller) {
     }, 'confirm', 'confirm-name-thread');
 
     convo.addAction('exit-thread');
-    convo.addMessage('{{vars.outnombre }} <b>{{vars.nombre}}</b>', 'exit-thread');
+    convo.addMessage({ type: 'update-username', text: '{{vars.nombre}}' }, 'exit-thread');
 
     convo.before('default', async (convo, bot) => {
         convo.setVar('getnombre', i18n('dialogs.userinfo.getnombre', convo.vars.lang));
@@ -45,10 +44,5 @@ module.exports = function (controller) {
         convo.setVar('yes', i18n('general.yes', convo.vars.lang));
         convo.setVar('no', i18n('general.no', convo.vars.lang));
     });
-
-    convo.after(async (results, bot) => {
-        bot.say({ type: 'update-username', text: results.nombre });
-    });
-
     controller.addDialog(convo);
 }

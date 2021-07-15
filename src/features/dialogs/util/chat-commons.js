@@ -17,6 +17,7 @@ resolveWelcome = function (isFirstime, lang, organizacion) {
 greetings = async function (bot, message, isFirstime) {
 
     let context = await ContextService.getContext(message.user_profile.context);
+    context.username = message.user_profile.username ? message.user_profile.username : '';
     //let baseText = resolveWelcome(isFirstime, message.user_profile.lang, context.organizacion);
     let descProp = resolveProp('desc', message.user_profile.lang);
 
