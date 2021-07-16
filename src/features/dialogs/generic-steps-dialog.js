@@ -4,7 +4,6 @@
  */
 
 // const { Usuario } = require('@model/vtiger')
-const UserService = require('@service/user/user.service')
 const ErrorService = require('@service/error/error.service')
 var Contacto = require('@model/kbase/Contacto.model')
 var Actividad = require('@model/kbase/Actividad.model')
@@ -16,8 +15,6 @@ const { BotkitConversation } = require('botkit')
 const { resolveOptions, resolvePageNumber } = require('@util/commons')
 const { config } = require('@config');
 const UnknowIntent = require('@model/kbase/UnknowIntent.model');
-
-const ContextService = require('@service/context/context.service')
 
 const TYPING_DELAY = config.bot.app.typingdelay;
 
@@ -232,11 +229,9 @@ module.exports = function (controller) {
      * Init common variables into the Dialog
      */
     convo.before('default', async (convo, bot) => {
-        let context = await ContextService.getContext(convo.vars.context);
         convo.setVar('descProp', resolveDescProp(convo.vars.lang));
         convo.setVar('welcomeMessage', i18n('welcome.dialog', convo.vars.lang));
         convo.setVar('rfc_insert', i18n('dialogs.rfc.insert', convo.vars.lang));
-        convo.setVar('rfc_insert_answer', i18n('dialogs.rfc.insert-answer', convo.vars.lang));
         convo.setVar('done', i18n('general.done', convo.vars.lang));
         convo.setVar('cancel', i18n('general.cancel', convo.vars.lang));
         convo.setVar('step_text', i18n('general.step', convo.vars.lang));

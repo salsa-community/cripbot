@@ -23,9 +23,12 @@ module.exports = function (controller) {
                 message.user_profile.intent = intent;
                 await bot.cancelAllDialogs();
                 await bot.beginDialog(INTENT_DIALOG_ID, message.user_profile);
+            } else {
+                next()
             }
+        } else {
+            next()
         }
-        next()
         //Get context
         //Error.service(context)
         //Iniciar dialogo generico de mensajes
