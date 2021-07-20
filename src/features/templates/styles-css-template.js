@@ -127,7 +127,6 @@ a.button {
   border-left: 1px solid #FFFFFF;
   border-right: 1px solid #FFFFFF;
   scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
   /* Lets it scroll lazy */
   /*height: 500px;
   width: 320px;*/
@@ -270,8 +269,9 @@ a.button {
   #message_window #message_replies {
     text-align: center;
     overflow-x: auto;
+    overflow-y: auto;
+    max-height: 100px;
     flex-shrink: 0;
-    -webkit-overflow-scrolling: touch;
     /* Lets it scroll lazy */ }
     #message_window #message_replies ul {
       list-style-type: none;
@@ -300,16 +300,23 @@ a.button {
       border-radius: 4px;
       background-color: #F5F5F5; }
 
+      #message_replies::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+      border-radius: 10px; }
+
       #message_replies::-webkit-scrollbar-thumb {
-        background-color: #$CSS_COLOR; }
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+      background-color: #$CSS_COLOR;
+      border-radius: 4px; }
 
       #message_replies::-webkit-scrollbar-thumb:hover {
       height: 10px;
+      background: #b3b3b3;
       box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2); }
 
       #message_replies::-webkit-scrollbar-thumb:active {
       height: 10px;
-      box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2); }
+      background-color: #999999; }
 
 #message_indicator_form_id .btn {
   background-color: #$CSS_COLOR !important; }

@@ -446,12 +446,12 @@ var Botkit = {
             that.replies.appendChild(list);
 
             // uncomment this code if you want your quick replies to scroll horizontally instead of stacking
-            var width = 0;
+            //var width = 0;
             // // resize this element so it will scroll horizontally
-            for (var e = 0; e < elements.length; e++) {
-                width = width + elements[e].offsetWidth + 18;
-            }
-            list.style.width = width + 'px';
+            //for (var e = 0; e < elements.length; e++) {
+            //    width = width + elements[e].offsetWidth + 18;
+            //}
+            //list.style.width = width + 'px';
 
             if (message.disable_input) {
                 that.input.disabled = true;
