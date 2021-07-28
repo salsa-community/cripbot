@@ -10,12 +10,12 @@ class ErrorService {
     }
 
     async findAllByContext(context) {
-        let errores = CacheService.get(context + 'general');
+        let errores = CacheService.getGeneralDialogs(context);
 
         if (errores == undefined) {
             errores = await Error.find({ contextos: { $in: [context] }, tipo: 'general' }, 'clave desc descEn').sort({ orden: 'asc' });
             if (errores) {
-                CacheService.set(context + 'general', errores);
+                CacheService.setGeneralDialogs(context, errores);
             }
         }
 
