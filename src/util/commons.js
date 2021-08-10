@@ -41,13 +41,15 @@ exports.resolveCodigo = function (rawCode, lang) {
     }
 }
 
-exports.resolveOptions = function (page, lang) {
+exports.resolveOptions = function (page, lang, excludePlus) {
     let options = [];
     let descLang = resolveDescProp(lang);
     page.forEach(element => {
         options.push({ title: element[descLang], payload: element.clave })
     });
-    options.push({ title: '<b><i>' + i18n('general.ver-mas', lang) + '</i></b>', payload: config.bot.app.nextlabel })
+    if (!excludePlus) {
+        options.push({ title: '<b><i>' + i18n('general.ver-mas', lang) + '</i></b>', payload: config.bot.app.nextlabel })
+    }
     return options;
 }
 
@@ -104,9 +106,13 @@ exports.resolveIntent = function (flows, message) {
     if (flows) {
         for (let i = 0; i < flows.length; i++) {
             const flow = flows[i];
+            let claveMatch = message.match(new RegExp("^" + flow.clave + "$", 'i'));
+            if (claveMatch) {
+                return flow.clave;
+            }
             for (let j = 0; j < flow.hears.length; j++) {
                 const hear = flow.hears[j];
-                founted = message.match(new RegExp(hear, 'gi'));
+                let founted = message.match(new RegExp(hear, 'gi'));
                 if (founted) {
                     return flow.clave;
                 }
@@ -114,5 +120,18 @@ exports.resolveIntent = function (flows, message) {
         }
 
     } else { return undefined }
+}
+exports.resolveMessage = function (message, context) {
+    context.username = context.username ? context.username : '';
+    return message
+        .replace(/\$ORGANIZACION/gi, context.organizacion)
+        .replace(/\$CONTEXTO/gi, context.nombre)
+        .replace(/\$USUARIO/gi, context.username);
+}
+
+exports.resolveMessageWithUsername = function (message, username) {
+    username = username ? username : '';
+    return message
+        .replace(/\$USUARIO/gi, username);
 }
 

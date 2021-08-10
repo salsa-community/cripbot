@@ -1,12 +1,26 @@
-const { resolveCodigo } = require('@util/commons')
 const Error = require('@model/kbase/Error.model');
 const CacheService = require('@service/cache/cache.service')
 class ErrorService {
 
     async findByGeneral(context, optionPage) {
-        let errorPage = await Error.find({ contextos: { $in: [context] }, tipo: 'general' }).skip(optionPage).limit(3).sort({ orden: 'asc' });
+        let errorPage = await Error.find({ contextos: { $in: [context] }, tipo: 'general' }).skip(optionPage).limit(8).sort({ orden: 'asc' });
         return new Promise(resolve => {
             resolve(errorPage)
+        });
+    }
+
+    async findAllByContext(context) {
+        let errores = CacheService.getGeneralDialogs(context);
+
+        if (errores == undefined) {
+            errores = await Error.find({ contextos: { $in: [context] }, tipo: 'general' }, 'clave desc descEn').sort({ orden: 'asc' });
+            if (errores) {
+                CacheService.setGeneralDialogs(context, errores);
+            }
+        }
+
+        return new Promise(resolve => {
+            resolve(errores)
         });
     }
 

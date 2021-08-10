@@ -1,4 +1,4 @@
-{	
+{
 	"common": {
 		"location": "Av. de los Insurgentes Sur 1582, Crédito Constructor, Benito Juárez, 03940 Ciudad de México, CDMX",
 		"what-are-you-doing": "Estoy aqui para ayudarte y atender tu dudas",
@@ -10,7 +10,9 @@
 		"done": "Continuar",
 		"cancel": "Salir",
 		"step": "Paso",
-		"begin": "muy bien, vamos a comenzar nuevamente"
+		"begin": "muy bien, vamos a comenzar nuevamente",
+		"yes": "Si",
+		"no": "No"
 	},
 	"bot": {
 		"whoare": "soy una inteligencia artificial, que fue creada para ayudarte",
@@ -24,9 +26,9 @@
 		"question": "¿Te puedo ayudar en alguno de los siguientes temas?",
 		"negative": "lo entiendo, posiblemente en otro momento",
 		"be-online": "estaré aquí por si se te ofrece algo",
-		"attended": "Fue un placer ayudarte, estaré aquí si me necesitas",
+		"attended": "Fue un placer ayudarte, si necesitas algo más escribe AYUDA",
 		"attended-alternative": "es un placer poder servirte",
-		"unknow-intent": "Por el momento, no tengo una respuesta para eso, quizas más adelante, pero puedo ayudarte con cualquiera de los siguientes temas",
+		"unknow-intent": "Por el momento no tengo una respuesta para eso, quizas más adelante, pero puedo ayudarte con cualquiera de los siguientes temas",
 		"codigos": "Ver ayuda",
 		"cfdi": "Tiene un código CFDI",
 		"seguimiento-ticket": "Seguimiento de un ticket",
@@ -46,7 +48,7 @@
 		"yes": "Si"
 	},
 	"welcome": {
-        "dialog":"Tengo información para tu consulta",
+		"dialog": "Tengo información para tu consulta",
 		"default": "Bienvenido",
 		"name": "Mi nombre es",
 		"question": "¿Solicitas ayuda de los servicios en línea?",
@@ -76,7 +78,7 @@
 			"insert-answer": "voy a presentarte información que te puede ser de utilidad"
 		},
 		"errorcode": {
-			"notfound": "es opción no la tengo",
+			"notfound": "esa opción no la tengo",
 			"finished": "Ha concluido los pasos para resolver su incidente ¿Requiere alguna ayuda adicional?",
 			"stepdesc": "Te voy a describir los pasos a seguir. Por favor, cuando concluyas el paso, presiona el botón de realizado",
 			"feedback": "¿Qué le pareció nuestro servicio?"
@@ -87,7 +89,10 @@
 			"getemail-invalid": "me podrías proporcionar un correo electrónico valido?",
 			"reason": "¿Me podrías indicar la razón por la que requieres que te contactemos?",
 			"answer": "Gracias por la información, en breve te contactaremos",
-			"behere": "Fue un placer ayudarte, estaré aquí si me requieres"
+			"behere": "Fue un placer ayudarte, si necesitas algo más escribe AYUDA",
+			"getnombre": "Hola, ¿cómo te llamas?",
+			"confirmnombre": "Tú nombre es",
+			"outnombre": "De aquí en adelante te llamaré"
 		}
 	},
 	"dialog": {

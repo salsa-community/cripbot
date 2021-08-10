@@ -4,7 +4,6 @@
  */
 
 // const { Usuario } = require('@model/vtiger')
-const UserService = require('@service/user/user.service')
 const ErrorService = require('@service/error/error.service')
 var Contacto = require('@model/kbase/Contacto.model')
 var Actividad = require('@model/kbase/Actividad.model')
@@ -16,8 +15,6 @@ const { BotkitConversation } = require('botkit')
 const { resolveOptions, resolvePageNumber } = require('@util/commons')
 const { config } = require('@config');
 const UnknowIntent = require('@model/kbase/UnknowIntent.model');
-
-const ContextService = require('@service/context/context.service')
 
 const TYPING_DELAY = config.bot.app.typingdelay;
 
@@ -36,7 +33,7 @@ module.exports = function (controller) {
         quick_replies: async (template, vars) => {
             vars.optionPage = resolvePageNumber(vars.optionPage);
             let errorPage = await ErrorService.findByGeneral(vars.context, vars.optionPage);
-            vars.optionPage = (errorPage && errorPage.length < 3) ? -1 : vars.optionPage;
+            vars.optionPage = (errorPage && errorPage.length < 8) ? -1 : vars.optionPage;
             return resolveOptions(errorPage, vars.lang)
         }
     }, async (res, convo, bot) => {
@@ -52,9 +49,6 @@ module.exports = function (controller) {
                 if (config.analytics) {
                     Actividad.create(new Actividad({ contexto: convo.vars.context, valor: error.clave, desc: error.clave, evento: 'CODIGO_ERROR' }));
                 }
-                bot.say({
-                    text: i18n('dialogs.rfc.insert-answer', convo.vars.lang)
-                });
 
                 error.instrucciones.pasos[0][convo.vars.descProp] = normalize(error.instrucciones.pasos[0][convo.vars.descProp]);
                 convo.setVar('errordesc', error[convo.vars.descProp]);
@@ -235,11 +229,9 @@ module.exports = function (controller) {
      * Init common variables into the Dialog
      */
     convo.before('default', async (convo, bot) => {
-        let context = await ContextService.getContext(convo.vars.context);
         convo.setVar('descProp', resolveDescProp(convo.vars.lang));
         convo.setVar('welcomeMessage', i18n('welcome.dialog', convo.vars.lang));
         convo.setVar('rfc_insert', i18n('dialogs.rfc.insert', convo.vars.lang));
-        convo.setVar('rfc_insert_answer', i18n('dialogs.rfc.insert-answer', convo.vars.lang));
         convo.setVar('done', i18n('general.done', convo.vars.lang));
         convo.setVar('cancel', i18n('general.cancel', convo.vars.lang));
         convo.setVar('step_text', i18n('general.step', convo.vars.lang));

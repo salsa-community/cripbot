@@ -247,6 +247,10 @@ var Botkit = {
 
         that.current_user.id = that.guid;
 
+        if (Botkit.getCookie('botkit_username')) {
+            that.username = Botkit.getCookie('botkit_username');
+            that.current_user.username = that.username;
+        }
         if (this.options.enable_history) {
             that.getHistory();
         }
@@ -442,12 +446,12 @@ var Botkit = {
             that.replies.appendChild(list);
 
             // uncomment this code if you want your quick replies to scroll horizontally instead of stacking
-            // var width = 0;
+            //var width = 0;
             // // resize this element so it will scroll horizontally
-            // for (var e = 0; e < elements.length; e++) {
-            //     width = width + elements[e].offsetWidth + 18;
-            // }
-            // list.style.width = width + 'px';
+            //for (var e = 0; e < elements.length; e++) {
+            //    width = width + elements[e].offsetWidth + 18;
+            //}
+            //list.style.width = width + 'px';
 
             if (message.disable_input) {
                 that.input.disabled = true;
@@ -500,7 +504,18 @@ var Botkit = {
         });
 
         that.on('message_received', function (message) {
-            that.scheduleMessage(message);
+            if (message.type === 'update-username') {
+                Botkit.setCookie('botkit_username', message.text, 1);
+                that.current_user.username = message.text;
+                that.deliverMessage({
+                    type: 'welcome_back',
+                    user: that.guid,
+                    channel: 'socket',
+                    user_profile: that.current_user ? that.current_user : null,
+                });
+            } else {
+                that.scheduleMessage(message);
+            }
         });
 
         that.on('typing', function () {

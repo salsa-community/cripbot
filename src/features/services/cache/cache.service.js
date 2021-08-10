@@ -3,8 +3,12 @@ const { config, logger } = require('@config');
 
 class CacheService {
 
+    static flowKey;
+    static generalKey;
+
     constructor(cache) {
-        this.flowKey = 'flow-';
+        this.flowKey = 'flow';
+        this.generalKey = 'general';
         this.cache = cache;
     }
 
@@ -24,16 +28,28 @@ class CacheService {
         return this.cache.del(key);
     }
 
+    getGeneralDialogs(context) {
+        this.get(this.generalKey + context);
+    }
+
+    setGeneralDialogs(context, dialogs) {
+        this.set(this.generalKey + context, dialogs);
+    }
+
     getFlows(context) {
-        let key = this.flowKey + context;
-        let flows = this.cache.get(key);
-        logger.debug(`cache.get((${key})): ` + JSON.stringify(flows));
-        return flows;
+        return this.get(this.flowKey + context);
     }
 
     setFlows(context, flows) {
-        let key = this.flowKey + context;
-        this.cache.set(key, flows);
+        this.set(this.flowKey + context, flows);
+    }
+
+    flushAll() {
+        this.cache.flushAll();
+    }
+
+    getStats() {
+        return this.cache.getStats();
     }
 }
 

@@ -71,9 +71,6 @@ module.exports = function (controller) {
                 if (config.analytics) {
                     Actividad.create(new Actividad({ contexto: convo.vars.context, valor: error.clave, desc: error.clave, evento: 'CODIGO_ERROR' }));
                 }
-                bot.say({
-                    text: i18n('dialogs.rfc.insert-answer', convo.vars.lang)
-                });
 
                 error.instrucciones.pasos[0][convo.vars.descProp] = normalize(error.instrucciones.pasos[0][convo.vars.descProp]);
                 convo.setVar('errordesc', error[convo.vars.descProp]);
@@ -260,7 +257,6 @@ module.exports = function (controller) {
         convo.setVar('welcomeMessage', context[welcomeMessage]);
         convo.setVar('rfc_ask', context[loginMessage]);
         convo.setVar('rfc_insert', i18n('dialogs.rfc.insert', convo.vars.lang));
-        convo.setVar('rfc_insert_answer', i18n('dialogs.rfc.insert-answer', convo.vars.lang));
         convo.setVar('done', i18n('general.done', convo.vars.lang));
         convo.setVar('cancel', i18n('general.cancel', convo.vars.lang));
         convo.setVar('step_text', i18n('general.step', convo.vars.lang));

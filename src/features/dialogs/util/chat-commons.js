@@ -1,7 +1,6 @@
-const { resolveGreeting } = require('@util/commons');
-const { typing } = require('@util/bot.typing');
 const { i18n } = require('@util/lang');
-const { normalize, resolveProp, arrayToReplies } = require('@util/commons');
+const { normalize, resolveProp, arrayToReplies, resolveMessage } = require('@util/commons');
+const { GET_NAME_DIALOG_ID } = require('@feature/dialogs/util/constants')
 
 const ContextService = require('@service/context/context.service')
 
@@ -18,6 +17,7 @@ resolveWelcome = function (isFirstime, lang, organizacion) {
 greetings = async function (bot, message, isFirstime) {
 
     let context = await ContextService.getContext(message.user_profile.context);
+    context.username = message.user_profile.username ? message.user_profile.username : '';
     //let baseText = resolveWelcome(isFirstime, message.user_profile.lang, context.organizacion);
     let descProp = resolveProp('desc', message.user_profile.lang);
 
@@ -33,17 +33,16 @@ greetings = async function (bot, message, isFirstime) {
         ) {
             messageWithReplay = context.mensajes[index];
         } else {
-            let mensaje = context.mensajes[index][descProp]
-                .replace(/\$ORGANIZACION/gi, context.organizacion)
-                .replace(/\$CONTEXTO/gi, context.nombre);
+            let mensaje = resolveMessage(context.mensajes[index][descProp], context);
             await bot.reply(message, normalize(mensaje));
         }
     }
 
     if (messageWithReplay) {
+        let mensaje = resolveMessage(messageWithReplay[descProp], context);
         await bot.reply(message,
             {
-                text: normalize(messageWithReplay[descProp]),
+                text: normalize(mensaje),
                 quick_replies: arrayToReplies(messageWithReplay.replies)
             });
     }
@@ -54,13 +53,21 @@ greetings = async function (bot, message, isFirstime) {
  * This is the hello event
  */
 exports.hello = async function (bot, message) {
-    await greetings(bot, message, true);
+    if (!message.user_profile.username) {
+        await bot.beginDialog(GET_NAME_DIALOG_ID, message.user_profile);
+    } else {
+        await greetings(bot, message, true);
+    }
 }
 
 /**
  * This is the welcome_back event
  */
 exports.welcomeBack = async function (bot, message) {
-    await greetings(bot, message, false);
+    if (!message.user_profile.username) {
+        await bot.beginDialog(GET_NAME_DIALOG_ID, message.user_profile);
+    } else {
+        await greetings(bot, message, false);
+    }
 }
 

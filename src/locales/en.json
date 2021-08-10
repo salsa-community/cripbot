@@ -10,7 +10,9 @@
 		"done": "Next",
 		"cancel": "Cancel",
 		"step": "Step",
-		"begin": "Ok, lets begin"
+		"begin": "Ok, lets begin",
+        "yes": "Yes",
+		"no": "No"
     },
     "bot":{
         "whoare":"I am an artificial intelligence, who was created to help you",
@@ -87,7 +89,10 @@
             "getemail-invalid":"The email you entered is not a valid email",
             "reason":"Could you tell me the reason why you require us to contact you?",
             "answer":"Thanks for the information, we will contact you shortly",
-            "behere":"It was a pleasure to help you, I will be here if you require me"
+            "behere":"It was a pleasure to help you, I will be here if you require me",
+			"getnombre":"what is your name es tu nombre?",
+			"confirmnombre":"is your name",
+			"outnombre":"I will call you"
         }
     }
 }

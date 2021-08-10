@@ -7,12 +7,31 @@ const { config, logger } = require('@config');
 
 module.exports = function (controller) {
 
+    controller.webserver.put('/api/cache/flush', (req, res) => {
 
-    controller.webserver.get('/cache/update', (req, res) => {
-        res.setHeader('content-type', 'application/javascript');
-        let result = { key: req.query.key, count: 0 };
-        result.count = CacheService.delete(result.key);
-        logger.info(`cache.delete((${result.key})): ${result.count}`);
-        res.send(JSON.stringify(result));
+        let status = {};
+        let request = { clave: req.body.clave, type: req.body.type, updated: 0 };
+
+        if (request.type == 'all') {
+            CacheService.flushAll();
+            request.updated = 'all';
+            logger.debug(`cache.flushAll(): ${request.type}`);
+
+        } else if (request.type == 'dialog') {
+            request.updated = CacheService.delete(request.clave);
+            logger.debug(`cache.flushDialog(${request.clave}): ${request.updated}`);
+
+
+        } else if (request.type == 'flow' || request.type == 'general') {
+            result.updated = CacheService.delete(request.type + request.clave);
+            logger.info(`cache.delete((${request.type + request.clave})): ${result.updated}`);
+
+        }
+
+        status = CacheService.getStats();
+        status = { ...request, ...status };
+        res.setHeader('content-type', 'application/json');
+        res.send(JSON.stringify(status));
+
     });
 }
