@@ -2,3 +2,4 @@
 node_modules/
 docker/data/
 .sass-cache/
+password.txt
