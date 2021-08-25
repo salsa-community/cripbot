@@ -20,7 +20,7 @@ module.exports = embedCssTemplate = `
   border-radius: 12px 12px 0px 0px; }
   #embedded_messenger.active {
     border-radius: 2px 2px 0px 0px;
-    bottom: 36px;
+    bottom: 70px;
     width: 450px; }
     #embedded_messenger.active #message_header {
       padding: 1.1rem 2rem;
@@ -38,7 +38,7 @@ module.exports = embedCssTemplate = `
       font-size: 1em;
       padding: 1em 3.5em; }
   #embedded_messenger iframe {
-    height: 500px;
+    height: 100%;
     width: 100%;
     border: 0; }
   #embedded_messenger #message_header {
@@ -77,14 +77,47 @@ module.exports = embedCssTemplate = `
   transition: 1.2s ease-in-out;
   padding-left: 1.7em; }
 
-@media only screen and (max-width: 767px) {  
-  #embedded_messenger.active {
-    bottom: 180px;
-    height: 400px;
-    width: 320px;
+/* For Mobile */
+@media only screen and (max-width: 540px) {
+  #embedded_messenger {
+    right: 0rem;
   }
+
+  #embedded_messenger.active {
+    bottom: 70px;
+    height: 90%;
+    width: 100%; 
+  }
+
+  #embedded_messenger.active .avatar_icon {
+    float: left;
+    position: absolute;
+    width: 0px;
+    left: 0px;
+    top: 0px;}
+
 }
 
+
+/* For Tablets */
+@media screen and (min-width: 540px) and (max-width: 780px) {
+  #embedded_messenger {
+    right: 0rem;
+  }
+
+  #embedded_messenger.active {
+    bottom: 70px;
+    height: 90%;
+    width: 100%; 
+  }
+
+  #embedded_messenger.active .avatar_icon {
+    float: left;
+    position: absolute;
+    width: 0px;
+    left: 0px;
+    top: 0px;}
+}
 /*# sourceMappingURL=embed.css.map */
 
 `

@@ -3,9 +3,6 @@ const { config, logger } = require('@config');
 
 class CacheService {
 
-    static flowKey;
-    static generalKey;
-
     constructor(cache) {
         this.flowKey = 'flow';
         this.generalKey = 'general';
