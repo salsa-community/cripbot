@@ -12,7 +12,7 @@ module.exports = embedCssTemplate = `
   bottom: -500px;
   right: 2rem;
   width: 200px;
-  height: 555px;
+  height: 70%;
   -webkit-box-shadow: 0px 0px 16px 3px rgba(0,0,0,0.2);
   -moz-box-shadow: 0px 0px 16px 3px rgba(0,0,0,0.2);
   box-shadow: 0px 0px 16px 3px rgba(0,0,0,0.2);
@@ -85,7 +85,7 @@ module.exports = embedCssTemplate = `
 
   #embedded_messenger.active {
     bottom: 70px;
-    height: 90%;
+    height: 70%;
     width: 100%; 
   }
 
@@ -107,8 +107,8 @@ module.exports = embedCssTemplate = `
 
   #embedded_messenger.active {
     bottom: 70px;
-    height: 90%;
-    width: 100%; 
+    height: 70%;
+    width: 90%; 
   }
 
   #embedded_messenger.active .avatar_icon {
