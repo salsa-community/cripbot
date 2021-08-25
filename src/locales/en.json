@@ -1,11 +1,18 @@
 {
+    "common": {
+		"location": "Av. de los Insurgentes Sur 1582, Crédito Constructor, Benito Juárez, 03940 Ciudad de México, CDMX",
+		"what-are-you-doing": "Estoy aqui para ayudarte y atender tu dudas",
+		"preferences": "pienso que es una buena persona"
+	},
     "general":{
-        "ver-mas":"See more...",
-        "of": "of",
-        "done":"Done",
-        "cancel": "Cancel",
-        "step":"Step",
-        "begin":"alright, let's start again"
+		"ver-mas": "See more...",
+		"of": "of",
+		"done": "Next",
+		"cancel": "Cancel",
+		"step": "Step",
+		"begin": "Ok, lets begin",
+        "yes": "Yes",
+		"no": "No"
     },
     "bot":{
         "whoare":"I am an artificial intelligence, who was created to help you",
@@ -13,6 +20,7 @@
         "state":"I'm feeling fine, thanks for asking!"
     },
     "help":{
+		"message": "help",
         "nice-to-see-you":"It is a pleasure to greet you",
         "hello":"Hello, I am here to serve you in whatever way I can",
         "question":"Can I help you with any of the following topics?",
@@ -40,6 +48,7 @@
         "yes":"Yes"
     },
     "welcome":{
+        "dialog":"Let me show you some information",
         "default":"Welcome",
         "name":"My name is",
         "question":"Do you need help with the service?",
@@ -80,7 +89,10 @@
             "getemail-invalid":"The email you entered is not a valid email",
             "reason":"Could you tell me the reason why you require us to contact you?",
             "answer":"Thanks for the information, we will contact you shortly",
-            "behere":"It was a pleasure to help you, I will be here if you require me"
+            "behere":"It was a pleasure to help you, I will be here if you require me",
+			"getnombre":"what is your name es tu nombre?",
+			"confirmnombre":"is your name",
+			"outnombre":"I will call you"
         }
     }
 }

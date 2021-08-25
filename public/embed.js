@@ -24,6 +24,7 @@ var Botkit = {
   active: false,
   booted: false,
   activate: function () {
+    this.triggerEvent('bot-status',{active: true});
     this.active = true;
     if (this.container) {
       this.container.className = 'active';
@@ -31,6 +32,7 @@ var Botkit = {
     this.setCookie('botkit_messenger_active', this.active);
   },
   deactivate: function () {
+    this.triggerEvent('bot-status',{active: false});
     this.active = false;
     if (this.container) {
       this.container.className = '';
@@ -49,6 +51,12 @@ var Botkit = {
   },
   trigger: function (event) {
     this.chatClient.postMessage(event, '*');
+  },
+  triggerEvent: function (event, details) {
+    var event = new CustomEvent(event, {
+        detail: details
+    });
+    window.dispatchEvent(event);
   },
   receiveMessage: function (message) {
     // message contains the following fields:

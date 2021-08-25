@@ -4,46 +4,25 @@
  */
 
 // const { Usuario } = require('@model/vtiger')
-const UserService = require('@service/user/user.service')
 const ErrorService = require('@service/error/error.service')
 var Contacto = require('@model/kbase/Contacto.model')
 var Actividad = require('@model/kbase/Actividad.model')
 const { normalize, resolveDescProp, resolveProp } = require('@util/commons');
 const { i18n } = require('@util/lang');
 
-const { RFC_DIALOG_ID } = require('@feature/dialogs/util/constants')
+const { GENERIC_STEP_DIALOG_ID } = require('@feature/dialogs/util/constants')
 const { BotkitConversation } = require('botkit')
 const { resolveOptions, resolvePageNumber } = require('@util/commons')
 const { config } = require('@config');
 const UnknowIntent = require('@model/kbase/UnknowIntent.model');
 
-const ContextService = require('@service/context/context.service')
-
 const TYPING_DELAY = config.bot.app.typingdelay;
 
 module.exports = function (controller) {
-    let convo = new BotkitConversation(RFC_DIALOG_ID, controller);
+    let convo = new BotkitConversation(GENERIC_STEP_DIALOG_ID, controller);
 
-    /**
-     * GET RFC THREAD
-     */
-    convo.addAction('get-rfc-thread')
-    convo.addQuestion('{{vars.rfc_ask}}', async (res, convo, bot) => {
-
-        let usuario = await UserService.findByUsername(res.trim());
-
-        if (usuario) {
-            convo.setVar('descProp', resolveDescProp(convo.vars.lang));
-            convo.setVar('username', usuario.username);
-
-            //bot.say({ text: convo.vars.welcomeMessage });
-            bot.say({ type: 'typing' }, 'typing');
-            await convo.gotoThread('codigo-error-thread')
-        } else {
-            bot.say({ text: i18n('dialogs.rfc.notfound', convo.vars.lang) })
-            await convo.gotoThread('ask-user-info-thread')
-        }
-    }, 'rfc', 'get-rfc-thread')
+    convo.addAction('get-steps-thread')
+    convo.addMessage({ type: 'typing', action: 'codigo-error-thread' }, 'get-steps-thread');
 
     /**
      * CODIGO ERROR THREAD
@@ -54,7 +33,7 @@ module.exports = function (controller) {
         quick_replies: async (template, vars) => {
             vars.optionPage = resolvePageNumber(vars.optionPage);
             let errorPage = await ErrorService.findByGeneral(vars.context, vars.optionPage);
-            vars.optionPage = (errorPage && errorPage.length < 3) ? -1 : vars.optionPage;
+            vars.optionPage = (errorPage && errorPage.length < 8) ? -1 : vars.optionPage;
             return resolveOptions(errorPage, vars.lang)
         }
     }, async (res, convo, bot) => {
@@ -64,8 +43,7 @@ module.exports = function (controller) {
             await convo.gotoThread('codigo-error-thread');
 
         } else {
-
-            let error = await ErrorService.findByClaveAndContext(res, convo.vars.context);
+            let error = await ErrorService.findByClaveAndContext(convo.vars.intent, convo.vars.context);
 
             if (error) {
                 if (config.analytics) {
@@ -251,11 +229,8 @@ module.exports = function (controller) {
      * Init common variables into the Dialog
      */
     convo.before('default', async (convo, bot) => {
-        let context = await ContextService.getContext(convo.vars.context);
-        let welcomeMessage = resolveProp('welcomeMessage', convo.vars.lang);
-        let loginMessage = resolveProp('loginMessage', convo.vars.lang);
-        convo.setVar('welcomeMessage', context[welcomeMessage]);
-        convo.setVar('rfc_ask', context[loginMessage]);
+        convo.setVar('descProp', resolveDescProp(convo.vars.lang));
+        convo.setVar('welcomeMessage', i18n('welcome.dialog', convo.vars.lang));
         convo.setVar('rfc_insert', i18n('dialogs.rfc.insert', convo.vars.lang));
         convo.setVar('done', i18n('general.done', convo.vars.lang));
         convo.setVar('cancel', i18n('general.cancel', convo.vars.lang));

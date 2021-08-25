@@ -24,6 +24,36 @@ var Botkit = {
             handler(evt.detail);
         });
     },
+    isRunning: false,
+    wasTyping: false,
+    defaultTime: 2000,
+    incomingMessageList: [],
+    scheduleMessage: function (message) {
+        let that = this;
+        let time = that.defaultTime;
+        if (!that.isRunning) {
+            that.isRunning = true;
+            if (!that.wasTyping && message.type != 'typing') {
+                that.trigger('typing');
+            }
+            if (that.wasTyping) {
+                that.wasTyping = false;
+            }
+            if (message.type === 'typing') {
+                that.wasTyping = true;
+                time = 0;
+            }
+            setTimeout(function () {
+                that.isRunning = false;
+                that.trigger(message.type, message);
+                if (that.incomingMessageList.length > 0) {
+                    that.scheduleMessage(that.incomingMessageList.shift());
+                }
+            }, time);
+        } else {
+            that.incomingMessageList.push(message);
+        }
+    },
     history: { data: [], count: 0, maxSize: 20 },
     trigger: function (event, details) {
         var event = new CustomEvent(event, {
@@ -217,6 +247,10 @@ var Botkit = {
 
         that.current_user.id = that.guid;
 
+        if (Botkit.getCookie('botkit_username')) {
+            that.username = Botkit.getCookie('botkit_username');
+            that.current_user.username = that.username;
+        }
         if (this.options.enable_history) {
             that.getHistory();
         }
@@ -261,7 +295,7 @@ var Botkit = {
                 return;
             }
 
-            that.trigger(message.type, message);
+            that.trigger('message_received', message);
         });
     },
     clearReplies: function () {
@@ -412,12 +446,12 @@ var Botkit = {
             that.replies.appendChild(list);
 
             // uncomment this code if you want your quick replies to scroll horizontally instead of stacking
-            // var width = 0;
+            //var width = 0;
             // // resize this element so it will scroll horizontally
-            // for (var e = 0; e < elements.length; e++) {
-            //     width = width + elements[e].offsetWidth + 18;
-            // }
-            // list.style.width = width + 'px';
+            //for (var e = 0; e < elements.length; e++) {
+            //    width = width + elements[e].offsetWidth + 18;
+            //}
+            //list.style.width = width + 'px';
 
             if (message.disable_input) {
                 that.input.disabled = true;
@@ -467,6 +501,21 @@ var Botkit = {
             alert('Error sending message!');
             console.error('Webhook Error', err);
 
+        });
+
+        that.on('message_received', function (message) {
+            if (message.type === 'update-username') {
+                Botkit.setCookie('botkit_username', message.text, 1);
+                that.current_user.username = message.text;
+                that.deliverMessage({
+                    type: 'welcome_back',
+                    user: that.guid,
+                    channel: 'socket',
+                    user_profile: that.current_user ? that.current_user : null,
+                });
+            } else {
+                that.scheduleMessage(message);
+            }
         });
 
         that.on('typing', function () {

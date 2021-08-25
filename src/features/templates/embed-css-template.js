@@ -2,8 +2,6 @@
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License.
  */
-const path = require('path');
-
 
 module.exports = embedCssTemplate = `
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -13,7 +11,7 @@ module.exports = embedCssTemplate = `
   z-index: 1000;
   bottom: -500px;
   right: 2rem;
-  width: 200;
+  width: 200px;
   height: 555px;
   -webkit-box-shadow: 0px 0px 16px 3px rgba(0,0,0,0.2);
   -moz-box-shadow: 0px 0px 16px 3px rgba(0,0,0,0.2);
@@ -22,22 +20,25 @@ module.exports = embedCssTemplate = `
   border-radius: 12px 12px 0px 0px; }
   #embedded_messenger.active {
     border-radius: 2px 2px 0px 0px;
-    bottom: 36;
-    width: 450; }
+    bottom: 70px;
+    width: 450px; }
     #embedded_messenger.active #message_header {
-      padding: 1.5rem 2rem;
+      padding: 1.1rem 2rem;
       border-radius: 2px 2px 0px 0px; }
     #embedded_messenger.active .circle {
       float: right;
       opacity: 1; }
     #embedded_messenger.active .avatar_icon {
       float: left;
-      width: 40px; }
+      position: absolute;
+      width: $AVATAR_WIDTH;
+      left: $AVATAR_LEFT;
+      top: $AVATAR_TOP;}
     #embedded_messenger.active .header_text {
       font-size: 1em;
-      padding: 0em 3.5em; }
+      padding: 1em 3.5em; }
   #embedded_messenger iframe {
-    height: 500px;
+    height: 100%;
     width: 100%;
     border: 0; }
   #embedded_messenger #message_header {
@@ -60,20 +61,63 @@ module.exports = embedCssTemplate = `
   border-radius: 50%;
   background-color: #35AC19;
   border:1px solid #021326;
-  float: left; }
+  float: left;
+  margin-top: .25rem;}
 
 .active_text {
   display: none; }
 
 .avatar_icon {
-  transition: 1.2s ease-in-out;
+  transition: width 0.2s ease-in-out;
   width: 0px; }
 
 .header_text {
+  display: inline;
   font-size: 1em;
   transition: 1.2s ease-in-out;
   padding-left: 1.7em; }
 
+/* For Mobile */
+@media only screen and (max-width: 540px) {
+  #embedded_messenger {
+    right: 0rem;
+  }
+
+  #embedded_messenger.active {
+    bottom: 70px;
+    height: 90%;
+    width: 100%; 
+  }
+
+  #embedded_messenger.active .avatar_icon {
+    float: left;
+    position: absolute;
+    width: 0px;
+    left: 0px;
+    top: 0px;}
+
+}
+
+
+/* For Tablets */
+@media screen and (min-width: 540px) and (max-width: 780px) {
+  #embedded_messenger {
+    right: 0rem;
+  }
+
+  #embedded_messenger.active {
+    bottom: 70px;
+    height: 90%;
+    width: 100%; 
+  }
+
+  #embedded_messenger.active .avatar_icon {
+    float: left;
+    position: absolute;
+    width: 0px;
+    left: 0px;
+    top: 0px;}
+}
 /*# sourceMappingURL=embed.css.map */
 
 `

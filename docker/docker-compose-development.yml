@@ -2,11 +2,18 @@ version: '3'
 services:
   bot-app:
     image: conacyt/cripbot:${BOT_TAG}
+    restart: always
     environment:
       - MONGO_URI=mongodb://kbase-db:27017
       - MONGO_KB_URI=mongodb://kbase-db:27017/chatbot
       - USER_SERVICE=default
       - TZ=America/Mexico_City
+      - DISABLE_STATE_STORAGE=${DISABLE_STATE_STORAGE}
+      - DISABLE_ANALYTICS=${DISABLE_ANALYTICS}
+      - CACHE_TTL=${CACHE_TTL}
+      - BOT_LOGGER_LEVEL=info
+      - BOT_DB_CORE_LOGGER_LEVEL=info
+      - BOT_DB_KBASE_LOGGER_LEVEL=info
     ports:
       - 3000:3000
     depends_on:
@@ -36,14 +43,3 @@ services:
     volumes:
       - ./data/mongo:/data/db
     command: mongod --smallfiles --logpath=/dev/null # --quiet
-  mongo-express:
-    image: mongo-express:latest
-    environment:
-      - ME_CONFIG_MONGODB_SERVER=kbase-db
-      - ME_CONFIG_MONGODB_PORT=27017
-      - ME_CONFIG_BASICAUTH_USERNAME=user
-      - ME_CONFIG_BASICAUTH_PASSWORD=user
-    ports:
-      - 8090:8081
-    depends_on:
-      - kbase-db

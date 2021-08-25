@@ -1,5 +1,23 @@
-version: '2'
+version: '3'
 services:
+  bot-app:
+    image: conacyt/cripbot:${BOT_TAG}
+    restart: always
+    environment:
+      - MONGO_URI=mongodb://kbase-db:27017
+      - MONGO_KB_URI=mongodb://kbase-db:27017/chatbot
+      - USER_SERVICE=default
+      - TZ=America/Mexico_City
+      - DISABLE_STATE_STORAGE=${DISABLE_STATE_STORAGE}
+      - DISABLE_ANALYTICS=${DISABLE_ANALYTICS}
+      - CACHE_TTL=${CACHE_TTL}
+      - BOT_LOGGER_LEVEL=info
+      - BOT_DB_CORE_LOGGER_LEVEL=info
+      - BOT_DB_KBASE_LOGGER_LEVEL=info
+    ports:
+      - 3000:3000
+    depends_on:
+    - kbase-db
   kbase-app:
     container_name: 'kbase-app'
     image: conacyt/kbase:${KBASE_TAG}
@@ -10,11 +28,11 @@ services:
       - SPRING_DATA_MONGODB_URI=mongodb://kbase-db:27017
       - SPRING_DATA_MONGODB_DATABASE=chatbot
       - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
+      - API_CLIENT_HOST_BASEURL=http://bot-app:3000
     ports:
       - 8080:8080
     depends_on:
     - kbase-db
-    - vtiger-db
   kbase-db:
     container_name: 'kbase-db'
     image: mongo:3.6.14
@@ -26,13 +44,3 @@ services:
     volumes:
       - ./data/mongo:/data/db
     command: mongod --smallfiles --logpath=/dev/null # --quiet
-  vtiger-db:
-    container_name: 'vtiger-db'
-    image: mysql:5.6.23
-    volumes:
-      - ./data/mysql/config/my.cnf:/etc/mysql/my.cnf
-      - ./data/mysql/db:/var/lib/mysql
-    env_file:
-      - ./data/mysql/env
-    ports:
-      - 3306:3306

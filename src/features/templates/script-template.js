@@ -2,9 +2,6 @@
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License.
  */
-const path = require('path');
-
-
 
 module.exports = scriptTemplate = `
 
@@ -27,7 +24,7 @@ if(language === "undefined"){
 }
 
 document.getElementsByClassName("header_text")[0].innerHTML = Botkit.title();
-let user = { asistente: Botkit.getAsistente('$ASISTENTE', '$EXTENSION'), context: appkey, lang: language };
+let user = { asistente: Botkit.getAsistente('$AVATAR', '$EXTENSION'), context: appkey, lang: language };
 Botkit.boot(user);
 
 if(Botkit.isActivated()){
