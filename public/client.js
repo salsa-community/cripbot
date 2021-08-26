@@ -463,6 +463,9 @@ var Botkit = {
         }
     },
 
+    wasAlreadyRendered: function (message) {
+        return (this.history.data.length > 0 && this.history.data[this.history.data.length-1].text == message.text);
+    },
     boot: function (user) {
 
         console.log('Booting up');
@@ -513,7 +516,7 @@ var Botkit = {
                     channel: 'socket',
                     user_profile: that.current_user ? that.current_user : null,
                 });
-            } else {
+            } else if(!that.wasAlreadyRendered(message)){
                 that.scheduleMessage(message);
             }
         });
