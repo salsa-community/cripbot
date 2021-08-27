@@ -19,6 +19,14 @@ module.exports = embedCssTemplate = `
   box-shadow: 0px 0px 16px 3px rgba(0,0,0,0.2);
   transition: 1.0s ease-in-out;
 }
+#embedded_messenger .chat-icon{
+  display: block;
+  font-size: 32;
+  left: 13px;
+  text-align: center;
+  top: 14px;
+  position: absolute;
+} 
 #embedded_messenger #message_header {
   border-radius: 4px;
   transition: 1.0s ease-in-out;  
@@ -43,6 +51,9 @@ module.exports = embedCssTemplate = `
   padding: 1.1rem 2rem;
   border-radius: 2px 2px 0px 0px;
 }
+#embedded_messenger.active .chat-icon{
+  display: none;
+} 
 #embedded_messenger.active .circle {
   visibility: visible;
   float: right;
