@@ -229,6 +229,24 @@ a.button {
   #message_window .step_message .message {
     background-color: #d5e1df !important;
     color: #3d3b3b; }
+
+  #bot-overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:url('../../images/loader.gif');
+    background-size: 100px;
+    background-color: white;
+    background-repeat:no-repeat;
+    background-position:center;
+    z-index: 2;
+    cursor: pointer;
+    }
 @keyframes fade {
   from {
     opacity: 0; }

@@ -19,6 +19,14 @@ var Botkit = {
     reconnect_count: 0,
     guid: null,
     current_user: null,
+    showOverlay: function () {
+        document.getElementById("bot-overlay").style.display = "block";
+    },
+    hideOverlay: function () {
+        setTimeout(function() {
+            document.getElementById("bot-overlay").style.display = "none";
+        }, 500);
+    },
     on: function (event, handler) {
         this.message_window.addEventListener(event, function (evt) {
             handler(evt.detail);
@@ -468,6 +476,7 @@ var Botkit = {
     },
     boot: function (user) {
 
+        this.showOverlay();
         console.log('Booting up');
 
         var that = this;
@@ -584,7 +593,7 @@ var Botkit = {
             // this is a stand-alone client. connect immediately.
             that.connect(user);
         }
-
+        this.hideOverlay();
         return that;
     }
 };
