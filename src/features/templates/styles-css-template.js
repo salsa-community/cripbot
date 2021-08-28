@@ -240,13 +240,22 @@ a.button {
     right: 0;
     bottom: 0;
     background-image:url('../../images/loader.gif');
-    background-size: 100px;
+    background-size: 60px;
     background-color: white;
     background-repeat:no-repeat;
-    background-position:center;
+    background-position: 50% 40%;
     z-index: 2;
     cursor: pointer;
-    }
+  }
+  .bot-overlay-text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 16px;
+    color: #889FA5;
+    font-style: italic;
+    transform: translate(-50%,-50%);    
+  }
 @keyframes fade {
   from {
     opacity: 0; }
