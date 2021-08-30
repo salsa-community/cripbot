@@ -23,9 +23,7 @@ var Botkit = {
         document.getElementById("bot-overlay").style.display = "block";
     },
     hideOverlay: function () {
-        setTimeout(function() {
-            document.getElementById("bot-overlay").style.display = "none";
-        }, 500);
+        document.getElementById("bot-overlay").style.display = "none";
     },
     on: function (event, handler) {
         this.message_window.addEventListener(event, function (evt) {
