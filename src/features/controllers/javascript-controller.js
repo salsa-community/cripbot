@@ -3,7 +3,7 @@
  * Licensed under the MIT License.
  */
 
-const scriptTemplate = require('@feature/templates/script-template.js');
+const scriptTemplate = require('@feature/templates/init-script-template.js');
 const { resolveColor, resolveLang, resolveAvatar } = require('@util/request-util');
 
 module.exports = function (controller) {

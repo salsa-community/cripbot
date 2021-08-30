@@ -474,7 +474,6 @@ var Botkit = {
     },
     boot: function (user) {
 
-        this.showOverlay();
         console.log('Booting up');
 
         var that = this;
@@ -591,7 +590,6 @@ var Botkit = {
             // this is a stand-alone client. connect immediately.
             that.connect(user);
         }
-        this.hideOverlay();
         return that;
     }
 };
@@ -601,4 +599,5 @@ var Botkit = {
     // your page initialization code here
     // the DOM will be available here
     Botkit.boot();
+    Botkit.hideOverlay();
 })();

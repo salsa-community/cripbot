@@ -4,7 +4,7 @@
  */
 const { resolveColor, resolveAvatar, resolveFontSize } = require('@util/request-util');
 const embedCssTemplate = require('@feature/templates/embed-css-template.js');
-const stylesCssTemplate = require('@feature/templates/styles-css-template.js');
+const stylesCssTemplate = require('@feature/templates/client-css-template.js');
 
 module.exports = function (controller) {
 
