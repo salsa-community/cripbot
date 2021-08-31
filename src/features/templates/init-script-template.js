@@ -11,8 +11,9 @@ function renderChatbot() {
 
     let iframe = document.getElementById("botkit_client");
     iframe.src = home + "/index.html?contexto=$APP_KEY&color=$CSS_COLOR";
+    
+    Botkit.activate();
     iframe.onload = () => {
-      Botkit.activate();
     }
 }
 

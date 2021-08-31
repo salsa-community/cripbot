@@ -1,6 +1,6 @@
 {
-  "name": "botkit-socrates",
-  "version": "2.6.2",
+  "name": "botkit-cripbot",
+  "version": "2.7.4",
   "description": "Cripbot",
   "main": "bot.js",
   "scripts": {

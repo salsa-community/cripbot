@@ -17,7 +17,7 @@ module.exports = embedCssTemplate = `
   -webkit-box-shadow: 0px 0px 16px 3px rgba(0,0,0,0.2);
   -moz-box-shadow: 0px 0px 16px 3px rgba(0,0,0,0.2);
   box-shadow: 0px 0px 16px 3px rgba(0,0,0,0.2);
-  transition: 1.0s ease-in-out;
+  transition: 0.1s ease-in-out;
 }
 #embedded_messenger .chat-icon{
   display: block;
@@ -29,7 +29,7 @@ module.exports = embedCssTemplate = `
 } 
 #embedded_messenger #message_header {
   border-radius: 4px;
-  transition: 1.0s ease-in-out;  
+  transition: 0.1s ease-in-out;
   background: #$CSS_COLOR;
   color: #FFF;
   min-height: 60px;
@@ -86,17 +86,17 @@ module.exports = embedCssTemplate = `
   display: none;
 }
 .avatar_icon {
-  transition: width 0.2s ease-in-out;
+  transition: width 0.1s ease-in-out;
   width: 0px;
 }
 .header_text {
   display: inline;
   font-size: 1em;
-  transition: 1.2s ease-in-out;
+  transition: 0.1s ease-in-out;
   padding-left: 1.7em;
 }
 .circle {
-  transition: 1.2s ease-in-out;
+  transition: 0.1s ease-in-out;
   width: 15px;
   height: 15px;
   padding: .1em;

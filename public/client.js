@@ -19,6 +19,12 @@ var Botkit = {
     reconnect_count: 0,
     guid: null,
     current_user: null,
+    showOverlay: function () {
+        document.getElementById("bot-overlay").style.display = "block";
+    },
+    hideOverlay: function () {
+        document.getElementById("bot-overlay").style.display = "none";
+    },
     on: function (event, handler) {
         this.message_window.addEventListener(event, function (evt) {
             handler(evt.detail);
@@ -463,6 +469,9 @@ var Botkit = {
         }
     },
 
+    wasAlreadyRendered: function (message) {
+        return (this.history.data.length > 0 && this.history.data[this.history.data.length-1].text == message.text);
+    },
     boot: function (user) {
 
         console.log('Booting up');
@@ -513,7 +522,7 @@ var Botkit = {
                     channel: 'socket',
                     user_profile: that.current_user ? that.current_user : null,
                 });
-            } else {
+            } else if(!that.wasAlreadyRendered(message)){
                 that.scheduleMessage(message);
             }
         });
@@ -581,7 +590,6 @@ var Botkit = {
             // this is a stand-alone client. connect immediately.
             that.connect(user);
         }
-
         return that;
     }
 };
@@ -591,4 +599,5 @@ var Botkit = {
     // your page initialization code here
     // the DOM will be available here
     Botkit.boot();
+    Botkit.hideOverlay();
 })();

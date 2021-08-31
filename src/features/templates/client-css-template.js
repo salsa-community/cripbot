@@ -138,12 +138,14 @@ a.button {
   font-family: 'Roboto', sans-serif;
   font-size: $FONT_SIZE; }
   #message_window .disconnected {
-    background-color: #ff9800;
-    color: white;
-    opacity: 0.83;
-    transition: opacity 0.6s;
-    margin-bottom: 0px;
-    padding: 0.25rem; }
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    margin-bottom: 12px;
+    font-size: 16px; 
+  }
   #message_window.connected .disconnected {
     display: none; }
   #message_window .offline {
@@ -151,12 +153,18 @@ a.button {
   #message_window.offline .disconnected {
     display: none; }
   #message_window.offline .offline {
-    background-color: #f44336;
-    color: white;
-    opacity: 0.83;
-    transition: opacity 0.6s;
-    padding: 0.25rem;
-    display: block; }
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    margin-bottom: 12px;
+    font-size: 16px;
+    background-color: rgba(217, 237, 247, 1);
+    color: rgba(49, 112, 143, 1);
+    border-color: rgba(126, 182, 193, 1);
+    display: block;
+  }
   #message_window .powered_by {
     flex-shrink: 0;
     text-align: left;
@@ -221,6 +229,33 @@ a.button {
   #message_window .step_message .message {
     background-color: #d5e1df !important;
     color: #3d3b3b; }
+
+  #bot-overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:url('../../images/loader.gif');
+    background-size: 60px;
+    background-color: white;
+    background-repeat:no-repeat;
+    background-position: 50% 40%;
+    z-index: 2;
+    cursor: pointer;
+  }
+  .bot-overlay-text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 16px;
+    color: #889FA5;
+    font-style: italic;
+    transform: translate(-50%,-50%);    
+  }
 @keyframes fade {
   from {
     opacity: 0; }
