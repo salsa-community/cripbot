@@ -10,7 +10,7 @@ module.exports = embedCssTemplate = `
   border-radius: 4px;
   position: fixed;
   z-index: 1000;
-  bottom: 120px;
+  bottom: 20px;
   right: 20px;
   width: 60px;
   height: 60px;
@@ -21,7 +21,7 @@ module.exports = embedCssTemplate = `
 }
 #embedded_messenger .chat-icon{
   display: block;
-  font-size: 32;
+  font-size: 32px;
   left: 13px;
   text-align: center;
   top: 14px;
