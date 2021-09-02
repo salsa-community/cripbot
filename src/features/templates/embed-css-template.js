@@ -32,7 +32,7 @@ module.exports = embedCssTemplate = `
   transition: 0.1s ease-in-out;
   background: #$CSS_COLOR;
   color: #FFF;
-  min-height: 60px;
+  height: 60px;
 }
 #embedded_messenger .circle,
 #embedded_messenger .avatar_icon,
