@@ -6,6 +6,34 @@
 module.exports = embedCssTemplate = `
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+#bot-overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:url('../../images/loader.gif');
+  background-size: 60px;
+  background-color: white;
+  background-repeat:no-repeat;
+  background-position: 50% 40%;
+  z-index: 2;
+  cursor: pointer;
+}
+.bot-overlay-text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 16px;
+  color: #889FA5;
+  font-style: italic;
+  transform: translate(-50%,-50%);    
+}
+
 #embedded_messenger {
   border-radius: 4px;
   position: fixed;

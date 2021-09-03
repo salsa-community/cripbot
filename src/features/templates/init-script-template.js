@@ -6,6 +6,7 @@
 module.exports = scriptTemplate = `
 
 function renderChatbot() {
+    Botkit.showOverlay();
     let home = document.getElementById("bot-client-script").getAttribute("bothome");
     home = home ? home : "";
 
@@ -14,6 +15,7 @@ function renderChatbot() {
     
     Botkit.activate();
     iframe.onload = () => {
+      Botkit.hideOverlay();
     }
 }
 

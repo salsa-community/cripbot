@@ -103,6 +103,12 @@ var Botkit = {
 
 
   },
+  showOverlay: function () {
+    document.getElementById("bot-overlay").style.display = "block";
+  },
+  hideOverlay: function () {
+      document.getElementById("bot-overlay").style.display = "none";
+  },
   boot: function (user) {
     var that = this;
 

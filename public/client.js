@@ -19,12 +19,6 @@ var Botkit = {
     reconnect_count: 0,
     guid: null,
     current_user: null,
-    showOverlay: function () {
-        document.getElementById("bot-overlay").style.display = "block";
-    },
-    hideOverlay: function () {
-        document.getElementById("bot-overlay").style.display = "none";
-    },
     on: function (event, handler) {
         this.message_window.addEventListener(event, function (evt) {
             handler(evt.detail);
@@ -599,5 +593,4 @@ var Botkit = {
     // your page initialization code here
     // the DOM will be available here
     Botkit.boot();
-    Botkit.hideOverlay();
 })();
