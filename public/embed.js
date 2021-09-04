@@ -104,7 +104,7 @@ var Botkit = {
 
   },
   showOverlay: function () {
-    document.getElementById("bot-overlay").style.display = "block";
+    document.getElementById("bot-overlay").style.display = "flex";
   },
   hideOverlay: function () {
       document.getElementById("bot-overlay").style.display = "none";
