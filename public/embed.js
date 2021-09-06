@@ -131,8 +131,7 @@ var Botkit = {
 
   asistentes: ['María', 'Isabella', 'Jimena'],
 
-  getAsistente: function (asistente, extension) {
-    extension = typeof extension === 'undefined' ? 'png' : extension;
+  getAsistente: function (asistente) {
 
     if (typeof asistente === 'undefined' || asistente === 'random') {
       min = Math.ceil(0);
@@ -140,9 +139,6 @@ var Botkit = {
       index = Math.floor(Math.random() * (max - min + 1)) + min;
       asistente = this.asistentes[index];
     }
-
-    let avatar = asistente.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") + "." + extension;
-    document.getElementById("avatar-bot").src = "/images/avatares/" + avatar;
     return asistente;
   },
 

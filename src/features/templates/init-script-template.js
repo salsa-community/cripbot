@@ -5,11 +5,8 @@
 
 module.exports = scriptTemplate = `
 
-function renderChatbot() {
+function renderChatbot(home) {
     Botkit.showOverlay();
-    let home = document.getElementById("bot-client-script").getAttribute("bothome");
-    home = home ? home : "";
-
     let iframe = document.getElementById("botkit_client");
     iframe.src = home + "/index.html?contexto=$APP_KEY&color=$CSS_COLOR";
     
@@ -22,22 +19,31 @@ function renderChatbot() {
 let appkey = "$APP_KEY";
 let language = "$APP_CULTURE";
 
+let home = document.getElementById("bot-client-script").getAttribute("bothome");
+home = home ? home : "";
+
 if(language === "undefined"){
   language = Botkit.browserLanguage({ languageCodeOnly: true })[0];
 }
 
 document.getElementsByClassName("header_text")[0].innerHTML = Botkit.title();
-let user = { asistente: Botkit.getAsistente('$AVATAR', '$EXTENSION'), context: appkey, lang: language };
+let extension = '$EXTENSION';
+extension = typeof extension === 'undefined' ? 'png' : extension;
+let asistente = Botkit.getAsistente('$AVATAR');
+let avatar = asistente.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") + "." + extension;
+document.getElementById("avatar-bot").src = home + "/images/avatares/" + avatar;
+
+let user = { asistente: asistente, context: appkey, lang: language, bothome: home };
 Botkit.boot(user);
 
 if(Botkit.isActivated()){
-  renderChatbot();
+  renderChatbot(home);
 }
 
 document.getElementById("message_header").onclick = function (event) {
   if (!Botkit.active) {
     if(!Botkit.booted){
-      renderChatbot();
+      renderChatbot(home);
     }else {
       Botkit.activate();
     }
