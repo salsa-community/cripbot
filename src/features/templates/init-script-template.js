@@ -13,6 +13,7 @@ function renderChatbot(home) {
     Botkit.activate();
     iframe.onload = () => {
       Botkit.hideOverlay();
+      Botkit.scrollBotton();
     }
 }
 

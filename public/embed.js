@@ -24,6 +24,9 @@ var Botkit = {
   active: false,
   booted: false,
   activate: function () {
+    if(this.chatClient.document.readyState  != 'complete'){
+      this.showOverlay();
+    }
     this.triggerEvent('bot-status',{active: true});
     this.active = true;
     if (this.container) {
@@ -32,6 +35,7 @@ var Botkit = {
     this.setCookie('botkit_messenger_active', this.active);
   },
   deactivate: function () {
+    this.hideOverlay();
     this.triggerEvent('bot-status',{active: false});
     this.active = false;
     if (this.container) {
@@ -102,6 +106,12 @@ var Botkit = {
     });
 
 
+  },
+  scrollBotton: function(time) {
+    Botkit.trigger({
+      name: 'scrollBottom',
+      time: time ? time : 1000,
+    });
   },
   showOverlay: function () {
     document.getElementById("bot-overlay").style.display = "flex";

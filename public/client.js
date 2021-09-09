@@ -374,6 +374,9 @@ var Botkit = {
                 // link this account info to this user
                 Botkit.connect(event.data.user);
                 break;
+            case 'scrollBottom':
+                setTimeout(() => { Botkit.scrollBottom() }, event.data.time);
+                break;
             default:
                 console.log('UNKNOWN COMMAND', event.data);
         }
