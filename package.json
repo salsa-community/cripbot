@@ -27,7 +27,9 @@
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "botkit-mock": "^0.7.5-4",  
     "jsdoc": "^3.6.3",
+    "prettier": "2.4.0",
     "sequelize-cli": "^5.5.1"
   },
   "_moduleAliases": {
