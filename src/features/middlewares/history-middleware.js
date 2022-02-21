@@ -8,7 +8,6 @@ const Message = require('@model/kbase/Message.model')
 const { config } = require('@config')
 
 module.exports = function (controller) {
-
     controller.middleware.receive.use(function (bot, message, next) {
         if (message.type === 'welcome_back') {
             if (bot.isDialogActive('rfc-dialog-id')) {

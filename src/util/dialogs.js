@@ -5,10 +5,10 @@ exports.resolveSaludo = function () {
     var today = new Date();
     var curHr = today.getHours();
     if (curHr < 12) {
-        return 'Buenos dias';
+        return 'Buenos dias ';
     } else if (curHr < 18) {
-        return 'Buena tarde';
+        return 'Buenas tardes ';
     } else {
-        return 'Buena noche';
+        return 'Buena noche ';
     }
 }

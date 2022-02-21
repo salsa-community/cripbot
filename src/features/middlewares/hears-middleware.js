@@ -3,6 +3,7 @@
  * 
  * @author danimaniARQSOFT
  */
+const {Intencion} = require('@util/resolveIntent');//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 const { INTENT_DIALOG_ID } = require('@feature/dialogs/util/constants')
 const ErrorService = require('@service/error/error.service')
@@ -10,11 +11,14 @@ const { resolveIntent } = require('@util/commons');
 const { logger } = require('@config');
 
 module.exports = function (controller) {
-
+    console.log('HEARS-MIDDLEWARE------')
     controller.middleware.receive.use(async function (bot, message, next) {
         logger.debug(`userprofile((${JSON.stringify(message.user_profile)})): `);
 
         if (message.type == 'message') {
+            message.text=Intencion(message.text)//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+            message.text=String(message.text)
+
             let context = message.user_profile.context;
             let flows = await ErrorService.findAllFlows(context);
             let intent = resolveIntent(flows, message.text);
