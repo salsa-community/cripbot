@@ -1,4 +1,7 @@
 {
+	"main":{
+		"menu":"Ir a Menú"
+	},
 	"common": {
 		"location": "Av. de los Insurgentes Sur 1582, Crédito Constructor, Benito Juárez, 03940 Ciudad de México, CDMX",
 		"what-are-you-doing": "Estoy aqui para ayudarte y atender tu dudas",
@@ -22,7 +25,7 @@
 	"help": {
 		"message": "ayuda",
 		"nice-to-see-you": "Es un gusto saludarte",
-		"hello": "Hola, estoy para servirte en lo que pueda;",
+		"hello": "Hola, estoy para servirte en lo que pueda...",
 		"question": "¿Te puedo ayudar en alguno de los siguientes temas?",
 		"negative": "lo entiendo, posiblemente en otro momento",
 		"be-online": "estaré aquí por si se te ofrece algo",
@@ -32,7 +35,8 @@
 		"codigos": "Ver ayuda",
 		"cfdi": "Tiene un código CFDI",
 		"seguimiento-ticket": "Seguimiento de un ticket",
-		"crear-ticket": "Crear un ticket"
+		"crear-ticket": "Crear un ticket",
+		"menu": "Ir a menú principal"
 	},
 	"solicitudes": {
 		"acuse": "SOLICITUD DE ACUSES DE RECIBO",

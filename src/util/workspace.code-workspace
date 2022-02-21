@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\CRIPBOT"
+		},
+		{
+			"path": "..\\..\\.vscode"
+		},
+		{
+			"path": "..\\..\\docker"
+		},
+		{
+			"path": "..\\..\\docs"
+		},
+		{
+			"path": "..\\..\\node_modules"
+		},
+		{
+			"path": "..\\..\\public"
+		},
+		{
+			"path": "..\\..\\sass"
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {}
+}
