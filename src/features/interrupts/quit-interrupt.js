@@ -3,6 +3,7 @@
  * 
  * @author danimaniARQSOFT
  */
+const { MY_STEP_DIALOG_ID } = require('@feature/dialogs/util/constants')
 const { menuQuickReplies } = require('@feature/dialogs/util/info-quick-replies');
 const { resolveSaludo } = require('@util/dialogs');
 const { typing } = require('@util/bot.typing');
@@ -12,6 +13,11 @@ let cancelEn = i18n('general.cancel', 'en');
 let cancelEs = i18n('general.cancel', 'es');
 
 module.exports = function (controller) {
+    //-----------------------------------------------------------------------------------
+    controller.interrupts(['skynet'], 'message', async (bot, message) => {
+        await bot.beginDialog(MY_STEP_DIALOG_ID, message.user_profile);
+    });
+    //-----------------------------------------------------------------------------------
     controller.interrupts(['hola', 'buenos dias', 'saludos'], 'message', async (bot, message) => {
         await typing(bot, message, {
             text: resolveSaludo() + ' posiblemente te pueda ayudar con alguno de los siguientes temas:',
