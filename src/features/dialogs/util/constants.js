@@ -7,4 +7,5 @@ module.exports = {
     TICKET_DIALOG_ID: 'ticket-dialog-id',
     BOT_CLIENT_RED_COFIDI__ID: 'RedCofidi',
     BOT_CLIENT_PAC_WEB__ID: 'PacWeb',
+    MY_STEP_DIALOG_ID: 'my-step-dialog-id',
 }
