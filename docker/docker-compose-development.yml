@@ -1,7 +1,7 @@
 version: '3'
 services:
   bot-app:
-    image: conacyt/cripbot:${BOT_TAG}
+    image: danimaniarqsoft/bot:${BOT_TAG}
     restart: always
     environment:
       - MONGO_URI=mongodb://kbase-db:27017
@@ -20,7 +20,7 @@ services:
     - kbase-db
   kbase-app:
     container_name: 'kbase-app'
-    image: conacyt/kbase:${KBASE_TAG}
+    image: danimaniarqsoft/kbase:${KBASE_TAG}
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=prod,swagger

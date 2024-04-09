@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to CRIPBot 👋</h1>
+<h1 align="center">Welcome to Chatbot 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-2.5.1-blue.svg?cacheSeconds=2592000" />
   <a href="#" target="_blank">
@@ -6,7 +6,14 @@
   </a>
 </p>
 
-> CRIPBot
+> Chatbot
+
+## Preconditions
+
+- Install Docker and docker compose [Official docker docs](https://docs.docker.com/)
+- Up and run Mongodb and kbase applications with the `run-development.sh` script
+- Use node v10
+- Create custom env file with the command `cp .env_template .env`
 
 ## Install
 
@@ -15,15 +22,17 @@ npm install
 ```
 
 ### Config vtiger database (optional)
+If you area working with a second user provider like mysql follow the next steps:
 
-Connect to the mysql database with the credentials defined at `docker/data/mysql/env`
-Execute the script located in `docker/vtiger-dump.sql`
+1. Connect to the mysql database with the credentials defined at `docker/data/mysql/env`
+2. Execute the script located in `docker/vtiger-dump.sql`
 
 ## Usage
 
 ```sh
 npm start
 ```
+Go to `http://localhost:3000/test/bot.html` and test the bot
 
 ## Run tests
 
@@ -40,7 +49,7 @@ sass --update sass/:public/css/
 ## Build docker images
 
 ```bash
-npm run docker-cripbot-build
+npm run docker-bot-build
 ```
 
 ## Authors

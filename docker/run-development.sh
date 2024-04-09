@@ -15,4 +15,4 @@ export CACHE_TTL='120'
 #########################
 export KBASE_TAG='latest'
 
-docker compose -f docker-compose-development.yml up kbase-db
+docker compose -f docker-compose-development.yml up kbase-db kbase-app

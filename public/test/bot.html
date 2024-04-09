@@ -1,0 +1,94 @@
+<html>
+
+<head>
+  <title>CRIP Bot</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">   
+  <style>
+      h1 {        
+        font-family: 'Montserrat', sans-serif;
+        font-size: 48px;
+        font-weight:100;
+        color: white;
+        
+      }
+      p {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 24px;
+        color: #003466;
+      }
+      .title {
+        background-color: #072146;
+        padding: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+      }
+      .subtitle {
+        padding-left: 1rem;
+      }
+      #version {
+        width: 21%;
+        border-radius: 4px;
+        border-style: solid;
+        border-width: 1px;
+        margin-bottom: 12px;
+        background-color: rgba(217, 237, 247, 1);
+        color: rgba(49, 112, 143, 1);
+        border-color: rgba(126, 182, 193, 1);
+        padding-left: 1rem;
+        font-style: italic;
+        font-weight: bold;
+      }
+      img {
+        width: 40px;
+      }
+
+      .top-buffer { margin-top:150px; }
+
+  </style>
+  <link rel="stylesheet" href="/default/css/embed.css" />
+  <script src="/embed.js"></script>
+
+</head>
+
+<body style="background: url('/images/bg.png');  background-repeat: no-repeat;">
+  <div class="container">
+    <div class="row top-buffer">
+      <div class="col-sm-6">
+        <div class="title">
+          <h1>
+            <img src="/images/logo.svg" alt="Bot">
+            Chat Bot
+          </h1>
+        </div>          
+        <p class="subtitle">Chat bot</p>
+        <p id="version"></p>
+      </div>
+      <div class="col-sm-6">
+      </div>
+    </div>
+  </div>
+  <div id="embedded_messenger">
+    <header id="message_header">
+      <div class="circle"></div>
+      <img id="avatar-bot" class="avatar_icon" src="" alt="Avatar" >
+      <div class="header_text">Botkit.title()</div>
+      <span class="material-icons chat-icon"> chat_bubble </span>
+    </header>
+    <iframe id="botkit_client" title="bot" /></iframe>
+  </div>
+  <script id="bot-client-script" bothome="" src="/default/scripts/bot.js?culture=es"></script>
+  <script>
+  fetch('/info')
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById("version").textContent +="v."+data.version;
+  });
+  </script>
+</body>
+
+</html>

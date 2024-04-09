@@ -6,6 +6,6 @@ PACKAGE_VERSION=$(cat package.json \
   | sed 's/[",]//g' \
   | xargs)
 
-docker build -t "conacyt/cripbot:${PACKAGE_VERSION}" .
-cat password.txt | docker login --username conacyt --password-stdin
-docker push conacyt/cripbot:$PACKAGE_VERSION
+docker build -t "danimaniarqsoft/bot:${PACKAGE_VERSION}" .
+cat password.txt | docker login --username danimaniarqsoft --password-stdin
+docker push danimaniarqsoft/bot:$PACKAGE_VERSION
