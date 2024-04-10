@@ -3,11 +3,12 @@
  * 
  * @author danimaniARQSOFT
  */
+const {Normalizacion} = require('@util/text');
 
 module.exports = function (controller) {
     controller.middleware.ingest.use(async function (bot, message, next) {
         if (message.type == 'message') {
-            message.text = message.text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            message.text = Normalizacion(message.text) //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         }
         next()
     });
