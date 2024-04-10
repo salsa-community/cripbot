@@ -24,6 +24,9 @@ var Botkit = {
   active: false,
   booted: false,
   activate: function () {
+    if(this.chatClient.document.readyState  != 'complete'){
+      this.showOverlay();
+    }
     this.triggerEvent('bot-status',{active: true});
     this.active = true;
     if (this.container) {
@@ -32,6 +35,7 @@ var Botkit = {
     this.setCookie('botkit_messenger_active', this.active);
   },
   deactivate: function () {
+    this.hideOverlay();
     this.triggerEvent('bot-status',{active: false});
     this.active = false;
     if (this.container) {
@@ -103,6 +107,18 @@ var Botkit = {
 
 
   },
+  scrollBotton: function(time) {
+    Botkit.trigger({
+      name: 'scrollBottom',
+      time: time ? time : 1000,
+    });
+  },
+  showOverlay: function () {
+    document.getElementById("bot-overlay").style.display = "flex";
+  },
+  hideOverlay: function () {
+      document.getElementById("bot-overlay").style.display = "none";
+  },
   boot: function (user) {
     var that = this;
 
@@ -125,8 +141,7 @@ var Botkit = {
 
   asistentes: ['María', 'Isabella', 'Jimena'],
 
-  getAsistente: function (asistente, extension) {
-    extension = typeof extension === 'undefined' ? 'png' : extension;
+  getAsistente: function (asistente) {
 
     if (typeof asistente === 'undefined' || asistente === 'random') {
       min = Math.ceil(0);
@@ -134,9 +149,6 @@ var Botkit = {
       index = Math.floor(Math.random() * (max - min + 1)) + min;
       asistente = this.asistentes[index];
     }
-
-    let avatar = asistente.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") + "." + extension;
-    document.getElementById("avatar-bot").src = "/images/avatares/" + avatar;
     return asistente;
   },
 

@@ -19,12 +19,6 @@ var Botkit = {
     reconnect_count: 0,
     guid: null,
     current_user: null,
-    showOverlay: function () {
-        document.getElementById("bot-overlay").style.display = "block";
-    },
-    hideOverlay: function () {
-        document.getElementById("bot-overlay").style.display = "none";
-    },
     on: function (event, handler) {
         this.message_window.addEventListener(event, function (evt) {
             handler(evt.detail);
@@ -380,6 +374,9 @@ var Botkit = {
                 // link this account info to this user
                 Botkit.connect(event.data.user);
                 break;
+            case 'scrollBottom':
+                setTimeout(() => { Botkit.scrollBottom() }, event.data.time);
+                break;
             default:
                 console.log('UNKNOWN COMMAND', event.data);
         }
@@ -599,5 +596,4 @@ var Botkit = {
     // your page initialization code here
     // the DOM will be available here
     Botkit.boot();
-    Botkit.hideOverlay();
 })();
